@@ -6,7 +6,6 @@ import { useCart } from "../../hooks/useCart";
 import { useUpdateProductCount } from "../../hooks/useUpdateProductCount";
 import { Link } from "react-router";
 import CartSkeleton from "../../skeleton/CartSkeleton";
-import ViewedProducts from "../../components/viewed_products/ViewedProducts";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function Cart() {
@@ -113,7 +112,6 @@ export default function Cart() {
           </div>
         </div>
       </div>
-      <ViewedProducts />
     </>
   );
 }

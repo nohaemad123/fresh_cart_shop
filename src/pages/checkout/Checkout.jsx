@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
-import ViewedProducts from "../../components/viewed_products/viewedProducts";
 import {
   faArrowRight,
   faChevronLeft,
@@ -35,7 +34,6 @@ export default function Checkout() {
         shippingAddress: values.shippingAddress,
         paymentMethod: values.paymentMethod,
       });
-     
 
       if (response.success) {
         if (response.data.session) {
@@ -369,8 +367,6 @@ export default function Checkout() {
             </div>
           </form>
         </div>
-
-        <ViewedProducts />
       </div>
     </>
   );

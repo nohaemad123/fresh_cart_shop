@@ -1,6 +1,3 @@
-import React from "react";
-import ViewedProductsSkeleton from "./ViewedProductsSkeleton";
-
 export default function CartSkeleton() {
   return (
     <>
@@ -57,7 +54,6 @@ export default function CartSkeleton() {
           </div>
         </div>
       </div>
-      <ViewedProductsSkeleton />
     </>
   );
 }
