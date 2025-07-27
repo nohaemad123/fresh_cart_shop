@@ -18,6 +18,7 @@ import { verifyEmail } from "../../services/auth-service";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+import PageMetaData from "../../components/page_meta_data/PageMetaData";
 export default function VerifyEmail() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
@@ -104,6 +105,10 @@ export default function VerifyEmail() {
 
   return (
     <>
+      <PageMetaData
+        title="Fresh cart - verify email page"
+        description="Fresh cart - verify email page"
+      />
       <div className="bg-mainColor py-10">
         <div className="container">
           <div className="w-full lg:w-[40%] bg-white p-5 lg:p-10 mx-auto border border-gray-300 rounded-lg">

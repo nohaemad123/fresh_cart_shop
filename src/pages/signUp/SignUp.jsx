@@ -16,6 +16,7 @@ import { sendDataToSignUp } from "../../services/auth-service";
 import { calcPasswordStrength } from "../../utils/password.utils";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function SignUp() {
   const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
@@ -86,6 +87,10 @@ export default function SignUp() {
 
   return (
     <>
+      <PageMetaData
+        title="Fresh cart - sign up page"
+        description="Fresh cart - sign up page"
+      />
       <div className="py-10 bg-mainColor">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">

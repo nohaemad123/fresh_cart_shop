@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useContext, useState } from "react";
 import { authContext } from "../../context/Auth.context";
+import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function Login() {
   const passwordRegex =
@@ -86,6 +87,10 @@ export default function Login() {
 
   return (
     <>
+      <PageMetaData
+        title="Fresh cart - login page"
+        description="Fresh cart - login page"
+      />
       <div className="py-15 bg-mainColor">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 w-full lg:w-[90%] mx-auto">

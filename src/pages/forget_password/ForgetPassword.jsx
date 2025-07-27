@@ -18,6 +18,7 @@ import { forgotPassword } from "../../services/auth-service";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function ForgetPassword() {
   const navigate = useNavigate();
@@ -55,6 +56,10 @@ export default function ForgetPassword() {
 
   return (
     <>
+      <PageMetaData
+        title="Fresh cart - forget password page"
+        description="Fresh cart - forget password page"
+      />
       <div className="bg-mainColor py-10">
         <div className="container">
           <div className="w-full lg:w-[40%] bg-white p-5 lg:p-10 mx-auto border border-gray-300 rounded-lg">

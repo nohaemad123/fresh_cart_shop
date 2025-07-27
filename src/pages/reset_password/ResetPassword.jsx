@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { calcPasswordStrength } from "../../utils/password.utils";
+import PageMetaData from "../../components/page_meta_data/PageMetaData";
 export default function ResetPassword() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
@@ -92,6 +93,10 @@ export default function ResetPassword() {
 
   return (
     <>
+      <PageMetaData
+        title="Fresh cart - reset password page"
+        description="Fresh cart - reset password page"
+      />
       <div className="bg-mainColor py-10">
         <div className="container">
           <div className="w-full lg:w-[40%] bg-white p-5 lg:p-10 mx-auto border border-gray-300 rounded-lg">
