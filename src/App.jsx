@@ -94,10 +94,7 @@ function App() {
         },
         {
           path: "/allOrders",
-          element: (
-           
-           <Navigate to="/account/orders"/>
-          ),
+          element: <Navigate to="/account/orders" />,
         },
         {
           path: "/wishlist",
@@ -167,13 +164,13 @@ function App() {
         <OfflineScreen>
           <AuthProvider>
             <AddressProvider>
-                  <RouterProvider router={routes} />
-                  <ToastContainer
-                    autoClose={3000}
-                    closeButton={false}
-                    closeOnClick={true}
-                    transition={Slide}
-                  />
+              <RouterProvider router={routes} />
+              <ToastContainer
+                autoClose={3000}
+                closeButton={false}
+                closeOnClick={true}
+                transition={Slide}
+              />
             </AddressProvider>
           </AuthProvider>
         </OfflineScreen>

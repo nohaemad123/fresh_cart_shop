@@ -38,14 +38,12 @@ export default function Login() {
   async function SendDataSignIn(values) {
     try {
       const response = await sendDataToSignIn(values);
-      console.log(response);
       if (response.success) {
         toast.success("Welcome back");
         localStorage.setItem(
           "user_details",
           JSON.stringify(response.data.user)
         );
-        console.log(response.data.user);
         if (values.rememberMe) {
           sessionStorage.setItem("token", response.data.token);
         } else {

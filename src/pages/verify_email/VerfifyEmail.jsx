@@ -33,7 +33,6 @@ export default function VerifyEmail() {
       values.digit6;
     try {
       const response = await verifyEmail(code);
-      console.log(response);
       if (response.success) {
         toast.success("The code is correct, please reset your password");
         setTimeout(() => {

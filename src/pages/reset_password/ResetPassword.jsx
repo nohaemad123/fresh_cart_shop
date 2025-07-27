@@ -33,7 +33,6 @@ export default function ResetPassword() {
   async function SendDataToResetPassword(values) {
     try {
       const response = await resetPassword(values);
-      console.log(response);
       if (response.success) {
         toast.success("The code is correct, please reset your password");
         setTimeout(() => {

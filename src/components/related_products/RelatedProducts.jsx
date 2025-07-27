@@ -16,31 +16,10 @@ import RelatedProductsSkeleton from "../../skeleton/RelatedProductsSkeleton";
 
 export default function RelatedProducts({ productDetails }) {
   const { category } = productDetails;
-  console.log(category);
-  // const [relatedProducts, setRelatedProducts] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [isError, setIsError] = useState(false);
+
   const { filteredProducts, isLoading } = useFilteredProducts({
     category: category._id,
   });
-  // async function getAllProducts() {
-  //   try {
-  //     setIsLoading(true);
-
-  //     const response = await getAllProductsApi({ category: category._id });
-  //     if (response.success) {
-  //       setIsLoading(false);
-  //       setRelatedProducts(response.data.data);
-  //     }
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //     setIsError(true);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
 
   if (isLoading) {
     return <RelatedProductsSkeleton />;

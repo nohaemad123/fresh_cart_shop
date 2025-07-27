@@ -47,7 +47,6 @@ export default function ChangePassword() {
   async function SendDataToChangePassword(values) {
     try {
       const response = await changePassword(values);
-      console.log(response);
       if (response.success) {
         toast.success(
           "the password is changes, please logout and login again "

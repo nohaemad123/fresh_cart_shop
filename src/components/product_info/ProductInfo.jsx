@@ -33,20 +33,21 @@ export default function ProductInfo({ productDetails }) {
     description,
     category,
   } = productDetails;
- 
+
   const removeProductToCartApi = useDeleteProductFromCart();
   const addProductToCartApi = useAddProductToCart();
-  
+
   const deleteProductFromWishlist = useDeleteProductFromWishlist();
-const addProductToWishlist=useAddProductToWishlist()
-const { wishlistProducts} = useWishlist();
-const { cartProducts} = useCart();
-const { token } = useContext(authContext);
-console.log(wishlistProducts)
+  const addProductToWishlist = useAddProductToWishlist();
+  const { wishlistProducts } = useWishlist();
+  const { cartProducts } = useCart();
+  const { token } = useContext(authContext);
 
   var isExistInWishlist = false;
   if (token) {
-    isExistInWishlist = wishlistProducts?.find((product) => _id === product._id);
+    isExistInWishlist = wishlistProducts?.find(
+      (product) => _id === product._id
+    );
   }
 
   var isExistInCart = false;
@@ -54,6 +55,18 @@ console.log(wishlistProducts)
     isExistInCart = cartProducts?.products.find(
       (product) => _id === product.product._id
     );
+  }
+
+  const [count, setCount] = useState(1);
+
+  function increaseCount() {
+    setCount(count + 1);
+  }
+
+  function decreaseCount() {
+    if (count > 1) {
+      setCount(count - 1);
+    }
   }
 
   return (
@@ -94,7 +107,6 @@ console.log(wishlistProducts)
                   <button
                     className="cursor-pointer"
                     onClick={() => addProductToWishlist.mutate(_id)}
-
                   >
                     <FontAwesomeIcon icon={regularHeart} />
                   </button>
@@ -102,7 +114,6 @@ console.log(wishlistProducts)
                   <button
                     className="cursor-pointer"
                     onClick={() => deleteProductFromWishlist.mutate(_id)}
-
                   >
                     <FontAwesomeIcon
                       icon={solidHeart}
@@ -149,11 +160,17 @@ console.log(wishlistProducts)
                 <h3 className=" me-4">Quantity: </h3>
 
                 <div className="flex border border-gray-600 rounded-md items-center">
-                  <button className="py-1 px-3 cursor-pointer text-2xl font-semibold">
+                  <button
+                    onClick={decreaseCount}
+                    className="py-1 px-3 cursor-pointer text-2xl font-semibold"
+                  >
                     -
                   </button>
-                  <span className="py-1 px-4 text-xl">1</span>
-                  <button className="py-1 px-3 cursor-pointer text-2xl font-semibold">
+                  <span className="py-1 px-4 text-xl">{count}</span>
+                  <button
+                    onClick={increaseCount}
+                    className="py-1 px-3 cursor-pointer text-2xl font-semibold"
+                  >
                     +
                   </button>
                 </div>
@@ -169,7 +186,7 @@ console.log(wishlistProducts)
                 {!isExistInCart ? (
                   <button
                     onClick={() => {
-                      addProductToCartApi.mutate(_id)              
+                      addProductToCartApi.mutate(_id);
                     }}
                     className="bg-primary-600 py-3 text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
                   >
@@ -178,8 +195,7 @@ console.log(wishlistProducts)
                   </button>
                 ) : (
                   <button
-                  onClick={() => removeProductToCartApi.mutate(_id)}
-
+                    onClick={() => removeProductToCartApi.mutate(_id)}
                     className="bg-red-500 py-3 text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
                   >
                     <FontAwesomeIcon icon={faCartShopping} className="me-2" />{" "}

@@ -18,7 +18,6 @@ import { Link, NavLink } from "react-router";
 
 export default function AccountSidebar() {
   const { userData, logout } = useContext(authContext);
-  console.log(userData);
   return (
     <>
       <div className="bg-white p-7 rounded-md">

@@ -27,7 +27,6 @@ export default function ForgetPassword() {
   async function SendDataForgetPassword(values) {
     try {
       const response = await forgotPassword(values);
-      console.log(response);
       if (response.success) {
         toast.success("We send you code, please check your email address");
         setTimeout(() => {
