@@ -21,7 +21,7 @@ export default function ReviewsTab({ ratingsAverage, ratingsQuantity }) {
       </div>
       <div className="mb-5">
         <div className="flex justify-between items-center mb-2">
-          <div className="flex gap-x-3">
+          <div className="flex flex-col md:flex-row gap-x-3">
             <ProductRating rating={5} />
             <span className="font-medium">John D.</span>
           </div>
@@ -34,7 +34,7 @@ export default function ReviewsTab({ ratingsAverage, ratingsQuantity }) {
       </div>
       <div>
         <div className="flex justify-between items-center mb-2">
-          <div className="flex gap-x-3">
+          <div className="flex flex-col md:flex-row gap-x-3">
             <ProductRating rating={4} />
             <span className="font-medium">Sarah m.</span>
           </div>

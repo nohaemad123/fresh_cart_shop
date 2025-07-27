@@ -9,10 +9,10 @@ export default function AccountLayout() {
       <div className="py-10 bg-mainColor">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-5">
-            <div className="md:col-span-3 ">
+            <div className="lg:col-span-3 md:col-span-4">
               <AccountSidebar />
             </div>
-            <div className="md:col-span-9 ">
+            <div className="lg:col-span-9 md:col-span-8">
               <div className="bg-white p-7 rounded-md">
                 <Outlet />
               </div>

@@ -69,6 +69,23 @@ export default function RelatedProducts({ productDetails }) {
 
         <Swiper
           modules={[Navigation]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+            1280: {
+              slidesPerView: 4,
+            },
+          }}
           slidesPerView={4}
           className="mt-5"
           loop={true}

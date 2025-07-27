@@ -14,13 +14,11 @@ import {
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import NavSidebar from "../nav_sidebar/NavSidebar";
 import logo from "../../assets/freshcart-logo.svg";
 import { authContext } from "../../context/Auth.context";
-import { cartContext } from "../../context/Cart.context";
-import OfflineScreen from "../offline_screen/OfflineScreen";
 import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 import { useCategories } from "../../hooks/useCategories";
 import { useCart } from "../../hooks/useCart";
@@ -37,7 +35,7 @@ export default function Navbar() {
           <div className="flex justify-between py-3 text-sm">
             <div className="details flex space-x-5">
               <p>
-                <FontAwesomeIcon icon={faPhone} className="me-2" />{" "}
+                <FontAwesomeIcon icon={faPhone} className="me-2" />
                 <a
                   href="tel:+1 (800)
                 123-4567"
@@ -247,7 +245,7 @@ export default function Navbar() {
                   </button>
 
                   <div className="absolute hidden group-hover:block z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
-                    <ul className=" text-sm text-gray-700 dark:text-gray-200">
+                    <ul className=" text-sm text-gray-700 dark:text-gray-200 w-full">
                       {categories &&
                         categories.map((category) => (
                           <li
@@ -266,7 +264,7 @@ export default function Navbar() {
                             </Link>
                           </li>
                         ))}
-                      <li className="px-4 py-3">
+                      <li className="px-3 py-3">
                         <Link to="/categories" className="text-sm">
                           <FontAwesomeIcon
                             icon={faEllipsis}

@@ -1,5 +1,5 @@
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { faRotateLeft, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import {  faCreditCard, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router";
 
@@ -48,8 +48,8 @@ export default function OrderItem({ orderInfo }) {
             </div>
           </div>
         </div>
-        <div className="flex p-2 flex-col lg:flex-row justify-between gap-x-3">
-          <div className="flex gap-x-3 border-r border-gray-300 pr-5 flex-wrap">
+        <div className="flex p-2 flex-col space-y-3 lg:space-y-0 lg:flex-row justify-between gap-x-3">
+          <div className="flex max-w-50 overflow-auto gap-y-3 gap-x-3 border-0 lg:border-r md:border-gray-300 pr-5 flex-wrap">
             {cartItems.map((item) => (
               <div className="relative rounded-md" key={item.product._id}>
                 <img
@@ -79,15 +79,15 @@ export default function OrderItem({ orderInfo }) {
               {shippingAddress?.details}
             </span>
           </div>
-          <div className="flex flex-col border-l border-gray-300 pl-5 space-y-3">
+          <div className="flex items-end flex-col border-0 lg:border-l md:border-gray-300 pl-0 md:pl-5 space-y-3">
             <button
-              type="submit"
-              className="py-2 px-2 bg-primary-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md"
+           
+              className="py-2 px-2 bg-orange-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md"
             >
-              Track order
+            <FontAwesomeIcon icon={faCreditCard} className="me-2"/>  Complete payment
             </button>
-            <button className="py-2 px-2 border mb-5 border-primary-600  text-sm text-primary-600 font-semibold text-center rounded-md">
-              Write review
+            <button className="py-2 px-2 border mb-5 text-white border-primary-600 bg-primary-600 w-fit  text-sm text-or-600 font-semibold text-center rounded-md">
+              Reorder items
             </button>
           </div>
         </div>

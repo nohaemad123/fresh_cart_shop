@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -28,7 +27,7 @@ export default function HomeSlider() {
               backgroundPosition: "center center",
             }}
           >
-            <div className="overlay bg-gradient-to-r from-primary-600/80 to-primary-600/30 py-25">
+            <div className="overlay bg-gradient-to-l from-primary-600/70 to-primary-600/30 py-30">
               <div className="container flex flex-col space-y-4 text-white">
                 <h2 className="text-2xl font-bold">
                   Fresh products delivered
@@ -59,7 +58,7 @@ export default function HomeSlider() {
               backgroundPosition: "center center",
             }}
           >
-            <div className="overlay bg-gradient-to-r from-primary-600/80 to-primary-600/30 py-25">
+            <div className="overlay bg-gradient-to-l from-primary-600/70 to-primary-600/30 py-30">
               <div className="container flex flex-col space-y-4 text-white">
                 <h2 className="text-2xl font-bold">
                   Fresh products delivered
@@ -91,7 +90,7 @@ export default function HomeSlider() {
               backgroundPosition: "center center",
             }}
           >
-            <div className="overlay bg-gradient-to-r from-primary-600/80 to-primary-600/30 py-25">
+            <div className="overlay bg-gradient-to-l from-primary-600/70 to-primary-600/30 py-30">
               <div className="container flex flex-col space-y-4 text-white">
                 <h2 className="text-2xl font-bold">
                   Fresh products delivered

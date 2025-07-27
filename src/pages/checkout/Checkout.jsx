@@ -9,9 +9,7 @@ import {
   faLock,
   faMoneyBill1Wave,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { cartContext } from "../../context/Cart.context";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import americanimg from "../../assets/American-Express-Color.png";
 import mastercardimg from "../../assets/mastercard.webp";
 import paypalimg from "../../assets/paypal.png";
@@ -26,7 +24,6 @@ import CheckoutSkeleton from "../../skeleton/CheckoutSkeleton";
 
 export default function Checkout() {
   const { cartProducts, cartId, isLoading, totalCartPrice } = useCart();
-  const { refreshCart } = useContext(cartContext);
   const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -38,7 +35,7 @@ export default function Checkout() {
         shippingAddress: values.shippingAddress,
         paymentMethod: values.paymentMethod,
       });
-      console.log(response);
+     
 
       if (response.success) {
         if (response.data.session) {
@@ -338,7 +335,7 @@ export default function Checkout() {
                       className={`py-3 text-lg font-semibold text-white text-center rounded-md transition-all duration-300 ${
                         formik.isValid && formik.dirty
                           ? "bg-primary-600 cursor-pointer"
-                          : "bg-gray-400 cursor-not-allowed"
+                          : "bg-primary-700 cursor-not-allowed"
                       }`}
                     >
                       Proceed to payment

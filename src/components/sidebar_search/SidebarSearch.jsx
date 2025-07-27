@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
-import { useFormik } from "formik";
+
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { brandsContext } from "../../context/Brands.context";
 import ProductRating from "../product_rating/ProductRating";
-import { Link } from "react-router";
 import { useCategories } from "../../hooks/useCategories";
 import { useBrands } from "../../hooks/useBrands";
 

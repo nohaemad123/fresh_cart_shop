@@ -7,7 +7,6 @@ export async function getAllAddressesApi() {
       url: `/addresses`,
     };
     const response = await apiClient.request(options);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;

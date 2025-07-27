@@ -5,14 +5,11 @@ import { authContext } from "../context/Auth.context";
 
 export function useCart() {
   const { token } = useContext(authContext);
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["cartProducts"],
     queryFn: () => getCartProductsApi(),
     enabled: !!token,
   });
-
-  console.log(data);
 
   return {
     cartProducts: data?.data.data,

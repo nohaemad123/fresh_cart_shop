@@ -3,7 +3,7 @@ export default function ShippingTab() {
     <>
       <div className="">
         <h3 className="text-lg font-semibold mb-3">Shipping & returns</h3>
-        <div className="grid grid-cols-2">
+        <div className="grid  grid-cols-1 md:grid-cols-2">
           <div>
             <h4 className="mb-3 font-small">Shipping information</h4>
 

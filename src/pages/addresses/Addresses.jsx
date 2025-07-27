@@ -10,7 +10,6 @@ import PageMetaData from "../../components/page_meta_data/PageMetaData";
 export default function Addresses() {
   const { addresses, isLoading } = useAddresses();
   const [isAction, setIsAction] = useState(null);
-  console.log(addresses);
   if (isLoading) return <AddressesSkeleton />;
   return (
     <>

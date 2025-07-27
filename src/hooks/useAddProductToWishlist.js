@@ -5,7 +5,7 @@ import { addProductToCartApi } from "../services/cart-service";
 import { useContext } from "react";
 import { addProductToWishlistApi } from "../services/wishlist-service";
 
-export function useAddProductToCart() {
+export function useAddProductToWishlist() {
   const queryClient = useQueryClient();
   const { token } = useContext(authContext);
   return useMutation({
@@ -16,7 +16,7 @@ export function useAddProductToCart() {
       return addProductToWishlistApi(productId);
     },
     onSuccess: () => {
-      toast.success("the product added to cart");
+      toast.success("the product added to wishlist");
       queryClient.invalidateQueries(["wishlistProducts"]);
     },
   });

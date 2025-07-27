@@ -13,8 +13,6 @@ export function useWishlist() {
     enabled: !!token,
   });
 
-  console.log(data);
-
   return {
     wishlistProducts: data?.data.data,
     isLoading,

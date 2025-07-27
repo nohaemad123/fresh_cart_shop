@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import Home from "./pages/home/Home";
 import Layout from "./components/layout/Layout";
 import NotFound from "./pages/notFound/NotFound";
@@ -9,7 +9,6 @@ import ProductDetails from "./pages/product_details/ProductDetails";
 import Cart from "./pages/cart/Cart";
 import AuthProvider from "./context/Auth.context";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
-import CartProvider from "./context/Cart.context";
 import Checkout from "./pages/checkout/Checkout";
 import AccountLayout from "./components/account_layout/AccountLayout";
 import Orders from "./pages/orders/Orders";
@@ -20,7 +19,6 @@ import ResetPassword from "./pages/reset_password/ResetPassword";
 import SearchProducts from "./pages/search_products/SearchProducts";
 import Categories from "./pages/categories/Categories";
 import Brands from "./pages/brands/Brands";
-import WishlistProvider from "./context/Wishlist.context";
 import Wishlist from "./pages/wishlist/Wishlist";
 import AccountWishlist from "./pages/account_wishlist/AccountWishlist";
 import AccountDetails from "./pages/account_details/AccountDetails";
@@ -31,7 +29,7 @@ import PaymentMethods from "./pages/payment_methods/PaymentMethods";
 import Dashboard from "./pages/dashboard/Dashboard";
 import OfflineScreen from "./components/offline_screen/OfflineScreen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AllOrders from "./pages/all-orders/AllOrders";
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -97,9 +95,8 @@ function App() {
         {
           path: "/allOrders",
           element: (
-            <ProtectedRoute>
-              <AllOrders />
-            </ProtectedRoute>
+           
+           <Navigate to="/account/orders"/>
           ),
         },
         {
@@ -123,7 +120,7 @@ function App() {
           ),
           children: [
             {
-              index: true, // دي بدل path: "/"
+              index: true,
               element: <Dashboard />,
             },
             {
@@ -170,8 +167,6 @@ function App() {
         <OfflineScreen>
           <AuthProvider>
             <AddressProvider>
-              <CartProvider>
-                <WishlistProvider>
                   <RouterProvider router={routes} />
                   <ToastContainer
                     autoClose={3000}
@@ -179,8 +174,6 @@ function App() {
                     closeOnClick={true}
                     transition={Slide}
                   />
-                </WishlistProvider>
-              </CartProvider>
             </AddressProvider>
           </AuthProvider>
         </OfflineScreen>

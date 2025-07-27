@@ -30,7 +30,6 @@ export function useDeleteProductFromCart() {
           throw new Error("Delete failed");
         }
       } else {
-        // لو الـ user عمل Cancel نرجع null
         return null;
       }
     },
@@ -42,10 +41,9 @@ export function useDeleteProductFromCart() {
     },
 
     onError: (error) => {
-      console.error("❌ Delete Product Error:", error);
       Swal.fire({
         title: "Error",
-        text: "There was an issue deleting the product. Try again!",
+        text: error.message,
         icon: "error",
       });
     },

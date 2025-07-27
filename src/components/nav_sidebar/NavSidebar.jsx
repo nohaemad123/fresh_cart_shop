@@ -14,7 +14,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authContext } from "../../context/Auth.context";
-import { cartContext } from "../../context/Cart.context";
 import { useCart } from "../../hooks/useCart";
 
 export default function NavSidebar() {

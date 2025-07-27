@@ -12,8 +12,8 @@ export default function BreadCrumb({ secondLink, thirdLink, bg_gray }) {
         } breadcrumb py-3 border-b-2 border-gray-200`}
       >
         <div className="container">
-          <nav className="flex" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <nav className="flex flex-col md:flex-row" aria-label="Breadcrumb">
+            <ol className="flex flex-col md:flex-row md:inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
               <li className="inline-flex items-center">
                 <Link
                   to="/"

@@ -4,16 +4,15 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
 import OrderItem from "../../components/order_item/OrderItem";
 
 import { useOrders } from "../../hooks/useOrders";
 import OrdersSkeleton from "../../skeleton/OrdersSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import EmptyOrders from "../../components/empty_orders/EmptyOrders";
 
 export default function Orders() {
   const { orders, isLoading } = useOrders();
-  console.log("orders:", orders);
   if (isLoading) return <OrdersSkeleton />;
   return (
     <>
@@ -40,11 +39,14 @@ export default function Orders() {
           </div>
         </div>
       </div>
+      {!orders.length && <EmptyOrders />}
+
+
       {orders?.map((order) => (
         <OrderItem orderInfo={order} key={order._id} />
       ))}
 
-      <div className="flex justify-between items-center">
+     {orders.length && <div className="flex justify-between items-center">
         <p>Showing 1-4 of 12 orders</p>
         <div>
           <ul className="flex gap-x-3">
@@ -65,7 +67,8 @@ export default function Orders() {
             </li>
           </ul>
         </div>
-      </div>
+      </div>}
+
     </>
   );
 }

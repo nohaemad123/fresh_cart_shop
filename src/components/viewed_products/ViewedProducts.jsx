@@ -52,6 +52,23 @@ export default function ViewedProducts() {
               pnextEl: ".related_next_btn",
               prevEl: ".related_prev_btn",
             }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+              1280: {
+                slidesPerView: 4,
+              },
+            }}
             spaceBetween={20}
           >
             {products.map((product) => {

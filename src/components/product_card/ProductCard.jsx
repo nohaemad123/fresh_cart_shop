@@ -13,10 +13,11 @@ import { Link } from "react-router";
 import { calcDiscount } from "../../utils/calcDiscount.utils";
 import ProductRating from "../product_rating/ProductRating";
 import { useContext } from "react";
-import { cartContext } from "../../context/Cart.context";
-import { wishlistContext } from "../../context/Wishlist.context";
 import { authContext } from "../../context/Auth.context";
 import { useAddProductToCart } from "../../hooks/useAddProductToCart";
+import { useWishlist } from "../../hooks/useWishlist";
+import { useDeleteProductFromWishlist } from "../../hooks/useDeleteProductFromWishlist";
+import { useAddProductToWishlist } from "../../hooks/useAddProductToWishlist";
 
 export default function ProductCard({ productInfo }) {
   const {
@@ -30,17 +31,17 @@ export default function ProductCard({ productInfo }) {
     ratingsQuantity,
   } = productInfo;
 
-  const { mutate: addProductToCartApi, isLoading } = useAddProductToCart();
-
-  const { AddProductToCart } = useContext(cartContext);
-  const { AddProductToWishlist, wishlistProducts, DeleteWishlistFromCart } =
-    useContext(wishlistContext);
+  const addProductToCartApi = useAddProductToCart();
+  const { wishlistProducts} = useWishlist();
+  const deleteProductFromWishlist = useDeleteProductFromWishlist();
+const addProductToWishlist=useAddProductToWishlist()
   const { token } = useContext(authContext);
 
   var isExist = false;
   if (token) {
     isExist = wishlistProducts?.find((product) => _id === product._id);
   }
+
   return (
     <>
       <div className="product_card bg-white relative  shadow-lg rounded-xl overflow-hidden">
@@ -48,7 +49,7 @@ export default function ProductCard({ productInfo }) {
           <Link to={`/product-details/${_id}`} className="block">
             <img
               src={imageCover}
-              alt=""
+              alt={title}
               className="h-60 mx-auto  object-cover"
             />
           </Link>
@@ -81,37 +82,31 @@ export default function ProductCard({ productInfo }) {
               )}
             </div>
             <button
-              onClick={() => {
-                addProductToCartApi(_id);
-              }}
+              onClick={() => 
+                addProductToCartApi.mutate(_id)              }
               className="size-9 rounded-full cursor-pointer bg-primary-600 text-white text-lg"
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
         </div>
-        {priceAfterDiscount &&
-          priceAfterDiscount < price &&
-          calcDiscount({ price, priceAfterDiscount }) > 0 && (
-            <span className="bg-red-600 absolute top-3 left-3 text-white text-xs rounded-md px-2 py-1">
-              -{calcDiscount({ price, priceAfterDiscount })}%
-            </span>
-          )}
+        {priceAfterDiscount ? (
+              <span className="bg-red-600 absolute top-3 left-3 text-white text-xs rounded-md px-2 py-1">
+                -{calcDiscount({ price, priceAfterDiscount })}%
+              </span>
+            ):""}
 
         <div className="absolute top-3 right-3 bg-white p-2 flex flex-col space-y-5 shadow-md *:hover:text-primary-600 *:transition-colors *:duration-500 *:cursor-pointer">
           {!isExist ? (
             <button
-              onClick={() => {
-                AddProductToWishlist(_id);
-              }}
+            onClick={() => addProductToWishlist.mutate(_id)}
+
             >
               <FontAwesomeIcon icon={regularHeart} />
             </button>
           ) : (
             <button
-              onClick={() => {
-                DeleteWishlistFromCart(_id);
-              }}
+            onClick={() => deleteProductFromWishlist.mutate(_id)}
             >
               <FontAwesomeIcon icon={solidHeart} className="text-red-500" />
             </button>

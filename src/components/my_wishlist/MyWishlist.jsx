@@ -1,12 +1,7 @@
-import { useContext } from "react";
-import { wishlistContext } from "../../context/Wishlist.context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
-  faMagnifyingGlass,
-  faShoppingCart,
-  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import WishlistItem from "../wishlist_item/WishlistItem";
 import EmptyWishlist from "../empty_wishlist/EmptyWishlist";

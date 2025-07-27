@@ -7,8 +7,6 @@ export function useOrderDetails(id) {
     queryFn: () => getOrderByIdApi(id),
   });
 
-  console.log(data);
-
   return {
     order: data?.data.data || {},
     isLoading,

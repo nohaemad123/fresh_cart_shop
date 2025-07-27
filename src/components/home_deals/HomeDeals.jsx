@@ -1,9 +1,8 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ProductCard from "../product_card/ProductCard";
-
 import { calcTimeLeft } from "../../utils/counterDown";
 import { useProduct } from "../../hooks/useProduct";
 import HomeDealsSkeleton from "../../skeleton/HomeDealsSkeleton";
@@ -36,7 +35,7 @@ export default function HomeDeals() {
     <>
       <div className="py-10 ">
         <div className="container">
-          <div className="flex flex-col space-y-2 lg:flex-row justify-between items-center text-center">
+          <div className="flex flex-col space-y-2 md:flex-row justify-between items-center text-center">
             <h2 className="text-2xl font-bold">Deals of the day</h2>
             <Link
               to=""

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import FeaturedBrands from "../../components/featured_brands/FeatruedBrands";
 import BrandCard from "../../components/brand_card/BrandCard";
@@ -42,7 +41,7 @@ export default function Brands() {
 
       <div className="py-10 bg-mainColor">
         <div className="container">
-          <div className="flex justify-between items-center mb-10">
+          <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 justify-between items-center mb-10">
             <div className="flex">
               <input
                 type="text"
@@ -57,7 +56,7 @@ export default function Brands() {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-5 md:gap-10">
             {brands &&
               brands.map((brand) => (
                 <BrandCard key={brand._id} brandInfo={brand} />

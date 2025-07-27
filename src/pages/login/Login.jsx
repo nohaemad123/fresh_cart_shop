@@ -27,7 +27,7 @@ export default function Login() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const navigate = useNavigate();
 
-  const { setToken, setUserData } = useContext(authContext);
+  const { setToken } = useContext(authContext);
 
   const [isExistError, setIsExistError] = useState(null);
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -84,15 +84,11 @@ export default function Login() {
     onSubmit: SendDataSignIn,
   });
 
-  function toggleShowPassword() {
-    setIsPasswordShow(!isPasswordShow);
-  }
-
   return (
     <>
       <div className="py-15 bg-mainColor">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 w-full lg:w-[90%] mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 w-full lg:w-[90%] mx-auto">
             <div className="text-center flex flex-col space-y-3">
               <img
                 src={login_img}

@@ -13,7 +13,7 @@ export default function FeaturedBrands() {
     <>
       <div className="">
         <h3 className="text-2xl font-bold">Featured brands</h3>
-        <div className="grid lg:grid-cols-3  gap-x-10 gap-y-5 mt-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-x-10 gap-y-5 mt-5">
           {brands &&
             brands.map((brand) => (
               <div className="rounded-md" key={brand._id}>

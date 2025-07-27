@@ -31,7 +31,6 @@ export function useDeleteProductFromWishlist() {
           throw new Error("Delete failed");
         }
       } else {
-        // لو الـ user عمل Cancel نرجع null
         return null;
       }
     },
@@ -43,7 +42,6 @@ export function useDeleteProductFromWishlist() {
     },
 
     onError: (error) => {
-      console.error("❌ Delete Product Error:", error);
       Swal.fire({
         title: "Error",
         text: error.message,

@@ -3,12 +3,10 @@ import { useState, useContext } from "react";
 import ProductRating from "../product_rating/ProductRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { cartContext } from "../../context/Cart.context";
 import { useDeleteProductFromCart } from "../../hooks/useDeleteProductFromCart";
 
 export default function CartItem({ cartProduct, updateCountProductsApi }) {
   const { product } = cartProduct;
-  const { DeleteProductFromCart } = useContext(cartContext);
   const [count, setCount] = useState(cartProduct.count);
   const deleteProductMutation = useDeleteProductFromCart();
 
@@ -27,14 +25,17 @@ export default function CartItem({ cartProduct, updateCountProductsApi }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 mb-5 border-b border-gray-300 pb-5">
-      <div className="md:col-span-7 px-5 md:px-10 items-center">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 mb-5 border-b border-gray-300 pb-5 last:border-0">
+      <div className="md:col-span-6 lg:col-span-7 px-5 md:px-10 items-center">
         <div className="flex gap-x-5 items-center">
           <Link to={`/product-details/${product._id}`}>
-            <img
+         <div className="w-[100px]">
+         <img
               src={product.imageCover}
-              className="size-20 rounded-lg border border-gray-200 p-1"
-            />
+              className="w-full rounded-lg border border-gray-200 p-1"
+              />
+         </div>
+           
           </Link>
           <div className="flex flex-col space-y-2 mb-3 lg:mb-0">
             <Link to={`/product-details/${product._id}`}>
@@ -52,7 +53,7 @@ export default function CartItem({ cartProduct, updateCountProductsApi }) {
           </div>
         </div>
       </div>
-      <div className="md:col-span-5 px-5 md:px-10">
+      <div className="md:col-span-6 lg:col-span-5 px-5 md:px-10">
         <div className="flex gap-x-3 justify-end items-center">
           <div className="flex items-center border-2 border-gray-200 rounded-lg">
             <button

@@ -88,13 +88,13 @@ export default function Footer() {
               <h2 className="text-xl font-bold">Customer service</h2>
               <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:hover:text-primary-500 *:transition-colors *:duration-300">
                 <li>
-                  <Link to="">My account</Link>
+                  <Link to="/account">My account</Link>
                 </li>
                 <li>
-                  <Link to="">My orders</Link>
+                  <Link to="/account/orders">My orders</Link>
                 </li>
                 <li>
-                  <Link to="">Wishlist</Link>
+                  <Link to="/wishlist">Wishlist</Link>
                 </li>
                 <li>
                   <Link to="">Returns and Refunds</Link>

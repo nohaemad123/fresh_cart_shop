@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import image_slider from "../../assets/slider-image-1.jpg";
-import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBoxArchive,
@@ -8,8 +7,6 @@ import {
   faLocationDot,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { cartContext } from "../../context/Cart.context";
-import { wishlistContext } from "../../context/Wishlist.context";
 import { useCart } from "../../hooks/useCart";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useOrders } from "../../hooks/useOrders";

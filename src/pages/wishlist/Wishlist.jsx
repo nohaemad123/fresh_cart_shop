@@ -1,16 +1,10 @@
-import React, { useContext } from "react";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
-import { wishlistContext } from "../../context/Wishlist.context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronLeft,
-  faChevronRight,
   faShoppingCart,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import WishlistItem from "../../components/wishlist_item/WishlistItem";
 
-import EmptyWishlist from "../../components/empty_wishlist/EmptyWishlist";
 import { Link } from "react-router";
 import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import MyWishlist from "../../components/my_wishlist/MyWishlist";
@@ -20,7 +14,6 @@ import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function Wishlist() {
   const { wishlistProducts, isLoading } = useWishlist();
-  console.log(wishlistProducts);
   if (isLoading) return <WishlistSkeleton />;
   return (
     <>
@@ -32,7 +25,7 @@ export default function Wishlist() {
       <div className="bg-mainColor py-15">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-5 items-start">
-            <div className="md:col-span-9 bg-white py-5 rounded-md border border-gray-300/70 w-full inline-block">
+            <div className="md:col-span-7 lg:col-span-9 bg-white py-5 rounded-md border border-gray-300/70 w-full inline-block">
               <div className="border-b border-gray-300 pb-5 px-10">
                 <h3 className="text-xl font-bold">My wishlist </h3>
                 <div className="flex flex-col lg:flex-row space-y-2 justify-between items-center">
@@ -55,7 +48,7 @@ export default function Wishlist() {
                 <MyWishlist />
               </div>
             </div>
-            <div className="md:col-span-3 ">
+            <div className="md:col-span-5 lg:col-span-3 ">
               <div className="bg-white p-5 rounded-md border border-gray-300/70 mb-5">
                 <h3 className="text-lg font-semibold">Create new wishlist </h3>
                 <div className="form-group mt-2 flex flex-col space-y-2">
@@ -140,7 +133,7 @@ export default function Wishlist() {
                     Twitter
                   </button>
                 </div>
-                <div className="border border-gray-400 p-2 rounded-lg flex items-center relative h-[35px]">
+                <div className="border border-gray-400 p-2 rounded-lg flex items-center relative h-[35px] overflow-hidden">
                   <span className="text-wrap">
                     http://www.freshcart.com/wishlist
                   </span>

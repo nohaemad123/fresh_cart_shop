@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
 
-import { getOrderByIdApi } from "../../services/orders-service";
-import { Link, useParams } from "react-router";
+import {useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 import { faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 import { useOrderDetails } from "../../hooks/useOrderDetails";
 import OrderDetailsSkeleton from "../../skeleton/OrderDetailsSkeleton";
@@ -32,7 +29,9 @@ export default function OrderDetails() {
           >
             {order.isDelivered ? "Delivered" : "Processing"}
           </span>
-          <h4>
+        
+        </div>
+        <h4>
             Placed on{" "}
             {new Date(order?.createdAt).toLocaleDateString("en-us", {
               month: "long",
@@ -40,10 +39,6 @@ export default function OrderDetails() {
               year: "numeric",
             })}
           </h4>
-        </div>
-        <button className="bg-primary-600 rounded-md px-3 py-2 cursor-pointer text-white font-bold">
-          Download invoice
-        </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-12 mb-2 mt-5 gap-x-5">
         <div className="md:col-span-7 ">

@@ -1,7 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router";
-import { useContext } from "react";
 import ProductCard from "../product_card/ProductCard";
 import { useProduct } from "../../hooks/useProduct";
 import HomeFeaturedProductsSkeleton from "../../skeleton/HomeFeaturedProductsSkeleton";
@@ -16,7 +15,7 @@ export default function HomeFeaturedProducts() {
     <>
       <div className="py-10 ">
         <div className="container">
-          <div className="flex flex-col space-y-2 lg:flex-row justify-between items-center text-center">
+          <div className="flex flex-col space-y-2 md:flex-row justify-between items-center text-center">
             <h2 className="text-2xl font-bold">Featured products</h2>
             <Link to="" className="flex items-center text-primary-600">
               View all featured{" "}

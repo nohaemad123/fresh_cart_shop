@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import ProductCard from "../../components/product_card/ProductCard";
@@ -90,10 +90,10 @@ export default function SearchProducts() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-10 mt-5">
-            <div className="md:col-span-3">
+            <div className="md:col-span-5 lg:col-span-3">
               <SidebarSearch />
             </div>
-            <div className="md:col-span-9">
+            <div className="md:col-span-7 lg:col-span-9">
               {!filteredProducts.length && searchParams.get("category") && (
                 <NoProducts name={categoryName} />
               )}
@@ -112,7 +112,7 @@ export default function SearchProducts() {
                             view === "grid"
                               ? "bg-primary-600 text-white"
                               : "bg-gray-200"
-                          } w-[35px] h-[40px] text-lg rounded-md`}
+                          } w-[35px] h-[40px] text-lg rounded-md cursor-pointer`}
                         >
                           <FontAwesomeIcon icon={faGrip} />
                         </button>
@@ -122,7 +122,7 @@ export default function SearchProducts() {
                             view === "list"
                               ? "bg-primary-600 text-white"
                               : "bg-gray-200"
-                          } w-[35px] h-[40px] text-lg rounded-md`}
+                          } w-[35px] h-[40px] text-lg rounded-md cursor-pointer`}
                         >
                           <FontAwesomeIcon icon={faList} />
                         </button>
@@ -138,7 +138,7 @@ export default function SearchProducts() {
                   </div>
 
                   {view === "grid" ? (
-                    <div className="grid lg:grid-cols-3 gap-10 mt-10">
+                    <div className="grid lg:grid-cols-3 gap-10 md:gap-5 lg:gap-10 mt-10">
                       {filteredProducts.map((product) => (
                         <ProductCard key={product._id} productInfo={product} />
                       ))}

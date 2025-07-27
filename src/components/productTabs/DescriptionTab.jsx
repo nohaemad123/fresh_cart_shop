@@ -7,8 +7,8 @@ export default function DescriptionTab({ description }) {
     <>
       <h3 className="text-lg font-semibold mb-3">Product description</h3>
       <p className="text-gray-600 mb-4">{description}</p>
-      <div className="grid grid-cols-2">
-        <div className="">
+      <div className="grid  lg:grid-cols-2">
+        <div className="md:mb-2">
           <h3 className="text-lg font-semibold mb-3">Benefits</h3>
           <ul className="gap-y-1 flex flex-col">
             <li>Rich in vitamins c and k</li>

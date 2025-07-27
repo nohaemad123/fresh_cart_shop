@@ -25,7 +25,6 @@ export async function getCartProductsApi() {
     };
 
     const response = await apiClient.request(options);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;
@@ -40,7 +39,6 @@ export async function deleteCartProductsApi(product_id) {
     };
 
     const response = await apiClient.request(options);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;
@@ -48,8 +46,6 @@ export async function deleteCartProductsApi(product_id) {
 }
 
 export async function updateCountProductsApi(product_id, count) {
-  console.log("count " + count);
-  console.log("product id " + product_id);
 
   try {
     const options = {
@@ -61,7 +57,6 @@ export async function updateCountProductsApi(product_id, count) {
     };
 
     const response = await apiClient.request(options);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;

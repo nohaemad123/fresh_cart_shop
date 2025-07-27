@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { addressContext } from "../../context/Address.context";
 
 export default function AddAddress() {
-  const { AddAddressFunction } = useContext(addressContext);
+  const { AddAddressFunction, error } = useContext(addressContext);
   const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
 
   const validationSchema = yup.object({
@@ -112,6 +112,8 @@ export default function AddAddress() {
         {formik.touched.details && formik.errors.details && (
           <p className="text-red-600">{formik.errors.details}</p>
         )}
+
+        {error && <p className="text-red-600">{error}</p>}
 
         <button
           type="submit"

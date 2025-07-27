@@ -1,8 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext,useState } from "react";
 import {
   addAddressApi,
   deleteAddressApi,
-  getAllAddressesApi,
 } from "../services/address-service";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -13,7 +12,6 @@ export const addressContext = createContext(null);
 const MySwal = withReactContent(Swal);
 
 export default function AddressProvider({ children }) {
-  // const [addresses, setAddresses] = useState(null);
   const queryClient = useQueryClient();
 
   const [isError, setIsError] = useState(false);
@@ -53,16 +51,14 @@ export default function AddressProvider({ children }) {
             icon: "success",
           });
           queryClient.invalidateQueries(["addresses"]);
-          console.log(response);
         }
       }
     } catch (error) {
-      console.log(error);
     }
   }
 
   return (
-    <addressContext.Provider value={{ AddAddressFunction, DeleteAddress }}>
+    <addressContext.Provider value={{error,isError, AddAddressFunction, DeleteAddress }}>
       {children}
     </addressContext.Provider>
   );

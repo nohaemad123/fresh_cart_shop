@@ -88,7 +88,7 @@ export default function SignUp() {
     <>
       <div className="py-10 bg-mainColor">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12">
             <div className="">
               <h2 className="text-4xl font-bold">
                 Welcome to <span className="text-primary-600">FreshCart</span>

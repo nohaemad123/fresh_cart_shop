@@ -8,19 +8,15 @@ export function useOrders() {
   const { token } = useContext(authContext);
   const { userData: userId, isLoading: isVerifying } = useVerifyToken();
 
-  console.log("userId: ", userId);
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["orders", userId],
     queryFn: () => getAllOrdersApi(userId),
-    enabled: !!token && !!userId && !isVerifying, // نشغل الكويري لما نتاكد ان userId موجود
+    enabled: !!token && !!userId && !isVerifying,
   });
-
-  console.log(data);
 
   return {
     orders: data?.data || [],
-    isLoading: isLoading || isVerifying, // ندمج loading بتاع التوكن مع كويري
+    isLoading: isLoading || isVerifying, 
     isError,
     error,
   };

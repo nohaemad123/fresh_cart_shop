@@ -7,8 +7,6 @@ export function useVerifyToken() {
     queryFn: verifyToken,
   });
 
-  console.log(data);
-
   return {
     userData: data?.data.decoded.id,
     isLoading,

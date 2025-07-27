@@ -1,6 +1,6 @@
 import { faGrip, faList } from "@fortawesome/free-solid-svg-icons";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CategoryCard from "../../components/category_card/CategoryCard";
 
@@ -34,7 +34,7 @@ export default function Categories() {
                 Browse our wide selection of fresh products by category
               </p>
             </div>
-            <div className="flex flex-col space-y-4 lg:flex-row justify-between items-center">
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 justify-between items-center">
               <div className="flex gap-x-5">
                 <h3 className="text-lg font-medium">Sorted by:</h3>
                 <select className="form-control min-w-40">
@@ -67,7 +67,7 @@ export default function Categories() {
       <div className="p-10 bg-mainColor">
         <div className="container">
           {view === "grid" ? (
-            <div className="grid lg:grid-cols-3 gap-x-10 gap-y-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-5">
               {categories &&
                 categories.map((category) => (
                   <div className="rounded-md" key={category._id}>

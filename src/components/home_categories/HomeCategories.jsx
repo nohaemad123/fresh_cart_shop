@@ -1,8 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
 import { Link } from "react-router";
-
 import { useCategories } from "../../hooks/useCategories";
 import HomeCategoriesSkeleton from "../../skeleton/homeCategoriesSkeleton";
 
@@ -27,7 +25,7 @@ export default function HomeCategories() {
               <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
             </Link>
           </div>
-          <div className="grid grid-cols-2  lg:grid-cols-6 gap-5 mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mt-10">
             {categories &&
               categories.map((category) => (
                 <Link

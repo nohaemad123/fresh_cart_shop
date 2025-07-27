@@ -7,7 +7,6 @@ export async function getAllBrandsApi({ limit } = {}) {
       url: `/brands?${limit ? `limit=${limit}` : ""}`,
     };
     const response = await apiClient.request(options);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;
