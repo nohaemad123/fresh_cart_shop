@@ -31,6 +31,7 @@ import OfflineScreen from "./components/offline_screen/OfflineScreen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import PrivacyPolice from "./pages/Privacy_policy/PrivacyPolice";
 
 function App() {
   const queryClient = new QueryClient();
@@ -52,6 +53,10 @@ function App() {
         {
           path: "/contact",
           element: <Contact />,
+        },
+        {
+          path: "/privacy",
+          element: <PrivacyPolice />,
         },
         {
           path: "/signup",
