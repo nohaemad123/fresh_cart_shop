@@ -30,6 +30,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import OfflineScreen from "./components/offline_screen/OfflineScreen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   const queryClient = new QueryClient();
@@ -47,6 +48,10 @@ function App() {
         {
           path: "/about",
           element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
         },
         {
           path: "/signup",

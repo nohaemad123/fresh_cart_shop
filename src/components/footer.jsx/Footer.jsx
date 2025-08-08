@@ -71,7 +71,7 @@ export default function Footer() {
                   <Link to="/about">About us</Link>
                 </li>
                 <li>
-                  <Link to="">Contact us</Link>
+                  <Link to="/contact">Contact us</Link>
                 </li>
                 <li>
                   <Link to="">Privacy policy</Link>

@@ -9,10 +9,10 @@ export default function About() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - About page"
-        description="Fresh cart - About page"
+        title="Fresh cart - About us page"
+        description="Fresh cart - About us page"
       />
-      <BreadCrumb thirdLink={"About"} bg_gray={"bg-mainColor"} />
+      <BreadCrumb thirdLink={"About us"} bg_gray={"bg-mainColor"} />
 
       <section className="py-20 w-[75%] mx-auto">
         <div className="container">
