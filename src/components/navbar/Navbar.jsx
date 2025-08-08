@@ -59,7 +59,7 @@ export default function Navbar() {
                   <Link to="/">Track order</Link>
                 </li>
                 <li>
-                  <Link to="/">About</Link>
+                  <Link to="/about">About</Link>
                 </li>
                 <li>
                   <Link to="/">Contact</Link>

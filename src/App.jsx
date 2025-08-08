@@ -29,6 +29,7 @@ import PaymentMethods from "./pages/payment_methods/PaymentMethods";
 import Dashboard from "./pages/dashboard/Dashboard";
 import OfflineScreen from "./components/offline_screen/OfflineScreen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import About from "./pages/About/About";
 
 function App() {
   const queryClient = new QueryClient();
@@ -42,6 +43,10 @@ function App() {
           path: "/",
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
         },
         {
           path: "/signup",

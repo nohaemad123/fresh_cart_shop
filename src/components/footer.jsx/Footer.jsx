@@ -68,7 +68,7 @@ export default function Footer() {
               <h2 className="text-xl font-bold">Quick links</h2>
               <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:hover:text-primary-500 *:transition-colors *:duration-300">
                 <li>
-                  <Link to="">About us</Link>
+                  <Link to="/about">About us</Link>
                 </li>
                 <li>
                   <Link to="">Contact us</Link>
