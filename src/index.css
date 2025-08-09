@@ -1,11 +1,25 @@
 @import "tailwindcss";
 @import "react-image-gallery/styles/css/image-gallery.css";
 @import "@fontsource/poppins";
+@import "@fontsource-variable/cairo";
 
 /* @import "react-image-gallery/styles/css/image-gallery.css"; */
 
 body {
+}
+
+html[dir="rtl"] body {
+  font-family: "Cairo Variable", sans-serif;
+
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] body {
+  direction: ltr;
   font-family: "Poppins", sans-serif;
+
+  text-align: left;
 }
 
 @theme {

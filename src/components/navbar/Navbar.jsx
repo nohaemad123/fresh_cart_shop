@@ -14,7 +14,7 @@ import {
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import NavSidebar from "../nav_sidebar/NavSidebar";
 import logo from "../../assets/freshcart-logo.svg";
@@ -22,12 +22,28 @@ import { authContext } from "../../context/Auth.context";
 import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 import { useCategories } from "../../hooks/useCategories";
 import { useCart } from "../../hooks/useCart";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const { categories } = useCategories();
   const { logout, token } = useContext(authContext);
   const { isLoading, numOfCartItems } = useCart();
   const isOnline = useOnlineStatus();
+  const { i18n, t } = useTranslation();
+
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  }, [lang]);
+
+  const changeLang = (lng) => {
+    setLang(lng);
+  };
+
   return (
     <>
       <header className=" top_navbar hidden xl:block">
@@ -49,20 +65,20 @@ export default function Navbar() {
               </p>
               {isOnline && (
                 <span className="text-primary-600">
-                  <FontAwesomeIcon icon={faWifi} /> Online
+                  <FontAwesomeIcon icon={faWifi} /> {t("online")}
                 </span>
               )}
             </div>
             <div className="links">
-              <ul className="flex space-x-4">
+              <ul className="flex space-x-4 items-center">
                 <li>
-                  <Link to="/">Track order</Link>
+                  <Link to="/">{t("track_order")}</Link>
                 </li>
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link to="/about">{t("about_us")}</Link>
                 </li>
                 <li>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">{t("contact_us")}</Link>
                 </li>
                 <li>
                   <select>
@@ -71,12 +87,32 @@ export default function Navbar() {
                     <option>AED</option>
                   </select>
                 </li>
-
                 <li>
-                  <select>
-                    <option value="ar">العربية</option>
-                    <option value="en">الانجليزية</option>
-                  </select>
+                  {lang === "ar" ? (
+                    <button
+                      onClick={() => changeLang("en")}
+                      className=" text-black flex items-center cursor-pointer  overflow-hidden "
+                    >
+                      <img
+                        src="https://flagcdn.com/w20/gb.png"
+                        alt="English"
+                        className="w-6 h-6 object-fit rounded-full me-2"
+                      />
+                      EN
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => changeLang("ar")}
+                      className=" text-black flex items-center cursor-pointer  overflow-hidden "
+                    >
+                      <img
+                        src="https://flagcdn.com/w20/sa.png"
+                        alt="العربية"
+                        className="w-6 h-6 object-fit rounded-full me-2"
+                      />
+                      AR
+                    </button>
+                  )}
                 </li>
               </ul>
             </div>
@@ -96,7 +132,7 @@ export default function Navbar() {
                   type="text"
                   id="email-address-icon"
                   className="form-control min-w-96"
-                  placeholder="Search for products..."
+                  placeholder={t("search_for_products")}
                 />
               </div>
 
@@ -115,7 +151,7 @@ export default function Navbar() {
                       }}
                     >
                       <FontAwesomeIcon className="text-xl" icon={faHeart} />
-                      <span className="text-sm">Wishlist</span>
+                      <span className="text-sm">{t("wishlist")}</span>
                     </NavLink>
                   </li>
                   {token ? (
@@ -150,7 +186,7 @@ export default function Navbar() {
                               )}
                             </div>
                           </div>
-                          <span className="text-sm">Cart</span>
+                          <span className="text-sm">{t("cart")}</span>
                         </NavLink>
                       </li>
                       <li>
@@ -166,7 +202,7 @@ export default function Navbar() {
                           }}
                         >
                           <FontAwesomeIcon className="text-xl" icon={faUser} />
-                          <span className="text-sm">Account</span>
+                          <span className="text-sm">{t("account")}</span>
                         </NavLink>
                       </li>
                     </>
@@ -188,7 +224,7 @@ export default function Navbar() {
                             className="text-xl"
                             icon={faUserPlus}
                           />
-                          <span className="text-sm">Signup</span>
+                          <span className="text-sm">{t("sign_up")}</span>
                         </NavLink>
                       </li>
                       <li>
@@ -207,7 +243,7 @@ export default function Navbar() {
                             className="text-xl"
                             icon={faAddressCard}
                           />
-                          <span className="text-sm">Login</span>
+                          <span className="text-sm">{t("login")}</span>
                         </NavLink>
                       </li>
                     </>
@@ -220,7 +256,7 @@ export default function Navbar() {
                           className="text-xl"
                           icon={faRightFromBracket}
                         />
-                        <span className="text-sm">Logout</span>
+                        <span className="text-sm">{t("logout")}</span>
                       </Link>
                     </li>
                   )}
@@ -240,7 +276,7 @@ export default function Navbar() {
                     type="button"
                   >
                     <FontAwesomeIcon icon={faBars} className="me-2" />
-                    All categories
+                    {t("all_categories")}
                     <FontAwesomeIcon icon={faChevronDown} className="ms-2" />
                   </button>
 
@@ -290,22 +326,22 @@ export default function Navbar() {
                   }}
                   aria-current="page"
                 >
-                  Home
+                  {t("home")}
                 </NavLink>
               </li>
               <li>
                 <Link aria-current="page" className="block mt-2">
-                  Recently added
+                  {t("recently_added")}
                 </Link>
               </li>
               <li>
                 <Link aria-current="page" className="block mt-2">
-                  Featured products
+                  {t("featured_products")}
                 </Link>
               </li>
               <li>
                 <Link aria-current="page" className="block mt-2">
-                  Offers
+                  {t("offers")}
                 </Link>
               </li>
               <li>
@@ -314,14 +350,14 @@ export default function Navbar() {
                   className={({ isActive }) => {
                     return `${
                       isActive
-                        ? " text-primary-600 flex flex-col mt-2"
-                        : "text-black flex flex-col mt-2"
+                        ? " text-primary-600 block  mt-2 me-10"
+                        : "text-black block mt-2 me-10"
                     } 
                     `;
                   }}
                   aria-current="page"
                 >
-                  Categories
+                  {t("categories")}
                 </NavLink>
               </li>
               <li>
@@ -337,7 +373,7 @@ export default function Navbar() {
                   }}
                   aria-current="page"
                 >
-                  Brands
+                  {t("brands")}
                 </NavLink>
               </li>
             </ul>

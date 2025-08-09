@@ -22,11 +22,13 @@ import * as yup from "yup";
 import { useContext, useState } from "react";
 import { authContext } from "../../context/Auth.context";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { setToken } = useContext(authContext);
 
@@ -99,7 +101,7 @@ export default function Login() {
                 className="w-full rounded-xl shadow-lg"
               />
               <h2 className="text-4xl font-bold mt-5">
-                Fresh groceries delivered
+                Fresh groceries delivered {t("welcome")}
               </h2>
               <p className="text-lg mt-3">
                 Join thousands of happy customers who enjoy fresh groceries

@@ -33,6 +33,7 @@ import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import PrivacyPolice from "./pages/Privacy_policy/PrivacyPolice";
 import Terms from "./pages/Terms/Terms";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const queryClient = new QueryClient();

@@ -15,11 +15,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authContext } from "../../context/Auth.context";
 import { useCart } from "../../hooks/useCart";
+import { useTranslation } from "react-i18next";
 
 export default function NavSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const { logout, token } = useContext(authContext);
   const { isLoading, numOfCartItems } = useCart();
+  const { i18n, t } = useTranslation();
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -72,14 +74,14 @@ export default function NavSidebar() {
                   type="text"
                   id="email-address-icon"
                   className="form-control "
-                  placeholder="Search for products..."
+                  placeholder={t("search_for_products")}
                 />
               </div>
 
               <div className="mt-4">
                 {token && (
                   <>
-                    <h2 className="text-xl font-bold mb-3">Main menu</h2>
+                    <h2 className="text-xl font-bold mb-3">{t("main_menu")}</h2>
                     <ul className=" *:space-y-3 *:hover:bg-gray-100 transition-colors ">
                       <li onClick={toggleMenu}>
                         <NavLink
@@ -87,7 +89,7 @@ export default function NavSidebar() {
                           className="flex gap-2 px-3 py-2"
                         >
                           <FontAwesomeIcon className="text-xl" icon={faHeart} />
-                          <span className="text-sm">Wishlist</span>
+                          <span className="text-sm">{t("wishlist")}</span>
                         </NavLink>
                       </li>
                       <li onClick={toggleMenu}>
@@ -120,7 +122,7 @@ export default function NavSidebar() {
                               )}
                             </div>
                           </div>
-                          <span className="text-sm">Cart</span>
+                          <span className="text-sm">{t("cart")}</span>
                         </NavLink>
                       </li>
                       <li onClick={toggleMenu}>
@@ -136,7 +138,7 @@ export default function NavSidebar() {
                           }}
                         >
                           <FontAwesomeIcon className="text-xl" icon={faUser} />
-                          <span className="text-sm">Account</span>
+                          <span className="text-sm">{t("account")}</span>
                         </NavLink>
                       </li>
                     </ul>
@@ -144,7 +146,7 @@ export default function NavSidebar() {
                 )}
 
                 <div className="mt-4">
-                  <h2 className="text-xl font-bold mb-3">Account</h2>
+                  <h2 className="text-xl font-bold mb-3">{t("account")}</h2>
 
                   <ul className="*:space-y-4 *:hover:bg-gray-100 transition-colors ">
                     {!token && (
@@ -165,7 +167,7 @@ export default function NavSidebar() {
                               className="text-xl"
                               icon={faUserPlus}
                             />
-                            <span className="text-sm">Signup</span>
+                            <span className="text-sm">{t("sign_up")}</span>
                           </NavLink>
                         </li>
                         <li onClick={toggleMenu}>
@@ -184,7 +186,7 @@ export default function NavSidebar() {
                               className="text-xl"
                               icon={faAddressCard}
                             />
-                            <span className="text-sm">Login</span>
+                            <span className="text-sm">{t("login")}</span>
                           </NavLink>
                         </li>
                       </>
@@ -200,7 +202,7 @@ export default function NavSidebar() {
                               className="text-xl"
                               icon={faRightFromBracket}
                             />
-                            <span className="text-sm">Logout</span>
+                            <span className="text-sm">{t("logout")}</span>
                           </button>
                         </li>
                       </>
