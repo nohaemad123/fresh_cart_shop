@@ -1,11 +1,15 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router";
 import { useCategories } from "../../hooks/useCategories";
 import HomeCategoriesSkeleton from "../../skeleton/homeCategoriesSkeleton";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function HomeCategories() {
   const { categories, isLoading } = useCategories();
+  const { t } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
   if (isLoading) {
     return <HomeCategoriesSkeleton />;
@@ -16,13 +20,17 @@ export default function HomeCategories() {
       <div className="py-10 bg-mainColor">
         <div className="container">
           <div className="flex flex-col space-y-2 lg:flex-row justify-between items-center text-center">
-            <h2 className="text-2xl font-bold">Shop by category</h2>
+            <h2 className="text-2xl font-bold">{t("shop_category")}</h2>
             <Link
               to="/categories"
               className="flex items-center text-primary-600"
             >
-              View all categories{" "}
-              <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+              {t("view_categories")}{" "}
+              {lang === "en" ? (
+                <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+              ) : (
+                <FontAwesomeIcon icon={faArrowLeft} className="ms-2" />
+              )}
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mt-10">

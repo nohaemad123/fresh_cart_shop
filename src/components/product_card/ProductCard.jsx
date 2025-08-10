@@ -18,6 +18,7 @@ import { useAddProductToCart } from "../../hooks/useAddProductToCart";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useDeleteProductFromWishlist } from "../../hooks/useDeleteProductFromWishlist";
 import { useAddProductToWishlist } from "../../hooks/useAddProductToWishlist";
+import { useTranslation } from "react-i18next";
 
 export default function ProductCard({ productInfo }) {
   const {
@@ -30,11 +31,12 @@ export default function ProductCard({ productInfo }) {
     ratingsAverage,
     ratingsQuantity,
   } = productInfo;
+  const { t } = useTranslation();
 
   const addProductToCartApi = useAddProductToCart();
-  const { wishlistProducts} = useWishlist();
+  const { wishlistProducts } = useWishlist();
   const deleteProductFromWishlist = useDeleteProductFromWishlist();
-const addProductToWishlist=useAddProductToWishlist()
+  const addProductToWishlist = useAddProductToWishlist();
   const { token } = useContext(authContext);
 
   var isExist = false;
@@ -69,21 +71,22 @@ const addProductToWishlist=useAddProductToWishlist()
               {priceAfterDiscount ? (
                 <>
                   <span className="text-lg font-semibold text-primary-600">
-                    {priceAfterDiscount} EGP
+                    {priceAfterDiscount} {t("egp")}
                   </span>
-                  <del className="text-gray-400 text-sm">{price} EGP</del>
+                  <del className="text-gray-400 text-sm">
+                    {price} {t("egp")}
+                  </del>
                 </>
               ) : (
                 <>
                   <span className="text-lg font-semibold text-primary-600">
-                    {price} EGP
+                    {price} {t("egp")}
                   </span>
                 </>
               )}
             </div>
             <button
-              onClick={() => 
-                addProductToCartApi.mutate(_id)              }
+              onClick={() => addProductToCartApi.mutate(_id)}
               className="size-9 rounded-full cursor-pointer bg-primary-600 text-white text-lg"
             >
               <FontAwesomeIcon icon={faPlus} />
@@ -91,23 +94,20 @@ const addProductToWishlist=useAddProductToWishlist()
           </div>
         </div>
         {priceAfterDiscount ? (
-              <span className="bg-red-600 absolute top-3 left-3 text-white text-xs rounded-md px-2 py-1">
-                -{calcDiscount({ price, priceAfterDiscount })}%
-              </span>
-            ):""}
+          <span className="bg-red-600 absolute top-3 ltr:left-3 rtl:right-3  text-white text-xs rounded-md px-2 py-1">
+            -{calcDiscount({ price, priceAfterDiscount })}%
+          </span>
+        ) : (
+          ""
+        )}
 
-        <div className="absolute top-3 right-3 bg-white p-2 flex flex-col space-y-5 shadow-md *:hover:text-primary-600 *:transition-colors *:duration-500 *:cursor-pointer">
+        <div className="absolute top-3 ltr:right-3 rtl:left-3 bg-white p-2 flex flex-col space-y-5 shadow-md *:hover:text-primary-600 *:transition-colors *:duration-500 *:cursor-pointer">
           {!isExist ? (
-            <button
-            onClick={() => addProductToWishlist.mutate(_id)}
-
-            >
+            <button onClick={() => addProductToWishlist.mutate(_id)}>
               <FontAwesomeIcon icon={regularHeart} />
             </button>
           ) : (
-            <button
-            onClick={() => deleteProductFromWishlist.mutate(_id)}
-            >
+            <button onClick={() => deleteProductFromWishlist.mutate(_id)}>
               <FontAwesomeIcon icon={solidHeart} className="text-red-500" />
             </button>
           )}

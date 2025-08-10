@@ -1,9 +1,16 @@
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 export default function BreadCrumb({ secondLink, thirdLink, bg_gray }) {
+  const { t } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+
   return (
     <>
       <div
@@ -19,19 +26,26 @@ export default function BreadCrumb({ secondLink, thirdLink, bg_gray }) {
                   to="/"
                   className="inline-flex items-center text-sm  text-gray-400 font-semibold hover:text-primary-600 "
                 >
-                  Home
+                  {t("home")}
                 </Link>
               </li>
               {secondLink && (
                 <li>
                   <div className="flex items-center">
-                    <FontAwesomeIcon
-                      icon={faChevronRight}
-                      className="text-gray-400 text-sm"
-                    />
+                    {lang === "en" ? (
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className="text-gray-400 text-sm"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faChevronLeft}
+                        className="text-gray-400 text-sm"
+                      />
+                    )}
                     <a
                       href="#"
-                      className="ms-3 text-sm text-gray-400 font-semibold hover:text-primary-600 "
+                      className="ms-3 rtl:me-3 text-sm text-gray-400 font-semibold hover:text-primary-600 "
                     >
                       {secondLink}
                     </a>
@@ -40,10 +54,17 @@ export default function BreadCrumb({ secondLink, thirdLink, bg_gray }) {
               )}
               <li aria-current="page">
                 <div className="flex items-center">
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    className="text-gray-400 text-sm"
-                  />
+                  {lang === "en" ? (
+                    <FontAwesomeIcon
+                      icon={faChevronRight}
+                      className="text-gray-400 text-sm"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faChevronLeft}
+                      className="text-gray-400 text-sm"
+                    />
+                  )}
                   <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                     {thirdLink}
                   </span>

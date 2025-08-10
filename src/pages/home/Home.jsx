@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import HomeAds from "../../components/home_ads/HomeAds";
 import HomeCategories from "../../components/home_categories/HomeCategories";
 import HomeDeals from "../../components/home_deals/HomeDeals";
@@ -8,12 +9,11 @@ import NewsLetter from "../../components/newsletter/NewsLetter";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <>
-      <PageMetaData
-        title="Fresh cart - home page"
-        description="Fresh cart - home page"
-      />
+      <PageMetaData title={t("home_title")} description={t("home_title")} />
       <HomeSlider />
       <HomeService />
       <HomeCategories />
