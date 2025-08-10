@@ -38,7 +38,7 @@ export default function VerifyEmail() {
     try {
       const response = await verifyEmail(code);
       if (response.success) {
-        toast.success("The code is correct, please reset your password");
+        toast.success(t("verify_email_msg"));
         setTimeout(() => {
           navigate("/reset-password");
         }, 3000);
@@ -109,7 +109,7 @@ export default function VerifyEmail() {
     try {
       const response = await forgotPassword(email);
       if (response.success) {
-        toast.success("We send you code, please check your email address");
+        toast.success(t("verify_email_msg"));
       } else {
       }
     } catch (error) {
@@ -227,7 +227,7 @@ export default function VerifyEmail() {
                 />
               </div>
               <p className="text-center my-3">
-                Code expires in
+                {t("code_expire")}
                 <span className="text-lg text-primary-600 font-semibold ms-2">
                   {formatTime(time)}
                 </span>
@@ -236,26 +236,26 @@ export default function VerifyEmail() {
                 type="submit"
                 className="py-3 mt-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
               >
-                Verify email
+                {t("verify_email")}
               </button>
               <div className="flex flex-col space-y-3 justify-center items-center mt-3">
-                <p>Didn't receive the code?</p>
+                <p>{t("ditnt_receive_code")}</p>
                 <button
                   onClick={() => sendCodeToEmail()}
                   className="text-primary-600 font-medium text-lg"
                 >
-                  Resend code
+                  {t("resend_code")}
                 </button>
                 <Link to="/login" className="text-primary-600 font-medium">
-                  Back to sign in
+                  {t("back_signin")}
                 </Link>
               </div>
             </form>
           </div>
           <p className="text-center text-gray-500 mt-5 text-lg">
-            Need help?{" "}
+            {t("need_help")}{" "}
             <span className="text-primary-600 font-medium">
-              Contact support
+              {t("contact_support")}
             </span>
           </p>
         </div>

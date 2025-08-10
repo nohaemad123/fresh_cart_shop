@@ -22,6 +22,7 @@ import { useFormik } from "formik";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { calcPasswordStrength } from "../../utils/password.utils";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 export default function ResetPassword() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
@@ -30,11 +31,13 @@ export default function ResetPassword() {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+  const { t } = useTranslation();
+
   async function SendDataToResetPassword(values) {
     try {
       const response = await resetPassword(values);
       if (response.success) {
-        toast.success("The code is correct, please reset your password");
+        toast.success(t("reset_password_msg"));
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -47,19 +50,16 @@ export default function ResetPassword() {
   }
 
   const validationSchema = yup.object({
-    email: yup.string().email("Invalid email").required("Email is required"),
+    email: yup.string().email(t("invalid_email")).required(t("email_required")),
     newPassword: yup
       .string()
-      .min(8, "Min 6 characters")
-      .required("password is required")
-      .matches(
-        passwordRegex,
-        "new password must be minimum 8 characters least one capital character one low case character one number one special character"
-      ),
+      .min(8, t("password_min_length"))
+      .required(t("password_required"))
+      .matches(passwordRegex, t("password_regex")),
     confirmNewPassword: yup
       .string()
-      .oneOf([yup.ref("newPassword")], "Passwords must match")
-      .required("Confirm new password is required"),
+      .oneOf([yup.ref("password")], t("password_match"))
+      .required(t("confirm_password_required")),
   });
 
   const formik = useFormik({
@@ -93,8 +93,8 @@ export default function ResetPassword() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - reset password page"
-        description="Fresh cart - reset password page"
+        title={t("reset_password_page_title")}
+        description={t("reset_password_page_title")}
       />
       <div className="bg-mainColor py-10">
         <div className="container">
@@ -103,23 +103,22 @@ export default function ResetPassword() {
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faKey} />
               </div>
-              <h3 className="text-2xl font-bold">Reset password</h3>
+              <h3 className="text-2xl font-bold">{t("reset_password")}</h3>
               <p className="text-[16px] text-gray-500">
-                Enter your email address and new password to reset your account
-                password{" "}
+                {t("reset_password_desc")}
               </p>
             </div>
             <form
               className="mt-5 space-y-2 flex flex-col"
               onSubmit={formik.handleSubmit}
             >
-              <label className="">Email address </label>
+              <label className="">{t("email_address")} </label>
               <div className="relative flex justify-center">
                 <input
                   type="email"
                   id="email_input"
                   className="form-control block w-full ps-10 border-gray-400"
-                  placeholder="Enter your email address"
+                  placeholder={t("email_placeholder")}
                   name="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -136,7 +135,7 @@ export default function ResetPassword() {
                 <p className="text-red-600">{formik.errors.email}</p>
               )}
               <div className="password flex flex-col space-y-1">
-                <label htmlFor="password_input">New password </label>
+                <label htmlFor="password_input">{t("new_password")} </label>
 
                 <div className="relative flex justify-center">
                   <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -146,7 +145,7 @@ export default function ResetPassword() {
                     type={isPasswordShow ? "text" : "password"}
                     id="email_input"
                     className="form-control block w-full ps-10"
-                    placeholder="Enter your password"
+                    placeholder={t("password_placeholder")}
                     name="newPassword"
                     value={formik.values.newPassword}
                     onChange={formik.handleChange}
@@ -183,23 +182,25 @@ export default function ResetPassword() {
                 )}
 
                 <div className="flex flex-col space-y-1 text-gray-500">
-                  <p>Password must contain</p>
+                  <p>{t("password_must_contain")}</p>
                   <p className="flex items-center gap-x-2">
                     <span className="w-[5px] h-[5px] rounded-full bg-gray-200 p-2 inline-block"></span>
-                    at least 8 characters
+                    {t("password_note_1")}
                   </p>
                   <p className="flex items-center gap-x-2">
                     <span className="w-[5px] h-[5px] rounded-full bg-gray-200 p-2 inline-block"></span>
-                    One uppercase character
+                    {t("password_note_2")}
                   </p>
                   <p className="flex items-center gap-x-2">
                     <span className="w-[5px] h-[5px] rounded-full bg-gray-200 p-2 inline-block"></span>
-                    numbers and special character
+                    {t("password_note_3")}
                   </p>
                 </div>
               </div>
               <div className="password flex flex-col space-y-1">
-                <label htmlFor="password_input">Confirm new password </label>
+                <label htmlFor="password_input">
+                  {t("confirm_new_password")}
+                </label>
 
                 <div className="relative flex justify-center">
                   <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -209,7 +210,7 @@ export default function ResetPassword() {
                     type={isConfirmPasswordShow ? "text" : "password"}
                     id="email_input"
                     className="form-control block w-full ps-10"
-                    placeholder="Confirm new password"
+                    placeholder={t("confirm_new_password")}
                     name="confirmNewPassword"
                     value={formik.values.confirmNewPassword}
                     onChange={formik.handleChange}
@@ -243,20 +244,20 @@ export default function ResetPassword() {
                 type="submit"
                 className="py-3 mt-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
               >
-                Reset password
+                {t("reset_password")}
               </button>
               <p className="text-center">
-                Remember your password
+                {t("remember_password")}
                 <Link to="/login" className="text-primary-600 font-medium ms-2">
-                  Back to sign in
+                  {t("back_signin")}
                 </Link>
               </p>
             </form>
           </div>
           <p className="text-center text-gray-500 mt-5 text-lg">
-            Need help?{" "}
+            {t("need_help")}{" "}
             <span className="text-primary-600 font-medium">
-              Contact support
+              {t("contact_support")}
             </span>
           </p>
         </div>
