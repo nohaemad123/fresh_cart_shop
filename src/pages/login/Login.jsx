@@ -41,7 +41,7 @@ export default function Login() {
     try {
       const response = await sendDataToSignIn(values);
       if (response.success) {
-        toast.success("Welcome back");
+        toast.success(t("welcome_back"));
         localStorage.setItem(
           "user_details",
           JSON.stringify(response.data.user)
@@ -64,15 +64,12 @@ export default function Login() {
   }
 
   const validationSchema = yup.object({
-    email: yup.string().email("Invalid email").required("Email is required"),
+    email: yup.string().email(t("invalid_email")).required(t("email_required")),
     password: yup
       .string()
-      .min(8, "Min 6 characters")
-      .required("password is required")
-      .matches(
-        passwordRegex,
-        "password must be minimum 8 characters least one capital character one low case character one number one special character"
-      ),
+      .min(8, t("password_min_length"))
+      .required(t("password_required"))
+      .matches(passwordRegex, t("password_regex")),
   });
 
   const formik = useFormik({
@@ -88,8 +85,8 @@ export default function Login() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - login page"
-        description="Fresh cart - login page"
+        title={t("login_page_title")}
+        description={t("login_page_title")}
       />
       <div className="py-15 bg-mainColor">
         <div className="container">
@@ -100,13 +97,8 @@ export default function Login() {
                 alt=""
                 className="w-full rounded-xl shadow-lg"
               />
-              <h2 className="text-4xl font-bold mt-5">
-                Fresh groceries delivered {t("welcome")}
-              </h2>
-              <p className="text-lg mt-3">
-                Join thousands of happy customers who enjoy fresh groceries
-                delivered right to their doorstep
-              </p>
+              <h2 className="text-4xl font-bold mt-5">{t("login_title")}</h2>
+              <p className="text-lg mt-3">{t("login_desc")}</p>
               <div className="mt-3">
                 <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
                   <div className="flex items-center gap-2">
@@ -114,21 +106,21 @@ export default function Login() {
                       icon={faTruckFast}
                       className="text-primary-600 text-lg"
                     />
-                    <span className="text-gray-500">Free delivery</span>
+                    <span className="text-gray-500">{t("free_delivery")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faCircleQuestion}
                       className="text-primary-600 text-lg"
                     />
-                    <span className="text-gray-500">Secure payment</span>
+                    <span className="text-gray-500">{t("secure_payment")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faClock}
                       className="text-primary-600 text-lg"
                     />
-                    <span className="text-gray-500">24/7 Support</span>
+                    <span className="text-gray-500">{t("support")}</span>
                   </div>
                 </div>
               </div>
@@ -139,10 +131,8 @@ export default function Login() {
                   <span className="text-primary-600">Fresh</span>Cart
                 </h2>
 
-                <h2 className="text-3xl font-bold">Welcome back!</h2>
-                <p className="text-md text-gray-500">
-                  Sign in to continue your fresh shopping experience
-                </p>
+                <h2 className="text-3xl font-bold">{t("welcome_back")}</h2>
+                <p className="text-md text-gray-500">{t("welcome_desc")} </p>
               </div>
               <div className="flex flex-col space-y-4 mt-5 mb-8">
                 <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
@@ -150,19 +140,19 @@ export default function Login() {
                     icon={faGoogle}
                     className="me-3 text-red-500"
                   />{" "}
-                  Google
+                  {t("google")}
                 </button>
                 <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
                   <FontAwesomeIcon
                     icon={faFacebook}
                     className="me-3 text-blue-500"
                   />
-                  Facebook
+                  {t("facebook")}
                 </button>
               </div>
               <div className="h-0.5 w-full bg-gray-300/30 relative">
-                <span className="absolute px-4 bg-white left-1/2 top-1/2 -translate-1/2 uppercase">
-                  or continue with email
+                <span className="absolute px-4 text-nowrap bg-white left-1/2 top-1/2 -translate-1/2 uppercase">
+                  {t("login_continue")}
                 </span>
               </div>
               <form
@@ -170,7 +160,7 @@ export default function Login() {
                 onSubmit={formik.handleSubmit}
               >
                 <div className="name flex flex-col space-y-1">
-                  <label htmlFor="">Email address</label>
+                  <label htmlFor="">{t("email_address")}</label>
                   <div className="relative flex justify-center">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <FontAwesomeIcon
@@ -182,7 +172,7 @@ export default function Login() {
                       type="email"
                       id="email_input"
                       className="form-control block w-full ps-10"
-                      placeholder="Enter your email"
+                      placeholder={t("email_placeholder")}
                       name="email"
                       value={formik.values.email}
                       onChange={formik.handleChange}
@@ -201,9 +191,9 @@ export default function Login() {
 
                 <div className="password flex flex-col space-y-1">
                   <div className="flex justify-between">
-                    <label htmlFor="password_input">Password </label>
+                    <label htmlFor="password_input">{t("password")} </label>
                     <Link to={"/forget-password"} className="text-primary-600">
-                      Forgot password?
+                      {t("forget_password?")}
                     </Link>
                   </div>
                   <div className="relative flex justify-center">
@@ -217,7 +207,7 @@ export default function Login() {
                       type={isPasswordShow ? "text" : "password"}
                       id="email_input"
                       className="form-control block w-full ps-10"
-                      placeholder="Enter your password"
+                      placeholder={t("password_placeholder")}
                       name="password"
                       value={formik.values.password}
                       onChange={formik.handleChange}
@@ -255,20 +245,20 @@ export default function Login() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  <label>Keep me signed in</label>
+                  <label>{t("keep_me_signed_in")}</label>
                 </div>
 
                 <button
                   type="submit"
                   className="btn flex gap-2 items-center text-center rounded-md py-2 justify-center bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-500"
                 >
-                  <span>Sign in</span>
+                  <span>{t("login_button")}</span>
                 </button>
               </form>
               <p className="border-t-2 border-gray-300/30 mt-2 pt-4 text-center">
-                New to freshCart?{" "}
+                {t("new_fresh_card")}{" "}
                 <Link to="/signup" className="text-primary-600 underline">
-                  Create an account
+                  {t("create_account")}
                 </Link>
               </p>
               <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
@@ -277,21 +267,21 @@ export default function Login() {
                     icon={faLock}
                     className="text-gray-400 text-sm"
                   />
-                  <span className="text-gray-500">SSL secure</span>
+                  <span className="text-gray-500">{t("ssl_secure")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faUsers}
                     className="text-gray-400 text-sm"
                   />
-                  <span className="text-gray-500">50k+ users</span>
+                  <span className="text-gray-500">{t("login_user")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faStar}
                     className="text-gray-400 text-sm"
                   />
-                  <span className="text-gray-500">4.9 rating</span>
+                  <span className="text-gray-500">{t("login_rating")}</span>
                 </div>
               </div>
             </div>

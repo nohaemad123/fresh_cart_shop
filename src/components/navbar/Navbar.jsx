@@ -350,8 +350,8 @@ export default function Navbar() {
                   className={({ isActive }) => {
                     return `${
                       isActive
-                        ? " text-primary-600 block  mt-2 me-10"
-                        : "text-black block mt-2 me-10"
+                        ? " text-primary-600 block  mt-2 rtl:me-10"
+                        : "text-black block mt-2 rtl:me-10"
                     } 
                     `;
                   }}

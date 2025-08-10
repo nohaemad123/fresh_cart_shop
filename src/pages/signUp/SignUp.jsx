@@ -17,6 +17,7 @@ import { calcPasswordStrength } from "../../utils/password.utils";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function SignUp() {
   const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
@@ -24,33 +25,29 @@ export default function SignUp() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const [isExistError, setIsExistError] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const validationSchema = yup.object({
     name: yup
       .string()
-      .required("Name is required")
-      .min(4, "name must be minimum 4 characters")
-      .max(20, "name must be at least 20 characters"),
-    email: yup.string().email("Invalid email").required("Email is required"),
+      .required(t("name_required"))
+      .min(4, t("name_min"))
+      .max(20, t("name_max")),
+    email: yup.string().email(t("invalid_email")).required(t("email_required")),
     password: yup
       .string()
-      .min(8, "Min 6 characters")
-      .required("password is required")
-      .matches(
-        passwordRegex,
-        "password must be minimum 8 characters least one capital character one low case character one number one special character"
-      ),
+      .min(8, t("password_min_length"))
+      .required(t("password_required"))
+      .matches(passwordRegex, t("password_regex")),
     rePassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Passwords must match")
-      .required("Confirm password is required"),
+      .oneOf([yup.ref("password")], t("password_match"))
+      .required(t("confirm_password_required")),
     phone: yup
       .string()
-      .matches(phoneRegex, "Invalid phone number")
-      .required("phone is required"),
-    terms: yup
-      .boolean()
-      .oneOf([true], "You must accept our terms and conditions"),
+      .matches(phoneRegex, t("phone_invalid"))
+      .required(t("phone_required")),
+    terms: yup.boolean().oneOf([true], t("terms_required")),
   });
 
   async function SendDataSignUp(values) {
@@ -58,7 +55,7 @@ export default function SignUp() {
       const response = await sendDataToSignUp(values);
 
       if (response.success) {
-        toast.success("user signed up successfully ");
+        toast.success(t("signup_done"));
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -88,30 +85,26 @@ export default function SignUp() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - sign up page"
-        description="Fresh cart - sign up page"
+        title={t("signup_page_title")}
+        description={t("signup_page_title")}
       />
       <div className="py-10 bg-mainColor">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="">
               <h2 className="text-4xl font-bold">
-                Welcome to <span className="text-primary-600">FreshCart</span>
+                {t("welcome_to")}{" "}
+                <span className="text-primary-600">FreshCart</span>
               </h2>
-              <p className="text-lg mt-3">
-                Join thousands of happy customers who enjoy fresh groceries
-                delivered right to their doorstep
-              </p>
+              <p className="text-lg mt-3">{t("signup_desc")}</p>
               <div className="mt-5">
                 <div className="flex gap-3">
                   <div className="rounded_icon ">
                     <FontAwesomeIcon icon={faStar} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">Premium quality</h3>
-                    <p className="text-gray-600">
-                      Premium quality products sourced from trusted suppliers
-                    </p>
+                    <h3 className="font-semibold">{t("premium_quality")}</h3>
+                    <p className="text-gray-600">{t("premium_quality_desc")}</p>
                   </div>
                 </div>
               </div>
@@ -121,10 +114,8 @@ export default function SignUp() {
                     <FontAwesomeIcon icon={faTruckFast} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">Fast delivery</h3>
-                    <p className="text-gray-600">
-                      Same-day delivered available in most areas
-                    </p>
+                    <h3 className="font-semibold">{t("free_delivery")}</h3>
+                    <p className="text-gray-600">{t("free_delivery_desc")}</p>
                   </div>
                 </div>
               </div>
@@ -134,10 +125,8 @@ export default function SignUp() {
                     <FontAwesomeIcon icon={faShieldHalved} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">Secure shopping</h3>
-                    <p className="text-gray-600">
-                      From data and payments are completely secure
-                    </p>
+                    <h3 className="font-semibold">{t("secure_shopping")}</h3>
+                    <p className="text-gray-600">{t("secure_shopping_desc")}</p>
                   </div>
                 </div>
               </div>
@@ -145,7 +134,7 @@ export default function SignUp() {
                 <div className="flex gap-3">
                   <img src={author_image} alt="" className="size-12" />
                   <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">Sara johnson</h3>
+                    <h3 className="font-semibold">{t("sara_johnson")}</h3>
                     <div className="flex *:text-yellow-400 gap-1 mt-1">
                       <FontAwesomeIcon icon={faStar} />
                       <FontAwesomeIcon icon={faStar} />
@@ -158,18 +147,17 @@ export default function SignUp() {
                 </div>
                 <blockquote>
                   <p className="text-gray-600 mt-3 italic">
-                    "FreeCart has completely changed how i shop for groceries,
-                    the quality is amazing and delivery is always on time!"
+                    "{t("sara_johnson_desc")}"
                   </p>
                 </blockquote>
               </div>
             </div>
             <div className="form bg-white p-5 lg:p-10 space-y-8 shadow-xl rounded-xl">
               <div className="flex flex-col justify-center items-center space-y-2">
-                <h2 className="text-3xl font-semibold">Create your account</h2>
-                <p className="text-md text-gray-500">
-                  Start your fresh journey with us today
-                </p>
+                <h2 className="text-3xl font-semibold">
+                  {t("create_account")}
+                </h2>
+                <p className="text-md text-gray-500">{t("signup_subtitle")}</p>
               </div>
               <div className="grid grid-cols-2 gap-3 mt-5 mb-10">
                 <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
@@ -177,19 +165,19 @@ export default function SignUp() {
                     icon={faGoogle}
                     className="me-3 text-red-500"
                   />{" "}
-                  Google
+                  {t("google")}
                 </button>
                 <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
                   <FontAwesomeIcon
                     icon={faFacebook}
                     className="me-3 text-blue-500"
                   />
-                  Facebook
+                  {t("facebook")}
                 </button>
               </div>
               <div className="h-0.5 w-full bg-gray-300/30 relative">
                 <span className="absolute px-4 bg-white left-1/2 top-1/2 -translate-1/2">
-                  OR
+                  {t("or")}
                 </span>
               </div>
               <form
@@ -197,7 +185,7 @@ export default function SignUp() {
                 onSubmit={formik.handleSubmit}
               >
                 <div className="name flex flex-col space-y-1">
-                  <label htmlFor="name">Name *</label>
+                  <label htmlFor="name">{t("name_input")} *</label>
                   <input
                     type="text"
                     className="form-control block w-full "
@@ -212,7 +200,7 @@ export default function SignUp() {
                   )}
                 </div>
                 <div className="name flex flex-col space-y-1">
-                  <label htmlFor="">Email *</label>
+                  <label htmlFor="">{t("email_address")} *</label>
                   <input
                     type="email"
                     id="email_input"
@@ -232,7 +220,7 @@ export default function SignUp() {
                   )}
                 </div>
                 <div className="phone flex flex-col space-y-1">
-                  <label htmlFor="phone_input">Phone *</label>
+                  <label htmlFor="phone_input">{t("phone")} *</label>
                   <input
                     type="tel"
                     id="phone_input"
@@ -248,7 +236,7 @@ export default function SignUp() {
                   )}
                 </div>
                 <div className="password flex flex-col space-y-1">
-                  <label htmlFor="password_input">Password *</label>
+                  <label htmlFor="password_input">{t("password")} *</label>
 
                   <input
                     type="password"
@@ -277,7 +265,9 @@ export default function SignUp() {
                 </div>
 
                 <div className="repassword flex flex-col space-y-1">
-                  <label htmlFor="repassword_input">Confirm password *</label>
+                  <label htmlFor="repassword_input">
+                    {t("confirm_password")} *
+                  </label>
                   <input
                     type="password"
                     name="rePassword"
@@ -301,13 +291,13 @@ export default function SignUp() {
                     className="accent-primary-600 size-4"
                   />
                   <label>
-                    I agree to the{" "}
+                    {t("i_agree")}{" "}
                     <Link to="/terms" className="text-primary-600 underline">
-                      terms
+                      {t("terms_of_service")}
                     </Link>{" "}
-                    of service and{" "}
+                    {t("and")}{" "}
                     <Link to="/privacy" className="text-primary-600 underline">
-                      privacy policy
+                      {t("privacy_policy")}
                     </Link>
                   </label>
                   {formik.touched.terms && formik.errors.terms && (
@@ -320,12 +310,12 @@ export default function SignUp() {
                   className="btn flex gap-2 items-center text-center rounded-md py-2 justify-center bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-500"
                 >
                   <FontAwesomeIcon icon={faUserPlus} />
-                  <span>Create my account</span>
+                  <span>{t("create_account")}</span>
                 </button>
                 <p className="border-t-2 border-gray-300/30 mt-2 pt-4">
-                  Already have account?{" "}
+                  {t("have_account")}{" "}
                   <Link to="/login" className="text-primary-600 underline">
-                    Sign in
+                    {t("login")}
                   </Link>
                 </p>
               </form>
@@ -336,38 +326,32 @@ export default function SignUp() {
 
       <div className="py-10 text-center">
         <div className="container">
-          <h2 className="text-3xl font-bold">
-            Why create an account with FreshCart
-          </h2>
+          <h2 className="text-3xl font-bold">{t("why_account")}</h2>
           <div className="grid lg:grid-cols-3 mt-8 lg:w-[85%] mx-auto gap-10 lg:gap-20">
             <div className="flex flex-col justify-center items-center space-y-3">
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faTruckFast} />
               </div>
-              <h3 className="font-semibold text-2xl">Faster checkout</h3>
+              <h3 className="font-semibold text-2xl">{t("faster_checkout")}</h3>
               <p className="text-gray-600 text-lg">
-                Save your delivery information for a quicker shopping
-                experience.
+                {t("faster_checkout_desc")}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center space-y-3">
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faTag} />
               </div>
-              <h3 className="font-semibold text-2xl">Exclusive deals</h3>
+              <h3 className="font-semibold text-2xl">{t("exclusive_deals")}</h3>
               <p className="text-gray-600 text-lg">
-                Get access to member-only discounts and early sale notification
+                {t("exclusive_deals_desc")}{" "}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center space-y-3">
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faClockRotateLeft} />
               </div>
-              <h3 className="font-semibold text-2xl">Order history</h3>
-              <p className="text-gray-600 text-lg">
-                Early track and recorder your favorite products from the past
-                purchases
-              </p>
+              <h3 className="font-semibold text-2xl">{t("order_history")}</h3>
+              <p className="text-gray-600 text-lg">{t("order_history_desc")}</p>
             </div>
           </div>
         </div>

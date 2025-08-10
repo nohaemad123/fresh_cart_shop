@@ -1,4 +1,5 @@
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { useRef } from "react";
 import {
   faArrowRight,
   faEnvelopeOpenText,
@@ -19,10 +20,13 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 export default function VerifyEmail() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
   const email = localStorage.getItem("registered_email");
+  const { t } = useTranslation();
+
   async function SendDataVerifyEmail(values) {
     const code =
       values.digit1 +
@@ -72,6 +76,18 @@ export default function VerifyEmail() {
   const initialTimeInSeconds = initialMinutes * 60 + initialSeconds;
 
   const [time, setTime] = useState(initialTimeInSeconds);
+  const input1 = useRef();
+  const input2 = useRef();
+  const input3 = useRef();
+  const input4 = useRef();
+  const input5 = useRef();
+  const input6 = useRef();
+
+  const handleChange = (e, nextRef) => {
+    if (e.target.value.length === 1 && nextRef) {
+      nextRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     if (time <= 0) return;
@@ -105,8 +121,8 @@ export default function VerifyEmail() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - verify email page"
-        description="Fresh cart - verify email page"
+        title={t("verify_email_page_title")}
+        description={t("verify_email_page_title")}
       />
       <div className="bg-mainColor py-10">
         <div className="container">
@@ -115,9 +131,9 @@ export default function VerifyEmail() {
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faEnvelopeOpenText} />
               </div>
-              <h3 className="text-2xl font-bold">Verify your email</h3>
+              <h3 className="text-2xl font-bold">{t("verify_your_email")}</h3>
               <p className="text-[16px] text-gray-500">
-                we've sent a verification code to your email address.
+                {t("verify_email_desc")}
               </p>
 
               <p className="text-lg text-primary-600 font-semibold">{email}</p>
@@ -127,55 +143,86 @@ export default function VerifyEmail() {
               onSubmit={formik.handleSubmit}
             >
               <label className="text-lg text-center">
-                Enter 6-digit verification code
+                {t("enter_6_digits")}
               </label>
               <div className="grid grid-cols-6 gap-x-5 justify-center items-center text-center">
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit1"
+                  ref={input1}
+                  maxLength={1}
                   value={formik.values.digit1}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input2);
+                  }}
                   onBlur={formik.handleBlur}
                 />
+
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit2"
+                  ref={input2}
+                  maxLength={1}
                   value={formik.values.digit2}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input3);
+                  }}
                   onBlur={formik.handleBlur}
                 />
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit3"
+                  ref={input3}
+                  maxLength={1}
                   value={formik.values.digit3}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input4);
+                  }}
                   onBlur={formik.handleBlur}
                 />
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit4"
+                  ref={input4}
+                  maxLength={1}
                   value={formik.values.digit4}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input5);
+                  }}
                   onBlur={formik.handleBlur}
                 />
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit5"
+                  ref={input5}
+                  maxLength={1}
                   value={formik.values.digit5}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input6);
+                  }}
                   onBlur={formik.handleBlur}
                 />
                 <input
                   type="text"
                   className="form-control text-center"
                   name="digit6"
+                  ref={input6}
+                  maxLength={1}
                   value={formik.values.digit6}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleChange(e, input6);
+                  }}
                   onBlur={formik.handleBlur}
                 />
               </div>

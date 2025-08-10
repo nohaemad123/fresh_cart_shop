@@ -1,5 +1,6 @@
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import {
+  faArrowLeft,
   faArrowRight,
   faEnvelopeOpenText,
   faHeadphones,
@@ -19,16 +20,19 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function ForgetPassword() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
+  const { t } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
   async function SendDataForgetPassword(values) {
     try {
       const response = await forgotPassword(values);
       if (response.success) {
-        toast.success("We send you code, please check your email address");
+        toast.success(t("forget_password_msg"));
         setTimeout(() => {
           navigate("/verify-email");
         }, 3000);
@@ -42,7 +46,7 @@ export default function ForgetPassword() {
   }
 
   const validationSchema = yup.object({
-    email: yup.string().email("Invalid email").required("Email is required"),
+    email: yup.string().email(t("invalid_email")).required(t("email_required")),
   });
 
   const formik = useFormik({
@@ -56,8 +60,8 @@ export default function ForgetPassword() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - forget password page"
-        description="Fresh cart - forget password page"
+        title={t("forget_password_page_title")}
+        description={t("forget_password_page_title")}
       />
       <div className="bg-mainColor py-10">
         <div className="container">
@@ -66,23 +70,22 @@ export default function ForgetPassword() {
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faLock} />
               </div>
-              <h3 className="text-2xl font-bold">Forgot your password?</h3>
+              <h3 className="text-2xl font-bold"> {t("forget_password?")}</h3>
               <p className="text-[16px] text-gray-500">
-                No worries! Enter your email address and we'll send you link to
-                reset your password
+                {t("forget_password_desc")}
               </p>
             </div>
             <form
               className="mt-5 space-y-2 flex flex-col"
               onSubmit={formik.handleSubmit}
             >
-              <label className="text-lg">Email address:</label>
+              <label className="text-lg">{t("email_address")}:</label>
               <div className="relative flex justify-center">
                 <input
                   type="email"
                   id="email_input"
                   className="form-control block w-full pe-10 border-gray-400"
-                  placeholder="Your registered email address"
+                  placeholder={t("registered_email_placeholder")}
                   name="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -105,12 +108,12 @@ export default function ForgetPassword() {
                 className="py-3 mt-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
               >
                 <FontAwesomeIcon icon={faPaperPlane} className="me-3" />
-                Send reset link
+                {t("forget_password_button")}
               </button>
-              <p className="text-center text-gray-500 text-[18px] mt-3">
-                Remember your password?{" "}
+              <p className="text-center text-gray-500 text-[18px] mt-3 rtl:text-[16px]">
+                {t("remember_password")}{" "}
                 <Link to="/login" className="text-primary-600 font-medium">
-                  Sign in
+                  {t("login")}
                 </Link>
               </p>
             </form>
@@ -122,11 +125,11 @@ export default function ForgetPassword() {
                 className="text-[16px] text-primary-600 mt-2"
               />
               <div className="flex flex-col">
-                <span className="text-lg font-semibold">Security notice</span>
+                <span className="text-lg font-semibold">
+                  {t("secure_notice")}
+                </span>
                 <p className="text-gray-600 text-sm mt-1">
-                  For your security, a password reset link will be sent to your
-                  registered email address. The link will expire after 30
-                  minutes
+                  {t("secure_notice_desc")}
                 </p>
               </div>
             </div>
@@ -137,7 +140,7 @@ export default function ForgetPassword() {
       <div className="py-10 w-full lg:w-[80%] m-auto">
         <div className="container">
           <h3 className="text-center text-xl font-semibold mb-5">
-            Need additional help?
+            {t("additional_help")}
           </h3>
 
           <div className="grid lg:grid-cols-3 gap-10">
@@ -148,16 +151,20 @@ export default function ForgetPassword() {
                   className="text-[20px] text-primary-600 mt-2"
                 />
               </div>
-              <h3 className="text-xl font-medium">Contact support</h3>
+              <h3 className="text-xl font-medium">{t("contact_support")}</h3>
               <p className="text-center text-gray-500">
-                Our customer support team is available 24/7 to assist you
+                {t("contact_support_desc")}
               </p>
               <Link
                 to="/contact "
                 className="text-primary-600 font-semibold text-[16px]"
               >
-                Contact us
-                <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                {t("contact_us")}{" "}
+                {lang === "en" ? (
+                  <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowLeft} className="ms-2" />
+                )}
               </Link>
             </div>
             <div className="flex space-y-3 flex-col justify-center items-center bg-mainColor p-7 border border-gray-300 rounded-md">
@@ -167,16 +174,18 @@ export default function ForgetPassword() {
                   className="text-[20px] text-primary-600 mt-2"
                 />
               </div>
-              <h3 className="text-xl font-medium">FAQs</h3>
-              <p className="text-center text-gray-500">
-                Find answers to frequently asked questions about your account
-              </p>
+              <h3 className="text-xl font-medium">{t("faqs")}</h3>
+              <p className="text-center text-gray-500">{t("faqs_desc")} </p>
               <Link
                 to="/"
                 className="text-primary-600 font-semibold text-[16px]"
               >
-                View faqs
-                <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                {t("view_faqs")}
+                {lang === "en" ? (
+                  <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowLeft} className="ms-2" />
+                )}
               </Link>
             </div>
             <div className="flex space-y-3 flex-col justify-center items-center bg-mainColor p-7 border border-gray-300 rounded-md">
@@ -186,16 +195,20 @@ export default function ForgetPassword() {
                   className="text-[20px] text-primary-600 mt-2"
                 />
               </div>
-              <h3 className="text-lg font-medium">Email not received?</h3>
+              <h3 className="text-lg font-medium">{t("email_not_received")}</h3>
               <p className="text-center text-gray-500">
-                Check your spam folder or request a new reset link{" "}
+                {t("email_not_received_desc")}
               </p>
               <Link
                 to="/"
                 className="text-primary-600 font-semibold text-[16px]"
               >
-                Resend email
-                <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                {t("resend_email")}
+                {lang === "en" ? (
+                  <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowLeft} className="ms-2" />
+                )}{" "}
               </Link>
             </div>{" "}
           </div>
