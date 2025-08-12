@@ -13,9 +13,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useFilteredProducts } from "../../hooks/useFilteredProducts";
 import RelatedProductsSkeleton from "../../skeleton/RelatedProductsSkeleton";
+import { useTranslation } from "react-i18next";
 
 export default function RelatedProducts({ productDetails }) {
   const { category } = productDetails;
+  const { t } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
   const { filteredProducts, isLoading } = useFilteredProducts({
     category: category._id,
@@ -29,19 +32,21 @@ export default function RelatedProducts({ productDetails }) {
     <>
       <div className="my-10">
         <div className="flex justify-between">
-          <h3 className="text-2xl font-bold">You may also like</h3>
+          <h3 className="text-2xl font-bold">{t("related_products")}</h3>
           <div className="buttons flex gap-x-2">
             <button className="related_prev_btn bg-gray-200/40 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center">
-              <FontAwesomeIcon
-                icon={faChevronLeft}
-                className=" text-sm text-primary-600 "
-              />
+              {lang === "en" ? (
+                <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
+              ) : (
+                <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+              )}
             </button>
             <button className="related_next_btn bg-gray-200/40 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center">
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                className=" text-sm text-primary-600 "
-              />
+              {lang === "en" ? (
+                <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+              ) : (
+                <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
+              )}
             </button>
           </div>
         </div>

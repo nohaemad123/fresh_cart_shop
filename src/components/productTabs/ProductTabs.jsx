@@ -2,10 +2,12 @@ import { useState } from "react";
 import ReviewsTab from "./ReviewsTab";
 import ShippingTab from "./ShippingTab";
 import DescriptionTab from "./DescriptionTab";
+import { useTranslation } from "react-i18next";
 
 export default function ProductTabs({ productDetails }) {
   const { ratingsQuantity, description, ratingsAverage } = productDetails;
   const [activeTab, setActiveTab] = useState("details");
+  const { t } = useTranslation();
 
   function getActiveTab() {
     switch (activeTab) {
@@ -39,7 +41,7 @@ export default function ProductTabs({ productDetails }) {
                   : "text-gray-600 border-b-transparent"
               } px-6 py-4 font-medium  cursor-pointer`}
             >
-              product info
+              {t("product_info")}
             </button>
             <button
               onClick={() => {
@@ -51,7 +53,7 @@ export default function ProductTabs({ productDetails }) {
                   : "text-gray-600 border-b-transparent"
               } px-6 py-4 font-medium  cursor-pointer`}
             >
-              Reviews ({ratingsQuantity})
+              {t("reviews_tabs")} ({ratingsQuantity})
             </button>
             <button
               onClick={() => {
@@ -63,7 +65,7 @@ export default function ProductTabs({ productDetails }) {
                   : "text-gray-600 border-b-transparent"
               } px-6 py-4 font-medium  cursor-pointer`}
             >
-              Shipping & returns
+              {t("shipping_returns")}
             </button>
           </div>
         </div>

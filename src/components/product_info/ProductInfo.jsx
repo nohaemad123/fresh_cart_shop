@@ -19,6 +19,7 @@ import { useDeleteProductFromWishlist } from "../../hooks/useDeleteProductFromWi
 import { useAddProductToWishlist } from "../../hooks/useAddProductToWishlist";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useCart } from "../../hooks/useCart";
+import { useTranslation } from "react-i18next";
 
 export default function ProductInfo({ productDetails }) {
   const {
@@ -33,6 +34,7 @@ export default function ProductInfo({ productDetails }) {
     description,
     category,
   } = productDetails;
+  const { t } = useTranslation();
 
   const removeProductToCartApi = useDeleteProductFromCart();
   const addProductToCartApi = useAddProductToCart();
@@ -96,7 +98,7 @@ export default function ProductInfo({ productDetails }) {
                     : "bg-red-200/50 text-red-600"
                 } px-2 py-1 rounded-lg  font-medium`}
               >
-                {quantity > 0 ? "In stock" : "Out of stock"}
+                {quantity > 0 ? t("in_stock") : t("out_stock")}
               </span>
 
               <div className="flex gap-x-4">
@@ -133,23 +135,25 @@ export default function ProductInfo({ productDetails }) {
                 <ProductRating rating={ratingsAverage} />
                 <span className="text-gray-500">{ratingsAverage}</span>
                 <span className="text-gray-500">
-                  ({ratingsQuantity} reviews)
+                  ({ratingsQuantity} {t("reviews")})
                 </span>
               </div>
               <div className="flex gap-x-3 items-center">
                 {priceAfterDiscount ? (
                   <>
                     <h3 className="text-primary-600 font-bold text-2xl">
-                      {priceAfterDiscount} EGP
+                      {priceAfterDiscount} {t("egp")}
                     </h3>
-                    <del className="text-gray-400">{price} EGP</del>
+                    <del className="text-gray-400">
+                      {price} {t("egp")}
+                    </del>
                     <span className="bg-red-200/50 px-2 py-1 rounded-md text-red-600 font-medium">
-                      Save {calcDiscount({ price, priceAfterDiscount })}%
+                      {t("save")} {calcDiscount({ price, priceAfterDiscount })}%
                     </span>
                   </>
                 ) : (
                   <h3 className="text-primary-600 font-bold text-2xl">
-                    {price} EGP
+                    {price} {t("egp")}
                   </h3>
                 )}
               </div>
@@ -157,7 +161,7 @@ export default function ProductInfo({ productDetails }) {
                 <p className="text-gray-500">{description}</p>
               </div>
               <div className="flex flex-col md:flex-row space-y-3 items-center">
-                <h3 className=" me-4">Quantity: </h3>
+                <h3 className=" me-4">{t("quantity")}: </h3>
 
                 <div className="flex border border-gray-600 rounded-md items-center">
                   <button
@@ -176,7 +180,7 @@ export default function ProductInfo({ productDetails }) {
                 </div>
                 {quantity > 0 ? (
                   <h3 className=" ms-4 text-sm">
-                    Only {quantity} items left in stock{" "}
+                    {t("only")} {quantity} {t("items_in_stock")}{" "}
                   </h3>
                 ) : (
                   ""
@@ -191,7 +195,7 @@ export default function ProductInfo({ productDetails }) {
                     className="bg-primary-600 py-3 text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
                   >
                     <FontAwesomeIcon icon={faCartShopping} className="me-2" />{" "}
-                    Add to cart
+                    {t("add_to_cart")}
                   </button>
                 ) : (
                   <button
@@ -199,11 +203,11 @@ export default function ProductInfo({ productDetails }) {
                     className="bg-red-500 py-3 text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
                   >
                     <FontAwesomeIcon icon={faCartShopping} className="me-2" />{" "}
-                    Remove from cart
+                    {t("remove_from_cart")}
                   </button>
                 )}
                 <button className="bg-white py-3 text-primary-600 rounded-md font-bold text-[16px] cursor-pointer border border-primary-600">
-                  Buy now
+                  {t("buy_now")}
                 </button>
               </div>
               <div className="border-t border-gray-300 pt-3 mt-5">
@@ -212,10 +216,10 @@ export default function ProductInfo({ productDetails }) {
                     <div className="rounded_icon size-[45px]">
                       <FontAwesomeIcon icon={faTruckFast} className="text-sm" />
                     </div>
-                    <div className="flex flex-col justify-center">
-                      <h3 className="font-semibold">Free delivery</h3>
+                    <div className="flex flex-col justify-center space-y-2">
+                      <h3 className="font-semibold">{t("free_delivery")}</h3>
                       <p className="text-gray-600">
-                        Free shipping on orders over $50
+                        {t("free_delivery_desc3")}
                       </p>
                     </div>
                   </div>
@@ -226,11 +230,9 @@ export default function ProductInfo({ productDetails }) {
                         className="text-sm"
                       />
                     </div>
-                    <div className="flex flex-col justify-center">
-                      <h3 className="font-semibold">30 days return</h3>
-                      <p className="text-gray-600">
-                        Satisfaction guaranteed of money back
-                      </p>
+                    <div className="flex flex-col justify-center space-y-2">
+                      <h3 className="font-semibold">{t("days_return")}</h3>
+                      <p className="text-gray-600">{t("days_return_desc2")}</p>
                     </div>
                   </div>
                 </div>
