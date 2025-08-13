@@ -162,8 +162,8 @@ export default function Navbar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex flex-col gap-2"
-                                : "text-black flex flex-col gap-2"
+                                ? " text-primary-600 flex flex-col items-center gap-2"
+                                : "text-black flex flex-col gap-2 items-center"
                             } 
                     `;
                           }}

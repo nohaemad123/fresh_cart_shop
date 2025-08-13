@@ -6,10 +6,12 @@ import { useCart } from "../../hooks/useCart";
 import { useDeleteProductFromWishlist } from "../../hooks/useDeleteProductFromWishlist";
 import { useDeleteProductFromCart } from "../../hooks/useDeleteProductFromCart";
 import { useAddProductToCart } from "../../hooks/useAddProductToCart";
+import { useTranslation } from "react-i18next";
 
 export default function WishlistItem({ productInfo }) {
   const removeProductToCartApi = useDeleteProductFromCart();
   const addProductToCartApi = useAddProductToCart();
+  const { t } = useTranslation();
 
   const { cartProducts } = useCart();
   const deleteProductFromWishlist = useDeleteProductFromWishlist();
@@ -49,7 +51,7 @@ export default function WishlistItem({ productInfo }) {
                 </span>
               </div>
               <h4 className="text-lg font-bold text-green-600">
-                {productInfo.price} EGP
+                {productInfo.price} {t("egp")}
               </h4>
             </div>
           </div>
@@ -61,14 +63,14 @@ export default function WishlistItem({ productInfo }) {
                 onClick={() => addProductToCartApi.mutate(productInfo._id)}
                 className="bg-green-600 cursor-pointer text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-700 transition"
               >
-                Add to Cart
+                {t("add_to_cart")}
               </button>
             ) : (
               <button
                 onClick={() => removeProductToCartApi.mutate(productInfo._id)}
                 className="bg-red-600 cursor-pointer text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-red-700 transition"
               >
-                Remove from Cart
+                {t("remove_from_cart")}
               </button>
             )}
             <button

@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShirt } from "@fortawesome/free-solid-svg-icons";
 import { useSubCategories } from "../../hooks/useSubcategories";
 import PopularSubcategoriesSkeleton from "../../skeleton/PopularSubCategoriesSkeleton";
+import { useTranslation } from "react-i18next";
 
 export default function Subcategories() {
   const { subCategories, isLoading } = useSubCategories();
+  const { t } = useTranslation();
 
   if (isLoading) return <PopularSubcategoriesSkeleton />;
 
@@ -12,7 +14,9 @@ export default function Subcategories() {
     <>
       <div className="py-10">
         <div className="container">
-          <h3 className="text-3xl font-bold mb-5">Popular subcategories</h3>
+          <h3 className="text-3xl font-bold mb-5">
+            {t("popular_subcategories")}
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 ">
             {subCategories &&
               subCategories.map((subCategory) => (

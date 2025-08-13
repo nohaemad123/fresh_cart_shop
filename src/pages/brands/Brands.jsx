@@ -10,25 +10,28 @@ import BrandPartner from "../../components/brand_partners/BrandPartner";
 import { useBrands } from "../../hooks/useBrands";
 import BrandsSkeleton from "../../skeleton/BrandsSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function Brands() {
   const { brands, isLoading } = useBrands();
+  const { t } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+
   if (isLoading) return <BrandsSkeleton />;
   return (
     <>
       <PageMetaData
-        title="Fresh cart - brands page"
-        description="Fresh cart - brands page"
+        title={t("brands_title_page")}
+        description={t("brands_title_page")}
       />
-      <BreadCrumb thirdLink={"Brands"} />
+      <BreadCrumb thirdLink={t("brands")} />
       <div className="py-5">
         <div className="container">
           <div className="text-center flex flex-col space-y-3">
-            <h3 className="text-3xl font-bold">Our partner brands</h3>
+            <h3 className="text-3xl font-bold">{t("brands_title")}</h3>
             <p className="w-[100%] lg:w-[50%] m-auto text-gray-500">
-              Discover quality products from our trusted brand partners, we've
-              partnered with leading brands to bring you the best selection of
-              fresh and organic products
+              {t("brands_desc")}
             </p>
           </div>
         </div>
@@ -45,14 +48,14 @@ export default function Brands() {
             <div className="flex">
               <input
                 type="text"
-                placeholder="Search brands ..."
+                placeholder={t("search_brands")}
                 className="form-control min-w-70 bg-white"
               />
             </div>
             <div className="flex items-center gap-x-4">
-              <h4>Sorted by:</h4>
+              <h4>{t("sorted_by")}:</h4>
               <select className="form-control min-w-50 bg-white">
-                <option>Aphabitical: A-z</option>
+                <option>{t("aphabitical")}</option>
               </select>
             </div>
           </div>
@@ -65,7 +68,11 @@ export default function Brands() {
           <div className="flex justify-center items-center mt-10">
             <ul className="flex gap-x-3">
               <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
-                <FontAwesomeIcon icon={faChevronLeft} />
+                {lang === "en" ? (
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                ) : (
+                  <FontAwesomeIcon icon={faChevronRight} />
+                )}{" "}
               </li>
               <li className="cursor-pointer font-semibold text-sm size-7 bg-primary-600 flex justify-center items-center text-white rounded-md">
                 1
@@ -77,7 +84,11 @@ export default function Brands() {
                 3
               </li>
               <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
-                <FontAwesomeIcon icon={faChevronRight} />
+                {lang === "en" ? (
+                  <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+                ) : (
+                  <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
+                )}{" "}
               </li>
             </ul>
           </div>

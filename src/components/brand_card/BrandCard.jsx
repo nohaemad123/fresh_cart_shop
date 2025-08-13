@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 export default function BrandCard({ brandInfo }) {
   const { _id, name, image } = brandInfo;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -21,7 +23,7 @@ export default function BrandCard({ brandInfo }) {
               to={`/search-products?brand=${_id}`}
               className="text-primary-600 font-medium text-end"
             >
-              View
+              {t("view")}
             </span>
           </div>
         </div>

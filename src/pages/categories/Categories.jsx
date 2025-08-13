@@ -12,33 +12,33 @@ import SeasonalCategories from "../../components/seasonal_categories/SeasonalCat
 import { useCategories } from "../../hooks/useCategories";
 import CategoriesSkeleton from "../../skeleton/CategoriesSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function Categories() {
   const [view, setView] = useState("grid");
   const { categories, isLoading } = useCategories();
+  const { t } = useTranslation();
 
   if (isLoading) return <CategoriesSkeleton />;
   return (
     <>
       <PageMetaData
-        title="Fresh cart - categories page"
-        description="Fresh cart - categories page"
+        title={t("categories_title")}
+        description={t("categories_title")}
       />
-      <BreadCrumb thirdLink={"categories"} />
+      <BreadCrumb thirdLink={t("categories")} />
       <div className="p-10">
         <div className="container">
           <div className="flex flex-col space-y-4 lg:flex-row justify-between items-center">
             <div className="flex flex-col space-y-3">
-              <h3 className="text-3xl font-bold">Shop by category</h3>
-              <p className="text-gray-500">
-                Browse our wide selection of fresh products by category
-              </p>
+              <h3 className="text-3xl font-bold">{t("shop_category")}</h3>
+              <p className="text-gray-500">{t("shop_category_desc")}</p>
             </div>
-            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 justify-between items-center">
-              <div className="flex gap-x-5">
-                <h3 className="text-lg font-medium">Sorted by:</h3>
+            <div className="flex  flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 justify-between items-center">
+              <div className="flex items-center gap-x-5">
+                <h3 className="text-lg font-medium">{t("sorted_by")}:</h3>
                 <select className="form-control min-w-40">
-                  <option>Featured</option>
+                  <option>{t("featured")}</option>
                 </select>
               </div>
 
