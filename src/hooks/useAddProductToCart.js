@@ -3,19 +3,22 @@ import { authContext } from "../context/Auth.context";
 import { toast } from "react-toastify";
 import { addProductToCartApi } from "../services/cart-service";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 export function useAddProductToCart() {
   const queryClient = useQueryClient();
   const { token } = useContext(authContext);
+  const { t } = useTranslation();
+
   return useMutation({
     mutationFn: async (productId) => {
       if (!token) {
-        toast.error("You must login first");
+        toast.error(t("must_login"));
       }
       return addProductToCartApi(productId);
     },
     onSuccess: () => {
-      toast.success("the product added to cart");
+      toast.success(t("add_cart_done"));
       queryClient.invalidateQueries(["cartProducts"]);
     },
   });

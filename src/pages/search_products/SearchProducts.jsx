@@ -18,6 +18,7 @@ import { useCategories } from "../../hooks/useCategories";
 import { useBrands } from "../../hooks/useBrands";
 import SearchProductsSkeleton from "../../skeleton/SearchProductsSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function SearchProducts() {
   const { categories } = useCategories();
@@ -27,8 +28,10 @@ export default function SearchProducts() {
   const [categoryName, setCategoryName] = useState("");
   const [brandName, setBrandName] = useState("");
   const query = Object.fromEntries(searchParams.entries());
+  const { t } = useTranslation();
 
   const { filteredProducts, isLoading, results } = useFilteredProducts(query);
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
   useEffect(() => {
     if (categories?.length > 0 && searchParams.get("category")) {
@@ -65,28 +68,33 @@ export default function SearchProducts() {
         }`}
       />
       <BreadCrumb
-        secondLink={"Search products"}
+        secondLink={t("search_products")}
         thirdLink={searchParams.get("category") ? categoryName : brandName}
       />
       <div className="bg-mainColor py-10">
         <div className="container">
           <h3 className="text-xl font-semibold flex flex-col space-y-3 lg:flex-row">
-            Search results for
+            {t("search_results")}
             {searchParams.get("category") && (
               <>
-                <p className="ms-2 me-2 mb-3 lg:mb-0">with category:</p>{" "}
+                <p className="ms-2 me-2 mb-3 lg:mb-0">
+                  {t("search_category")}:
+                </p>
                 <span className="text-primary-600">{categoryName}</span>
               </>
             )}
             {searchParams.get("brand") && (
               <>
-                <p className="ms-2 me-2">and with brand:</p>{" "}
+                <p className="ms-2 me-2">
+                  {t("and")} {t("search_brand")}:
+                </p>{" "}
                 <span className="text-primary-600">{brandName}</span>
               </>
             )}
           </h3>
           <p className="text-gray-500 mt-2 ">
-            We found {filteredProducts?.length || 0} products for you
+            {t("we_found")} {filteredProducts?.length || 0}{" "}
+            {t("products_for_you")}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-10 mt-5">
@@ -105,7 +113,7 @@ export default function SearchProducts() {
                   <div className="bg-white p-5 rounded-md">
                     <div className="flex flex-col space-y-4 lg:flex-row justify-between items-center">
                       <div className="flex items-center gap-x-3">
-                        <h3 className="text-lg font-medium">View:</h3>
+                        <h3 className="text-lg font-medium">{t("view")}:</h3>
                         <button
                           onClick={() => setView("grid")}
                           className={`${
@@ -128,10 +136,12 @@ export default function SearchProducts() {
                         </button>
                       </div>
                       <div className="flex items-center gap-x-3">
-                        <h3 className="text-lg font-medium">Sorted by:</h3>
+                        <h3 className="text-lg font-medium">
+                          {t("sorted_by")}:
+                        </h3>
                         <select className="form-control min-w-50">
-                          <option>Relevance</option>
-                          <option>Price</option>
+                          <option>{t("relevance")}</option>
+                          <option>{t("price")}</option>
                         </select>
                       </div>
                     </div>
@@ -168,7 +178,11 @@ export default function SearchProducts() {
                         }}
                         className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600"
                       >
-                        <FontAwesomeIcon icon={faChevronLeft} />
+                        {lang === "en" ? (
+                          <FontAwesomeIcon icon={faChevronLeft} />
+                        ) : (
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        )}{" "}
                       </li>
 
                       {Number.isInteger(results?.numberOfPages) &&
@@ -207,7 +221,17 @@ export default function SearchProducts() {
                         }}
                         className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600"
                       >
-                        <FontAwesomeIcon icon={faChevronRight} />
+                        {lang === "en" ? (
+                          <FontAwesomeIcon
+                            icon={faChevronRight}
+                            className="ms-2"
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faChevronLeft}
+                            className="ms-2"
+                          />
+                        )}{" "}
                       </li>
                     </ul>
                   </div>

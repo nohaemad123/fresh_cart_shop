@@ -4,11 +4,13 @@ import ProductRating from "../product_rating/ProductRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDeleteProductFromCart } from "../../hooks/useDeleteProductFromCart";
+import { useTranslation } from "react-i18next";
 
 export default function CartItem({ cartProduct, updateCountProductsApi }) {
   const { product } = cartProduct;
   const [count, setCount] = useState(cartProduct.count);
   const deleteProductMutation = useDeleteProductFromCart();
+  const { t } = useTranslation();
 
   function handleIncrease() {
     const newCount = count + 1;
@@ -29,13 +31,12 @@ export default function CartItem({ cartProduct, updateCountProductsApi }) {
       <div className="md:col-span-6 lg:col-span-7 px-5 md:px-10 items-center">
         <div className="flex gap-x-5 items-center">
           <Link to={`/product-details/${product._id}`}>
-         <div className="w-[100px]">
-         <img
-              src={product.imageCover}
-              className="w-full rounded-lg border border-gray-200 p-1"
+            <div className="w-[100px]">
+              <img
+                src={product.imageCover}
+                className="w-full rounded-lg border border-gray-200 p-1"
               />
-         </div>
-           
+            </div>
           </Link>
           <div className="flex flex-col space-y-2 mb-3 lg:mb-0">
             <Link to={`/product-details/${product._id}`}>
@@ -71,7 +72,7 @@ export default function CartItem({ cartProduct, updateCountProductsApi }) {
             </button>
           </div>
           <h4 className="text-lg font-semibold text-center">
-            {cartProduct.price} EGP
+            {cartProduct.price} {t("egp")}
           </h4>
           <button
             className="text-red-600 cursor-pointer"

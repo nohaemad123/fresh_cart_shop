@@ -1,19 +1,20 @@
-
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import ProductRating from "../product_rating/ProductRating";
 import { useCategories } from "../../hooks/useCategories";
 import { useBrands } from "../../hooks/useBrands";
+import { useTranslation } from "react-i18next";
 
 export default function SidebarSearch() {
   const { categories } = useCategories();
   const { brands } = useBrands();
+  const { t } = useTranslation();
 
   return (
     <div className="bg-white p-5 rounded-md">
       <form>
         <div>
-          <h3 className="text-lg font-semibold mb-2">Categories</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("categories")}</h3>
           {categories &&
             categories.map((cat, index) => (
               <div key={index} className="flex flex-col gap-y-4">
@@ -29,7 +30,7 @@ export default function SidebarSearch() {
         </div>
 
         <div className="mt-2 border-t border-gray-300 pt-2">
-          <h3 className="text-lg font-semibold mb-2">Price range</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("price_range")}</h3>
 
           <Slider
             range
@@ -65,7 +66,7 @@ export default function SidebarSearch() {
         </div>
 
         <div className="mt-2 border-t border-gray-300 pt-2">
-          <h3 className="text-lg font-semibold mb-2">Brands</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("brands")}</h3>
           {brands &&
             brands.map((brand, index) => (
               <div key={index} className="flex flex-col gap-y-4">
@@ -80,7 +81,7 @@ export default function SidebarSearch() {
             ))}
         </div>
         <div className="mt-2 border-t border-gray-300 pt-2">
-          <h3 className="text-lg font-semibold mb-2">Ratings</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("ratings")}</h3>
 
           <label className="flex items-center space-x-2 mb-2 text-gray-700">
             <input
@@ -111,7 +112,7 @@ export default function SidebarSearch() {
           </label>
         </div>
         <div className="mt-2 border-t border-gray-300 pt-2">
-          <h3 className="text-lg font-semibold mb-2">Availability</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("availability")}</h3>
 
           <label className="flex items-center space-x-2 mb-2 text-gray-700">
             <input
@@ -129,7 +130,9 @@ export default function SidebarSearch() {
           </label>
         </div>
         <div className="mt-2 border-t border-gray-300 pt-2">
-          <h3 className="text-lg font-semibold mb-2">Dietary preferences </h3>
+          <h3 className="text-lg font-semibold mb-2">
+            {t("dietary_preferences")}{" "}
+          </h3>
 
           <label className="flex items-center space-x-2 mb-2 text-gray-700">
             <input
@@ -165,10 +168,10 @@ export default function SidebarSearch() {
             type="submit"
             className="py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md"
           >
-            Apply filters
+            {t("apply_filter")}
           </button>
           <button className="py-2 px-3 border  border-primary-600  text-sm text-primary-600 font-semibold text-center rounded-md">
-            Reset
+            {t("reset")}
           </button>
         </div>
       </form>

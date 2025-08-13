@@ -20,6 +20,7 @@ import { useAddProductToWishlist } from "../../hooks/useAddProductToWishlist";
 import { useAddProductToCart } from "../../hooks/useAddProductToCart";
 import { useCart } from "../../hooks/useCart";
 import { useDeleteProductFromCart } from "../../hooks/useDeleteProductFromCart";
+import { useTranslation } from "react-i18next";
 
 export default function ListProductCard({ productInfo }) {
   const {
@@ -32,14 +33,15 @@ export default function ListProductCard({ productInfo }) {
     ratingsAverage,
     ratingsQuantity,
   } = productInfo;
+  const { t } = useTranslation();
 
   const removeProductToCartApi = useDeleteProductFromCart();
   const addProductToCartApi = useAddProductToCart();
 
   const deleteProductFromWishlist = useDeleteProductFromWishlist();
-const addProductToWishlist=useAddProductToWishlist()
-const { wishlistProducts} = useWishlist();
-const { cartProducts} = useCart();
+  const addProductToWishlist = useAddProductToWishlist();
+  const { wishlistProducts } = useWishlist();
+  const { cartProducts } = useCart();
 
   const { token } = useContext(authContext);
 
@@ -64,10 +66,12 @@ const { cartProducts} = useCart();
               <img src={imageCover} className="h-60 mx-auto  object-cover" />
             </Link>
             {priceAfterDiscount ? (
-              <span className="bg-red-600 absolute top-3 left-3 text-white text-xs rounded-md px-2 py-1">
+              <span className="bg-red-600 absolute top-3 ltr:left-3 rtl:right-3  text-white text-xs rounded-md px-2 py-1">
                 -{calcDiscount({ price, priceAfterDiscount })}%
               </span>
-            ):""}
+            ) : (
+              ""
+            )}
           </div>
           <div className="md:col-span-9 ">
             <div className="flex flex-col space-y-3">
@@ -83,14 +87,16 @@ const { cartProducts} = useCart();
                 {priceAfterDiscount ? (
                   <>
                     <span className="text-lg font-bold text-primary-600">
-                      {priceAfterDiscount} EGP
+                      {priceAfterDiscount} {t("egp")}
                     </span>
-                    <del className="text-gray-500">{price} EGP</del>
+                    <del className="text-gray-500">
+                      {price} {t("egp")}
+                    </del>
                   </>
                 ) : (
                   <>
                     <span className="text-lg font-bold text-primary-600">
-                      {price} EGP
+                      {price} {t("egp")}
                     </span>
                   </>
                 )}
@@ -98,17 +104,11 @@ const { cartProducts} = useCart();
 
               <div className=" bg-white  flex  items-center space-x-5 *:hover:bg-primary-600 *:hover:text-white *:transition-colors *:duration-500 *:cursor-pointer *:p-2 *:shadow-md ">
                 {!isExist ? (
-                  <button
-                  onClick={() => addProductToWishlist.mutate(_id)}
-
-                  >
+                  <button onClick={() => addProductToWishlist.mutate(_id)}>
                     <FontAwesomeIcon icon={regularHeart} />
                   </button>
                 ) : (
-                  <button
-                  onClick={() => deleteProductFromWishlist.mutate(_id)}
-
-                  >
+                  <button onClick={() => deleteProductFromWishlist.mutate(_id)}>
                     <FontAwesomeIcon
                       icon={solidHeart}
                       className="text-red-500"
@@ -120,22 +120,23 @@ const { cartProducts} = useCart();
                   <FontAwesomeIcon icon={faEye} />
                 </Link>
               </div>
-             {!isProductCartExist ? <button
-                onClick={() => 
-                  addProductToCartApi.mutate(_id)              
-                }
-                className="w-fit px-5 py-2 rounded-md cursor-pointer bg-primary-600 text-white text-lg inline-flex items-center"
-              >
-                <FontAwesomeIcon icon={faShoppingBag} className="me-2" /> Add to
-                cart
-              </button>: <button
-            onClick={() => removeProductToCartApi.mutate(_id)}
-            className="bg-red-500 flex items-center w-fit px-5 py-2  text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
-
-          >
-            <FontAwesomeIcon icon={faTrashCan} className="me-2"/> Remove from cart
-          </button>}
-            
+              {!isProductCartExist ? (
+                <button
+                  onClick={() => addProductToCartApi.mutate(_id)}
+                  className="w-fit px-5 py-2 rounded-md cursor-pointer bg-primary-600 text-white text-lg inline-flex items-center"
+                >
+                  <FontAwesomeIcon icon={faShoppingBag} className="me-2" />{" "}
+                  {t("add_to_cart")}
+                </button>
+              ) : (
+                <button
+                  onClick={() => removeProductToCartApi.mutate(_id)}
+                  className="bg-red-500 flex items-center w-fit px-5 py-2  text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
+                >
+                  <FontAwesomeIcon icon={faTrashCan} className="me-2" />{" "}
+                  {t("remove_from_cart")}
+                </button>
+              )}
             </div>
           </div>
         </div>
