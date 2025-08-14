@@ -2,19 +2,21 @@ import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
 import { addressContext } from "../../context/Address.context";
+import { useTranslation } from "react-i18next";
 
 export default function AddAddress() {
   const { AddAddressFunction, error } = useContext(addressContext);
   const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
+  const { t } = useTranslation();
 
   const validationSchema = yup.object({
-    name: yup.string().required("the name is required"),
-    city: yup.string().required("the city is required"),
-    details: yup.string().required("the details is required"),
+    name: yup.string().required(t("name_required")),
+    city: yup.string().required(t("city_required")),
+    details: yup.string().required(t("details_required")),
     phone: yup
       .string()
-      .matches(phoneRegex, "Invalid phone number")
-      .required("phone is required"),
+      .matches(phoneRegex, t("phone_invalid"))
+      .required(t("phone_required")),
   });
 
   function SendDataToAddAddress(values) {
@@ -38,14 +40,14 @@ export default function AddAddress() {
         onSubmit={formik.handleSubmit}
       >
         <div className=" flex flex-col space-y-2">
-          <label htmlFor="password_input">Name </label>
+          <label htmlFor="password_input">{t("name_input")} </label>
 
           <div className="relative flex justify-center">
             <input
               type="text"
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter name"
+              placeholder={t("name_placeholder")}
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -57,14 +59,14 @@ export default function AddAddress() {
           <p className="text-red-600">{formik.errors.name}</p>
         )}
         <div className=" flex flex-col space-y-2">
-          <label htmlFor="password_input">City </label>
+          <label htmlFor="password_input">{t("city")} </label>
 
           <div className="relative flex justify-center">
             <input
               type="text"
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter city"
+              placeholder={t("city_placeholder")}
               name="city"
               value={formik.values.city}
               onChange={formik.handleChange}
@@ -76,14 +78,14 @@ export default function AddAddress() {
           <p className="text-red-600">{formik.errors.city}</p>
         )}
         <div className=" flex flex-col space-y-2">
-          <label htmlFor="password_input">Phone </label>
+          <label htmlFor="password_input">{t("phone")} </label>
 
           <div className="relative flex justify-center">
             <input
               type="tel"
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter your Phone"
+              placeholder={t("phone_placeholder")}
               name="phone"
               value={formik.values.phone}
               onChange={formik.handleChange}
@@ -95,11 +97,11 @@ export default function AddAddress() {
           <p className="text-red-600">{formik.errors.phone}</p>
         )}
         <div className=" flex flex-col space-y-2">
-          <label htmlFor="password_input">Address Details </label>
+          <label htmlFor="password_input">{t("address_details")} </label>
 
           <div className="relative flex justify-center">
             <textarea
-              placeholder="Enter address details"
+              placeholder={t("details_placeholder")}
               name="details"
               value={formik.values.details}
               onChange={formik.handleChange}
@@ -119,7 +121,7 @@ export default function AddAddress() {
           type="submit"
           className="mt-3 w-fit py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-[18px] font-semibold text-white text-center rounded-md"
         >
-          Add address
+          {t("add_address")}
         </button>
       </form>
     </>

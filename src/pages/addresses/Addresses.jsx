@@ -6,24 +6,27 @@ import AddAddress from "../../components/add_address/AddAddress";
 import { useAddresses } from "../../hooks/useAddresses";
 import AddressesSkeleton from "../../skeleton/AddressesSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function Addresses() {
   const { addresses, isLoading } = useAddresses();
   const [isAction, setIsAction] = useState(null);
+  const { t } = useTranslation();
+
   if (isLoading) return <AddressesSkeleton />;
   return (
     <>
       <PageMetaData
-        title="Fresh cart - my addresses page"
-        description="Fresh cart - my addresses page"
+        title={t("addresses_title_page")}
+        description={t("addresses_title_page")}
       />
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-bold">My addresses</h3>
+        <h3 className="text-xl font-bold">{t("my_addresses")}</h3>
         <button
           onClick={() => setIsAction("add")}
           className=" py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md"
         >
-          Add new address
+          {t("add_new_address")}
         </button>
       </div>
       {!addresses.length && <EmptyAddress />}

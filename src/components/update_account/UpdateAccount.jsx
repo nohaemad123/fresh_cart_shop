@@ -5,9 +5,12 @@ import * as yup from "yup";
 import { Link } from "react-router";
 import { updateUserData } from "../../services/auth-service";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateAccount() {
   const { userData } = useContext(authContext);
+  const { t } = useTranslation();
+
   const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
@@ -19,10 +22,10 @@ export default function UpdateAccount() {
   const validationSchema = yup.object({
     name: yup
       .string()
-      .required("Name is required")
-      .min(4, "name must be minimum 4 characters")
-      .max(20, "name must be at least 20 characters"),
-    email: yup.string().email("Invalid email").required("Email is required"),
+      .required(t("name_required"))
+      .min(4, t("name_min"))
+      .max(20, t("name_max")),
+    email: yup.string().email(t("invalid_email")).required(t("email_required")),
     phone: yup.string(),
     //   .matches(phoneRegex, "Invalid phone number")
     //   .required("phone is required"),
@@ -43,7 +46,7 @@ export default function UpdateAccount() {
       const response = await updateUserData(values);
 
       if (response.success) {
-        toast.success("the account updated successfully ");
+        toast.success(t("update_profile_msg"));
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -69,7 +72,7 @@ export default function UpdateAccount() {
         className="flex flex-col space-y-3 mt-3"
       >
         <div className="form-group flex flex-col space-y-3">
-          <label>Name</label>
+          <label>{t("name_input")}</label>
           <input
             type="text"
             className="form-control block w-full "
@@ -84,7 +87,7 @@ export default function UpdateAccount() {
           )}
         </div>
         <div className="form-group flex flex-col space-y-3">
-          <label>Email</label>
+          <label>{t("email_address")}</label>
           <input
             type="text"
             className="form-control block w-full "
@@ -99,7 +102,7 @@ export default function UpdateAccount() {
           )}
         </div>
         <div className="form-group flex flex-col space-y-3">
-          <label>Phone</label>
+          <label>{t("phone")}</label>
           <input
             type="tel"
             className="form-control block w-full "
@@ -113,18 +116,18 @@ export default function UpdateAccount() {
             <p className="text-red-600">{formik.errors.phone}</p>
           )}
         </div>
-        <div className="flex gap-x-3 mt-3">
+        <div className="flex items-center gap-x-3 mt-3">
           <button
             type="submit"
             className=" py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
           >
-            Update my profile
+            {t("update_my_profile")}
           </button>
           <Link
             to="/"
             className="py-2 px-3 border cursor-pointer border-primary-600  text-sm text-primary-600 font-semibold text-center rounded-md"
           >
-            Cancel
+            {t("cancel")}
           </Link>
         </div>
       </form>

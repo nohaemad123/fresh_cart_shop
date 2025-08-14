@@ -13,19 +13,21 @@ import { useOrders } from "../../hooks/useOrders";
 import { useAddresses } from "../../hooks/useAddresses";
 import DashboardSkeleton from "../../skeleton/DashboardSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
   const { orders } = useOrders();
   const { cartProducts, isLoading } = useCart();
   const { wishlistProducts } = useWishlist();
   const { addresses } = useAddresses();
+  const { t } = useTranslation();
 
   if (isLoading) return <DashboardSkeleton />;
   return (
     <>
       <PageMetaData
-        title="Fresh cart - dashboard page"
-        description="Fresh cart - dashboard page"
+        title={t("dashboard_title_page")}
+        description={t("dashboard_title_page")}
       />
       <div
         style={{
@@ -36,18 +38,18 @@ export default function Dashboard() {
         }}
         className="rounded-lg"
       >
-        <div className="overlay rounded-lg py-10">
+        <div className="overlay rounded-lg bg-gradient-to-l from-primary-600/70 to-primary-600/30 py-10 text-white">
           <div className="container flex flex-col space-y-4">
-            <h2 className="text-2xl font-bold">Welcome back! FreshCart</h2>
-            <p className="text-lg">
-              Get 20% off on your first order with code FRESH20
-            </p>
+            <h2 className="text-2xl font-bold">
+              {t("welcome_back")} FreshCart
+            </h2>
+            <p className="text-lg">{t("home_slider_desc")}</p>
             <div className="flex gap-4">
               <Link
                 to="/"
-                className=" py-2 px-5 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
+                className=" py-2 px-5 bg-black border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
               >
-                Shop now
+                {t("shop_now")}
               </Link>
             </div>
           </div>
@@ -57,7 +59,9 @@ export default function Dashboard() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-5 gap-5">
         <div className="bg-primary-100 p-5 rounded-lg">
           <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xl font-bold">My orders</h3>
+            <h3 className="text-xl rtl:text-[18px] font-bold">
+              {t("my_orders")}
+            </h3>
             <FontAwesomeIcon
               icon={faBoxArchive}
               className="text-primary-600 text-2xl"
@@ -68,7 +72,9 @@ export default function Dashboard() {
         </div>
         <div className="bg-red-100 p-5 rounded-lg">
           <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xl font-bold">My Cart</h3>
+            <h3 className="text-xl rtl:text-[18px] font-bold">
+              {t("my_cart")}
+            </h3>
             <FontAwesomeIcon
               icon={faShoppingCart}
               className="text-red-600 text-2xl"
@@ -79,7 +85,9 @@ export default function Dashboard() {
         </div>
         <div className="bg-blue-100 p-5 rounded-lg">
           <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xl font-bold">My Wishlist</h3>
+            <h3 className="text-xl rtl:text-[18px] font-bold">
+              {t("my_wishlist")}
+            </h3>
             <FontAwesomeIcon
               icon={faHeart}
               className="text-blue-600 text-2xl"
@@ -90,7 +98,9 @@ export default function Dashboard() {
         </div>
         <div className="bg-yellow-100 p-5 rounded-lg">
           <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xl font-bold">My addresses</h3>
+            <h3 className="text-xl rtl:text-[18px] font-bold">
+              {t("my_addresses")}
+            </h3>
             <FontAwesomeIcon
               icon={faLocationDot}
               className="text-yellow-600 text-2xl"

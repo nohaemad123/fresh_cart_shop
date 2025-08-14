@@ -15,9 +15,12 @@ import {
   faUserPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function AccountSidebar() {
   const { userData, logout } = useContext(authContext);
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="bg-white p-7 rounded-md">
@@ -44,7 +47,8 @@ export default function AccountSidebar() {
               }}
               to="/account"
             >
-              <FontAwesomeIcon icon={faDashboard} className="me-4" /> Dashboard
+              <FontAwesomeIcon icon={faDashboard} className="me-4" />{" "}
+              {t("dashboard")}
             </NavLink>
           </li>
           <li>
@@ -59,7 +63,8 @@ export default function AccountSidebar() {
               }}
               to="/account/orders"
             >
-              <FontAwesomeIcon icon={faBoxArchive} className="me-4" /> Orders
+              <FontAwesomeIcon icon={faBoxArchive} className="me-4" />{" "}
+              {t("orders")}
             </NavLink>
           </li>
           <li>
@@ -74,7 +79,8 @@ export default function AccountSidebar() {
               }}
               to="/account/my-wishlist"
             >
-              <FontAwesomeIcon icon={faHeart} className="me-4" /> Wishlist
+              <FontAwesomeIcon icon={faHeart} className="me-4" />{" "}
+              {t("wishlist")}
             </NavLink>
           </li>
           <li>
@@ -90,7 +96,7 @@ export default function AccountSidebar() {
               to="/account/addresses"
             >
               <FontAwesomeIcon icon={faLocationDot} className="me-4" />
-              Addresses
+              {t("addresses")}
             </NavLink>
           </li>
           <li>
@@ -105,8 +111,8 @@ export default function AccountSidebar() {
               }}
               to="/account/payment-methods"
             >
-              <FontAwesomeIcon icon={faCreditCard} className="me-4" /> Payment
-              methods
+              <FontAwesomeIcon icon={faCreditCard} className="me-4" />{" "}
+              {t("payment_methods")}
             </NavLink>
           </li>
           <li>
@@ -121,8 +127,8 @@ export default function AccountSidebar() {
               }}
               to="/account/account-details"
             >
-              <FontAwesomeIcon icon={faUserPen} className="me-4" /> Account
-              details
+              <FontAwesomeIcon icon={faUserPen} className="me-4" />{" "}
+              {t("account_details")}
             </NavLink>
           </li>
           <li>
@@ -137,7 +143,8 @@ export default function AccountSidebar() {
               }}
               to="/account/change-password"
             >
-              <FontAwesomeIcon icon={faLock} className="me-4" /> Change password
+              <FontAwesomeIcon icon={faLock} className="me-4" />{" "}
+              {t("change_password")}
             </NavLink>
           </li>
           <li>
@@ -146,7 +153,7 @@ export default function AccountSidebar() {
               className="text-gray-500 items-center px-3 py-2 flex rounded-md"
             >
               <FontAwesomeIcon icon={faRightFromBracket} className="me-4 " />
-              Logout
+              {t("logout")}
             </Link>
           </li>
         </ul>

@@ -1,10 +1,13 @@
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import {  faCreditCard, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { faCreditCard, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 export default function OrderItem({ orderInfo }) {
   const { _id, cartItems, totalOrderPrice, shippingAddress } = orderInfo;
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="border border-gray-300 rounded-lg mb-5">
@@ -12,7 +15,9 @@ export default function OrderItem({ orderInfo }) {
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className="flex  flex-col">
               <div className="flex gap-x-3">
-                <h3>Order #{orderInfo?.id}</h3>
+                <h3>
+                  {t("order")} #{orderInfo?.id}
+                </h3>
                 <span
                   className={`${
                     orderInfo.isDelivered
@@ -20,11 +25,11 @@ export default function OrderItem({ orderInfo }) {
                       : "bg-blue-100 text-blue-600"
                   } px-2 py-1 rounded-full text-sm font-medium`}
                 >
-                  {orderInfo.isDelivered ? "Delivered" : "Processing"}
+                  {orderInfo.isDelivered ? t("delivered") : t("processing")}
                 </span>
               </div>
               <h4>
-                Placed on{" "}
+                {t("placed_on")}{" "}
                 {new Date(orderInfo?.createdAt).toLocaleDateString("en-us", {
                   month: "long",
                   day: "numeric",
@@ -35,7 +40,7 @@ export default function OrderItem({ orderInfo }) {
             <div className="flex  gap-x-2">
               <Link to="/" className="text-primary-600 font-medium">
                 <FontAwesomeIcon icon={faRotateRight} className="me-1" />
-                Reorder
+                {t("reorder")}
               </Link>
 
               <Link
@@ -43,7 +48,7 @@ export default function OrderItem({ orderInfo }) {
                 className="text-gray-600 font-medium"
               >
                 <FontAwesomeIcon icon={faEye} className="me-1" />
-                View details
+                {t("view_details")}
               </Link>
             </div>
           </div>
@@ -63,31 +68,31 @@ export default function OrderItem({ orderInfo }) {
             ))}
           </div>
           <div className="flex flex-col">
-            <h3 className="text-sm text-gray-500">Items</h3>
+            <h3 className="text-sm text-gray-500">{t("items_2")}</h3>
             <span className="text-lg font-bold">
               {orderInfo.cartItems.reduce((acc, item) => acc + item.count, 0)}{" "}
               item
             </span>
           </div>
           <div className="flex flex-col">
-            <h3 className="text-sm text-gray-500">Total amount</h3>
-            <span className="text-lg font-bold">{totalOrderPrice} EGP</span>
+            <h3 className="text-sm text-gray-500">{t("total_amount")}</h3>
+            <span className="text-lg font-bold">
+              {totalOrderPrice} {t("egp")}
+            </span>
           </div>
           <div className="flex flex-col">
-            <h3 className="text-sm text-gray-500">Delivered to</h3>
+            <h3 className="text-sm text-gray-500">{t("delivered_to")}</h3>
             <span className="text-lg font-bold">
               {shippingAddress?.details}
             </span>
           </div>
           <div className="flex items-end flex-col border-0 lg:border-l md:border-gray-300 pl-0 md:pl-5 space-y-3">
-            <button
-           
-              className="py-2 px-2 bg-orange-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md"
-            >
-            <FontAwesomeIcon icon={faCreditCard} className="me-2"/>  Complete payment
+            <button className="py-2 px-2 bg-orange-600 border-transparent cursor-pointer  text-sm font-semibold text-white text-center rounded-md">
+              <FontAwesomeIcon icon={faCreditCard} className="me-2" />{" "}
+              {t("complete_payment")}
             </button>
             <button className="py-2 px-2 border mb-5 text-white border-primary-600 bg-primary-600 w-fit  text-sm text-or-600 font-semibold text-center rounded-md">
-              Reorder items
+              {t("reorder_items")}
             </button>
           </div>
         </div>

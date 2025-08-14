@@ -1,14 +1,15 @@
-
-import {useParams } from "react-router";
+import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 import { useOrderDetails } from "../../hooks/useOrderDetails";
 import OrderDetailsSkeleton from "../../skeleton/OrderDetailsSkeleton";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function OrderDetails() {
   let { id } = useParams();
   const { order, isLoading } = useOrderDetails(id);
+  const { t } = useTranslation();
 
   if (isLoading) return <OrderDetailsSkeleton />;
   return (
@@ -19,7 +20,9 @@ export default function OrderDetails() {
       />
       <div className="flex flex-col lg:flex-row justify-between items-center">
         <div className="flex flex-col lg:flex-row gap-x-3 ">
-          <h3 className="text-lg font-bold">order Id #{order.id}</h3>
+          <h3 className="text-lg font-bold">
+            {t("order_id")} #{order.id}
+          </h3>
           <span
             className={`${
               order.isDelivered
@@ -27,25 +30,25 @@ export default function OrderDetails() {
                 : "bg-blue-100 text-blue-600"
             } px-2 py-1 rounded-full text-sm font-medium`}
           >
-            {order.isDelivered ? "Delivered" : "Processing"}
+            {order.isDelivered ? t("delivered") : t("processing")}
           </span>
-        
         </div>
         <h4>
-            Placed on{" "}
-            {new Date(order?.createdAt).toLocaleDateString("en-us", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </h4>
+          {t("placed_on")}{" "}
+          {new Date(order?.createdAt).toLocaleDateString("en-us", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </h4>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-12 mb-2 mt-5 gap-x-5">
         <div className="md:col-span-7 ">
           <div className=" p-5 rounded-md border border-gray-300/70 mb-3">
             <h3 className="text-lg font-bold">
-              Order Items (
-              {order.cartItems.reduce((acc, item) => acc + item.count, 0)} item)
+              {t("order_items")} (
+              {order.cartItems.reduce((acc, item) => acc + item.count, 0)}{" "}
+              {t("items")})
             </h3>
             {order.cartItems.map((item) => (
               <div className="mt-3 ">
@@ -63,7 +66,7 @@ export default function OrderDetails() {
                       {item.product.title}
                     </h3>
                     <span className="text-gray-500">
-                      Quantity: {item.count}
+                      {t("quantity")}: {item.count}
                     </span>
                   </div>
                 </div>
@@ -71,30 +74,34 @@ export default function OrderDetails() {
             ))}
           </div>
           <div className=" p-5 rounded-md border border-gray-300/70 mb-3">
-            <h3 className="text-lg font-medium">Order summary</h3>
+            <h3 className="text-lg font-medium">{t("order_summary")}</h3>
             <div className="flex justify-between mb-3 mt-3">
-              <h3 className="text-[18px] font-medium">subtotal</h3>
-              <span>{order.totalOrderPrice} EGP</span>
+              <h3 className="text-[18px] font-medium">{t("subtotal")}</h3>
+              <span>
+                {order.totalOrderPrice} {t("egp")}
+              </span>
             </div>
             <div className="flex justify-between mb-3">
-              <h3 className="text-[18px] font-medium">Shipping price</h3>
-              <span>70 EGP</span>
+              <h3 className="text-[18px] font-medium">{t("shipping_price")}</h3>
+              <span>70 {t("egp")}</span>
             </div>
             <div className="flex justify-between mb-3">
-              <h3 className="text-[18px] font-medium">Tax price</h3>
-              <span>{Math.trunc(order.totalOrderPrice * 0.14)} EGP</span>
+              <h3 className="text-[18px] font-medium">{t("tax_price")}</h3>
+              <span>
+                {Math.trunc(order.totalOrderPrice * 0.14)} {t("egp")}
+              </span>
             </div>
             <div className="flex justify-between mb-3">
-              <h3 className="text-[18px] font-medium">Total</h3>
+              <h3 className="text-[18px] font-medium">{t("total")}</h3>
               <span>
                 {Math.trunc(
                   order.totalOrderPrice + 70 + order.totalOrderPrice * 0.14
                 )}{" "}
-                EGP
+                {t("egp")}
               </span>
             </div>
             <div className="flex justify-between mb-3">
-              <h3 className="text-[18px] font-medium">Payment method</h3>
+              <h3 className="text-[18px] font-medium">{t("payment_method")}</h3>
               <span>
                 <FontAwesomeIcon
                   icon={faMoneyBill1Wave}
@@ -107,33 +114,45 @@ export default function OrderDetails() {
         </div>
         <div className="md:col-span-5 ">
           <div className=" p-5 rounded-md border border-gray-300/70">
-            <h3 className="text-lg font-bold">User details</h3>
+            <h3 className="text-lg font-bold">{t("user_details")}</h3>
             <div className="flex justify-between mt-3">
-              <h3 className="text-[18px] font-medium">Name</h3>
+              <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                {t("name_input")}
+              </h3>
               <span className="text-sm">{order.user.name}</span>
             </div>
             <div className="flex justify-between mt-3">
-              <h3 className="text-[18px] font-medium">Email</h3>
+              <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                {t("email_address")}
+              </h3>
               <span className="text-sm">{order.user.email}</span>
             </div>
             <div className="flex justify-between mt-3">
-              <h3 className="text-[18px] font-medium">phone number</h3>
+              <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                {t("phone")}
+              </h3>
               <span>{order.user.phone}</span>
             </div>
           </div>
           {order?.shippingAddress && (
             <div className=" p-5 rounded-md border border-gray-300/70 mt-3">
-              <h3 className="text-lg font-bold">Shipping address</h3>
+              <h3 className="text-lg font-bold">{t("shipping_address")}</h3>
               <div className="flex justify-between mt-3">
-                <h3 className="text-[18px] font-medium">City</h3>
+                <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                  {t("city")}
+                </h3>
                 <span className="text-sm">{order.shippingAddress.city}</span>
               </div>
               <div className="flex justify-between mt-3">
-                <h3 className="text-[18px] font-medium">Address</h3>
+                <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                  {t("address")}
+                </h3>
                 <span className="text-sm">{order.shippingAddress.details}</span>
               </div>
               <div className="flex justify-between mt-3">
-                <h3 className="text-[18px] font-medium">phone number</h3>
+                <h3 className="text-[18px] rtl:text-[16px] font-medium">
+                  {t("phone")}
+                </h3>
                 <span>{order.shippingAddress.phone}</span>
               </div>
             </div>
@@ -141,17 +160,17 @@ export default function OrderDetails() {
         </div>
       </div>
       <div className=" p-5 rounded-md border border-gray-300/70">
-        <h3 className="text-lg font-bold">Add notes</h3>
+        <h3 className="text-lg font-bold">{t("add_notes")}</h3>
         <form className="mt-3">
           <textarea
             className="form-control w-full "
-            placeholder="Add notes"
+            placeholder={t("add_notes")}
           ></textarea>
           <button
             type="submit"
             className="bg-primary-600 rounded-md px-3 py-2 cursor-pointer text-white font-bold mt-3"
           >
-            Add note
+            {t("add_notes")}{" "}
           </button>
         </form>
       </div>

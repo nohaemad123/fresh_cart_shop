@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { calcPasswordStrength } from "../../utils/password.utils";
 import { toast } from "react-toastify";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
+import { useTranslation } from "react-i18next";
 
 export default function ChangePassword() {
   const passwordRegex =
@@ -17,6 +18,7 @@ export default function ChangePassword() {
   const [isCurrentPasswordShow, setIsCurrentPasswordShow] = useState(false);
   const [isNewPasswordShow, setIsNewPasswordShow] = useState(false);
   const [isReNewPasswordShow, setIsReNewPasswordShow] = useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -25,32 +27,24 @@ export default function ChangePassword() {
   const validationSchema = yup.object({
     currentPassword: yup
       .string()
-      .required("currentPassword is required")
-      .matches(
-        passwordRegex,
-        "password must be minimum 8 characters least one capital character one low case character one number one special character"
-      ),
+      .required(t("current_password_required"))
+      .matches(passwordRegex, t("password_regex")),
     password: yup
       .string()
-      .min(8, "Min 6 characters")
-      .required("password is required")
-      .matches(
-        passwordRegex,
-        "password must be minimum 8 characters least one capital character one low case character one number one special character"
-      ),
+      .min(8, t("password_min_length"))
+      .required(t("password_required"))
+      .matches(passwordRegex, t("password_regex")),
     rePassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Passwords must match")
-      .required("Confirm password is required"),
+      .oneOf([yup.ref("password")], t("password_match"))
+      .required(t("confirm_password_required")),
   });
 
   async function SendDataToChangePassword(values) {
     try {
       const response = await changePassword(values);
       if (response.success) {
-        toast.success(
-          "the password is changes, please logout and login again "
-        );
+        toast.success(t("change_password_done"));
         setTimeout(() => {
           logout();
           setTimeout(() => {
@@ -80,23 +74,23 @@ export default function ChangePassword() {
   return (
     <>
       <PageMetaData
-        title="Fresh cart - Change password page"
-        description="Fresh cart - Change password page"
+        title={t("change_password_title_page")}
+        description={t("change_password_title_page")}
       />
-      <h3 className="text-2xl font-bold">Change password</h3>
+      <h3 className="text-2xl font-bold">{t("change_password")}</h3>
       <form
         className="flex flex-col space-y-2 mt-4"
         onSubmit={formik.handleSubmit}
       >
         <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">Current password </label>
+          <label htmlFor="password_input">{t("current_password")} </label>
 
           <div className="relative flex justify-center">
             <input
               type={isCurrentPasswordShow ? "text" : "password"}
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter your current password"
+              placeholder={t("current_password_placeholder")}
               name="currentPassword"
               value={formik.values.currentPassword}
               onChange={formik.handleChange}
@@ -118,14 +112,14 @@ export default function ChangePassword() {
           <p className="text-red-600">{formik.errors.currentPassword}</p>
         )}
         <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">New password </label>
+          <label htmlFor="password_input">{t("new_password")} </label>
 
           <div className="relative flex justify-center">
             <input
               type={isNewPasswordShow ? "text" : "password"}
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter your new password"
+              placeholder={t("new_password_placeholder")}
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -161,14 +155,14 @@ export default function ChangePassword() {
         )}
 
         <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">Confirm new password </label>
+          <label htmlFor="password_input">{t("confirm_new_password")} </label>
 
           <div className="relative flex justify-center">
             <input
               type={isReNewPasswordShow ? "text" : "password"}
               id="email_input"
               className="form-control block w-full pe-10"
-              placeholder="Enter confirm new password"
+              placeholder={t("confirm_new_password_placeholder")}
               name="rePassword"
               value={formik.values.rePassword}
               onChange={formik.handleChange}
@@ -189,18 +183,18 @@ export default function ChangePassword() {
         {formik.touched.rePassword && formik.errors.rePassword && (
           <p className="text-red-600">{formik.errors.rePassword}</p>
         )}
-        <div className="flex gap-x-3 mt-3">
+        <div className="flex items-center gap-x-3 mt-3">
           <button
             type="submit"
             className=" py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
           >
-            Change my password
+            {t("change_my_password")}
           </button>
           <Link
             to="/"
             className="py-2 px-3 border cursor-pointer border-primary-600  text-sm text-primary-600 font-semibold text-center rounded-md"
           >
-            Cancel
+            {t("cancel")}
           </Link>
         </div>
       </form>
