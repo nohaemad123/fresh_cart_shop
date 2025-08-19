@@ -18,11 +18,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import NavSidebar from "../nav_sidebar/NavSidebar";
 import logo from "../../assets/freshcart-logo.svg";
+import colored_logo from "../../assets/logo_white.svg";
+
 import { authContext } from "../../context/Auth.context";
 import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 import { useCategories } from "../../hooks/useCategories";
 import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Navbar() {
   const { categories } = useCategories();
@@ -44,12 +47,14 @@ export default function Navbar() {
     setLang(lng);
   };
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <>
-      <header className=" top_navbar hidden xl:block">
+      <header className=" top_navbar hidden xl:block dark:text-gray-200">
         <div className="container">
-          <div className="flex justify-between py-3 text-sm">
-            <div className="details flex space-x-5">
+          <div className="flex justify-between py-3 text-sm items-center">
+            <div className="details flex space-x-5 ">
               <p>
                 <FontAwesomeIcon icon={faPhone} className="me-2" />
                 <a
@@ -59,12 +64,13 @@ export default function Navbar() {
                   +1 (800) 123-4567
                 </a>
               </p>
+
               <p>
                 <FontAwesomeIcon icon={faEnvelope} className="me-2" />
                 <a href="mailto:support@freshcart.com">support@freshcart.com</a>
               </p>
               {isOnline && (
-                <span className="text-primary-600">
+                <span className="text-primary-600 dark:text-primary-300">
                   <FontAwesomeIcon icon={faWifi} /> {t("online")}
                 </span>
               )}
@@ -81,7 +87,7 @@ export default function Navbar() {
                   <Link to="/contact">{t("contact_us")}</Link>
                 </li>
                 <li>
-                  <select>
+                  <select className="dark:bg-gray-950">
                     <option>EGP</option>
                     <option>SAR</option>
                     <option>AED</option>
@@ -91,7 +97,7 @@ export default function Navbar() {
                   {lang === "ar" ? (
                     <button
                       onClick={() => changeLang("en")}
-                      className=" text-black flex items-center cursor-pointer  overflow-hidden "
+                      className=" flex items-center cursor-pointer  overflow-hidden "
                     >
                       <img
                         src="https://flagcdn.com/w20/gb.png"
@@ -103,7 +109,7 @@ export default function Navbar() {
                   ) : (
                     <button
                       onClick={() => changeLang("ar")}
-                      className=" text-black flex items-center cursor-pointer  overflow-hidden "
+                      className="  flex items-center cursor-pointer  overflow-hidden "
                     >
                       <img
                         src="https://flagcdn.com/w20/sa.png"
@@ -114,14 +120,29 @@ export default function Navbar() {
                     </button>
                   )}
                 </li>
+                <button
+                  onClick={toggleTheme}
+                  className="rounded-xl text-primary-600 dark:text-primary-300 px-3 py-1 border text-sm shadow-sm "
+                >
+                  {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+                </button>
               </ul>
             </div>
           </div>
-          <div className="second_navbar border-t-2 border-gray-300/30 py-4">
+          <div className="second_navbar border-t-2 border-gray-300/30 dark:border-gray-700 py-4">
             <div className="flex justify-between items-center">
               <div className="logo">
                 <Link to={"/"}>
-                  <img src={logo} alt="" />
+                  {theme === "light" ? (
+                    <img src={logo} />
+                  ) : (
+                    <div className="flex items-center gap-x-3">
+                      <img src={colored_logo} width={40} />
+                      <span className="text-gray-200 text-3xl font-extrabold">
+                        FreshCart
+                      </span>
+                    </div>
+                  )}
                 </Link>
               </div>
               <div className="relative flex justify-center">
@@ -131,7 +152,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   id="email-address-icon"
-                  className="form-control min-w-96"
+                  className="form-control min-w-96 "
                   placeholder={t("search_for_products")}
                 />
               </div>
@@ -144,9 +165,9 @@ export default function Navbar() {
                       className={({ isActive }) => {
                         return `${
                           isActive
-                            ? " text-primary-600 flex flex-col gap-2"
-                            : "text-black flex flex-col gap-2"
-                        } 
+                            ? " text-primary-600 dark:text-primary-300"
+                            : "dark:text-gray-200 text-black"
+                        } flex flex-col gap-2
                     `;
                       }}
                     >
@@ -162,9 +183,9 @@ export default function Navbar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex flex-col items-center gap-2"
-                                : "text-black flex flex-col gap-2 items-center"
-                            } 
+                                ? " text-primary-600 dark:text-primary-300"
+                                : "dark:text-gray-200 text-black"
+                            } flex flex-col gap-2 items-center
                     `;
                           }}
                         >
@@ -195,9 +216,9 @@ export default function Navbar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex flex-col gap-2"
-                                : "text-black flex flex-col gap-2"
-                            } 
+                                ? " text-primary-600 dark:text-primary-300"
+                                : "dark:text-gray-200 text-black"
+                            } flex flex-col gap-2
                     `;
                           }}
                         >
@@ -213,9 +234,9 @@ export default function Navbar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex flex-col gap-2"
-                                : "text-black flex flex-col gap-2"
-                            } 
+                                ? " text-primary-600 dark:text-primary-300"
+                                : "dark:text-gray-200 text-black"
+                            } flex flex-col gap-2
                     `;
                           }}
                           to="/signup"
@@ -232,9 +253,9 @@ export default function Navbar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex flex-col gap-2"
-                                : "text-black flex flex-col gap-2"
-                            } 
+                                ? " text-primary-600 dark:text-primary-300"
+                                : "dark:text-gray-200 text-black"
+                            } flex flex-col gap-2
                     `;
                           }}
                           to="/login"
@@ -266,13 +287,13 @@ export default function Navbar() {
           </div>
         </div>
 
-        <nav className="bg-gray-100 py-4">
+        <nav className="bg-gray-100 py-4 dark:bg-gray-900 md:dark:bg-gray-900 dark:border-gray-700">
           <div className="container">
-            <ul className="font-medium flex flex-col p-4 md:p-0   md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="font-medium flex flex-col p-4 md:p-0   md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  ">
               <li>
                 <div className="relative group inline-block text-left">
                   <button
-                    className="text-white cursor-pointer bg-primary-600 hover:bg-primary-600/95 font-medium rounded-lg text-md px-5 py-2.5 inline-flex items-center "
+                    className="text-white cursor-pointer bg-primary-600 dark:bg-primary-500 hover:bg-primary-600/95 font-medium rounded-lg text-md px-5 py-2.5 inline-flex items-center "
                     type="button"
                   >
                     <FontAwesomeIcon icon={faBars} className="me-2" />
@@ -290,7 +311,7 @@ export default function Navbar() {
                           >
                             <Link
                               to={`/search-products?category=${category._id}`}
-                              className="flex px-4 py-3"
+                              className="flex px-4  py-3"
                             >
                               <img
                                 src={category.image}
@@ -300,13 +321,13 @@ export default function Navbar() {
                             </Link>
                           </li>
                         ))}
-                      <li className="px-3 py-3">
+                      <li className="px-3 flex items-center py-3 text-start">
                         <Link to="/categories" className="text-sm">
                           <FontAwesomeIcon
                             icon={faEllipsis}
                             className="me-1 text-primary-600"
                           />
-                          View all categories
+                          {t("view_categories")}
                         </Link>
                       </li>
                     </ul>
@@ -319,9 +340,9 @@ export default function Navbar() {
                   className={({ isActive }) => {
                     return `${
                       isActive
-                        ? " text-primary-600 flex flex-col mt-2"
-                        : "text-black flex flex-col mt-2"
-                    } 
+                        ? " text-primary-600 dark:text-primary-300"
+                        : "text-black dark:text-gray-200"
+                    }  flex flex-col mt-2
                     `;
                   }}
                   aria-current="page"
@@ -350,9 +371,9 @@ export default function Navbar() {
                   className={({ isActive }) => {
                     return `${
                       isActive
-                        ? " text-primary-600 block  mt-2 rtl:me-10"
-                        : "text-black block mt-2 rtl:me-10"
-                    } 
+                        ? " text-primary-600 dark:text-primary-300"
+                        : "text-black dark:text-gray-200"
+                    }  flex flex-col mt-2 rtl:me-10
                     `;
                   }}
                   aria-current="page"
@@ -366,9 +387,9 @@ export default function Navbar() {
                   className={({ isActive }) => {
                     return `${
                       isActive
-                        ? " text-primary-600 flex flex-col mt-2"
-                        : "text-black flex flex-col mt-2"
-                    } 
+                        ? " text-primary-600 dark:text-primary-300"
+                        : "text-black dark:text-gray-200"
+                    }  flex flex-col mt-2
                     `;
                   }}
                   aria-current="page"

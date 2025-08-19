@@ -20,8 +20,13 @@ export default function HomeFeaturedProducts() {
       <div className="py-10 ">
         <div className="container">
           <div className="flex flex-col space-y-2 md:flex-row justify-between items-center text-center">
-            <h2 className="text-2xl font-bold">{t("featured_products")}</h2>
-            <Link to="" className="flex items-center text-primary-600">
+            <h2 className="text-2xl font-bold dark:text-gray-200">
+              {t("featured_products")}
+            </h2>
+            <Link
+              to=""
+              className="flex items-center dark:text-primary-300 text-primary-600"
+            >
               {t("view_products")}{" "}
               {lang === "en" ? (
                 <FontAwesomeIcon icon={faArrowRight} className="ms-2" />

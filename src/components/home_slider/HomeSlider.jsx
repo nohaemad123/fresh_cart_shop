@@ -39,10 +39,10 @@ export default function HomeSlider() {
                 </h2>
                 <p className="text-lg">{t("home_slider_desc")}</p>
                 <div className="flex gap-4">
-                  <button className="btn max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
+                  <button className="btn max-w-40 bg-white dark:bg-gray-900 dark:text-primary-300 border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
                     {t("shop_now")}
                   </button>
-                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 transition-all duration-500">
+                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 dark:hover:bg-gray-900 dark:hover:text-primary-300 transition-all duration-500">
                     {t("view_deals")}
                   </button>
                 </div>
@@ -68,10 +68,10 @@ export default function HomeSlider() {
                 </h2>
                 <p className="text-lg">{t("home_slider_desc")}</p>
                 <div className="flex gap-4">
-                  <button className="btn max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
+                  <button className="btn max-w-40 bg-white dark:bg-gray-900 dark:text-primary-300 border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
                     {t("shop_now")}
                   </button>
-                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 transition-all duration-500">
+                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 dark:hover:bg-gray-900 dark:hover:text-primary-300 transition-all duration-500">
                     {t("view_deals")}
                   </button>
                 </div>
@@ -98,10 +98,10 @@ export default function HomeSlider() {
                 </h2>
                 <p className="text-lg">{t("home_slider_desc")}</p>
                 <div className="flex gap-4">
-                  <button className="btn max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
+                  <button className="btn max-w-40 bg-white dark:bg-gray-900 dark:text-primary-300 border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
                     {t("shop_now")}
                   </button>
-                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 transition-all duration-500">
+                  <button className="btn border max-w-40 border-white rounded-lg py-2 px-3 hover:bg-white hover:border-transparent hover:text-primary-600 dark:hover:bg-gray-900 dark:hover:text-primary-300 transition-all duration-500">
                     {t("view_deals")}
                   </button>
                 </div>

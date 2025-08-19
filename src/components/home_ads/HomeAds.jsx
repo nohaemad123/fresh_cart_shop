@@ -7,7 +7,7 @@ export default function HomeAds() {
 
   return (
     <>
-      <div className="bg-mainColor py-10">
+      <div className="bg-mainColor py-10 dark:bg-gray-800">
         <div className="container">
           <div className="grid grid-cols-1 space-y-5 md:grid-cols-2 lg:space-y-0 gap-x-10">
             <div
@@ -26,7 +26,7 @@ export default function HomeAds() {
                     {t("organic_vegetables")}
                   </h2>
                   <p className="text-lg">{t("organic_vegetables_desc")} </p>
-                  <button className="btn max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
+                  <button className="btn dark:bg-gray-900 dark:text-primary-300 max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
                     {t("shop_now")}
                   </button>
                 </div>
@@ -45,7 +45,7 @@ export default function HomeAds() {
                 <div className="container flex flex-col space-y-4 text-white">
                   <h2 className="text-2xl font-bold">{t("fresh_products")}</h2>
                   <p className="text-lg">{t("fresh_products_desc")}</p>
-                  <button className="btn max-w-40 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
+                  <button className="btn max-w-40 dark:bg-gray-900 dark:text-primary-300 bg-white border border-transparent text-primary-600 rounded-lg py-2 px-3 hover:bg-transparent hover:border-white hover:text-white transition-all duration-500">
                     {t("shop_now")}
                   </button>
                 </div>

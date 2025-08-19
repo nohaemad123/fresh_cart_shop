@@ -34,6 +34,7 @@ import Contact from "./pages/Contact/Contact";
 import PrivacyPolice from "./pages/Privacy_policy/PrivacyPolice";
 import Terms from "./pages/Terms/Terms";
 import { useTranslation } from "react-i18next";
+import { ThemeProvider } from "./hooks/useTheme";
 
 function App() {
   const queryClient = new QueryClient();
@@ -182,19 +183,21 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <OfflineScreen>
-          <AuthProvider>
-            <AddressProvider>
-              <RouterProvider router={routes} />
-              <ToastContainer
-                autoClose={3000}
-                closeButton={false}
-                closeOnClick={true}
-                transition={Slide}
-              />
-            </AddressProvider>
-          </AuthProvider>
-        </OfflineScreen>
+        <ThemeProvider>
+          <OfflineScreen>
+            <AuthProvider>
+              <AddressProvider>
+                <RouterProvider router={routes} />
+                <ToastContainer
+                  autoClose={3000}
+                  closeButton={false}
+                  closeOnClick={true}
+                  transition={Slide}
+                />
+              </AddressProvider>
+            </AuthProvider>
+          </OfflineScreen>
+        </ThemeProvider>
       </QueryClientProvider>
     </>
   );

@@ -39,10 +39,12 @@ export default function HomeDeals() {
       <div className="py-10 ">
         <div className="container">
           <div className="flex flex-col space-y-2 md:flex-row justify-between items-center text-center">
-            <h2 className="text-2xl font-bold">{t("deals_days")}</h2>
+            <h2 className="text-2xl font-bold dark:text-gray-300">
+              {t("deals_days")}
+            </h2>
             <Link
               to=""
-              className="flex items-center text-center text-primary-600"
+              className="flex items-center text-center text-primary-600 dark:text-primary-300"
             >
               {t("view_all_deals")}{" "}
               {lang === "en" ? (
@@ -53,17 +55,19 @@ export default function HomeDeals() {
             </Link>
           </div>
           <div className="flex gap-2 mb-5 mt-5 items-center">
-            <h2 className="text-sm font-semibold">{t("offers_end")}</h2>
-            <div className="counter flex gap-3 *:text-white *:flex *:justify-center *:item-center *:text-lg">
-              <div className="size-8 bg-black">
+            <h2 className="text-sm font-semibold dark:text-gray-300">
+              {t("offers_end")}
+            </h2>
+            <div className="counter flex gap-3 text-white justify-center items-center text-lg">
+              <div className="size-8 bg-gray-900 dark:bg-gray-700 flex justify-center items-center">
                 {String(timeLeft.hour_left).padStart(2, "0")}
               </div>
               :
-              <div className="size-8 bg-black">
+              <div className="size-8 bg-gray-900 dark:bg-gray-700 flex justify-center items-center">
                 {String(timeLeft.minute_left).padStart(2, "0")}
               </div>
               :
-              <div className="size-8 bg-black">
+              <div className="size-8 bg-gray-900 dark:bg-gray-700 flex justify-center items-center">
                 {String(timeLeft.second_left).padStart(2, "0")}
               </div>
             </div>

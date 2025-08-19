@@ -17,13 +17,15 @@ export default function HomeCategories() {
 
   return (
     <>
-      <div className="py-10 bg-mainColor">
+      <div className="py-10 bg-mainColor dark:bg-gray-800">
         <div className="container">
           <div className="flex flex-col space-y-2 lg:flex-row justify-between items-center text-center">
-            <h2 className="text-2xl font-bold">{t("shop_category")}</h2>
+            <h2 className="text-2xl font-bold dark:text-gray-200">
+              {t("shop_category")}
+            </h2>
             <Link
               to="/categories"
-              className="flex items-center text-primary-600"
+              className="flex items-center text-primary-600 dark:text-primary-300"
             >
               {t("view_categories")}{" "}
               {lang === "en" ? (
@@ -43,14 +45,16 @@ export default function HomeCategories() {
                 >
                   <div
                     key={category._id}
-                    className="bg-white shadow-sm hover:shadow-lg transition-shadow duration-500 py-3 px-5 rounded-lg flex flex-col items-center justify-center space-y-3"
+                    className="bg-white dark:bg-gray-900 shadow-sm hover:shadow-lg transition-shadow duration-500 py-3 px-5 rounded-lg flex flex-col items-center justify-center space-y-3"
                   >
                     <img
                       src={category.image}
                       alt=""
                       className="size-15 rounded-full object-cover"
                     />
-                    <h4 className="text-center">{category.name}</h4>
+                    <h4 className="text-center text-gray-900 dark:text-gray-100">
+                      {category.name}
+                    </h4>
                   </div>
                 </Link>
               ))}

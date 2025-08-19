@@ -16,12 +16,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authContext } from "../../context/Auth.context";
 import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
+import colored_logo from "../../assets/logo_white.svg";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function NavSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const { logout, token } = useContext(authContext);
   const { isLoading, numOfCartItems } = useCart();
   const { i18n, t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -29,15 +32,24 @@ export default function NavSidebar() {
 
   return (
     <>
-      <div className=" xl:hidden">
+      <div className=" xl:hidden fixed top-0 z-20 dark:bg-gray-900 w-full">
         <div className="navbar_mobile py-3">
-          <div className="container flex justify-between">
+          <div className="container flex justify-between items-center">
             <Link to="/" onClick={toggleMenu}>
-              <img src={logo} alt="" />
+              {theme === "light" ? (
+                <img src={logo} />
+              ) : (
+                <div className="flex items-center gap-x-2 ">
+                  <img src={colored_logo} width={40} />
+                  <span className="text-gray-200 text-2xl font-extrabold">
+                    FreshCart
+                  </span>
+                </div>
+              )}
             </Link>
             <button
               onClick={toggleMenu}
-              className="text-white cursor-pointer bg-primary-600 hover:bg-primary-600/95 font-medium rounded-lg text-md size-8 flex justify-center items-center "
+              className="text-white dark:bg-primary-300 dark:text-gray-700 cursor-pointer bg-primary-600 hover:bg-primary-600/95 font-medium rounded-lg text-md size-8 flex justify-center items-center "
             >
               {isOpen ? (
                 <FontAwesomeIcon icon={faXmark} />
@@ -54,10 +66,19 @@ export default function NavSidebar() {
               className="background cursor-pointer fixed inset-0 bg-black/50 z-30"
               onClick={toggleMenu}
             ></div>
-            <div className="offcanvas fixed bg-white z-40 p-5 top-0 bottom-0">
+            <div className="offcanvas fixed dark:bg-gray-900 bg-white z-40 p-5 top-0 bottom-0">
               <div className="flex justify-between items-center">
                 <Link to={"/"}>
-                  <img src={logo} alt="" />
+                  {theme === "light" ? (
+                    <img src={logo} />
+                  ) : (
+                    <div className="flex items-center gap-x-2 ">
+                      <img src={colored_logo} width={40} />
+                      <span className="text-gray-200 text-2xl font-extrabold">
+                        FreshCart
+                      </span>
+                    </div>
+                  )}{" "}
                 </Link>
                 <button
                   onClick={toggleMenu}
@@ -68,12 +89,15 @@ export default function NavSidebar() {
               </div>
               <div className="relative flex justify-center mt-5">
                 <div className="absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="dark:text-gray-200"
+                  />
                 </div>
                 <input
                   type="text"
                   id="email-address-icon"
-                  className="form-control "
+                  className="form-control dark:text-gray-200"
                   placeholder={t("search_for_products")}
                 />
               </div>
@@ -81,12 +105,21 @@ export default function NavSidebar() {
               <div className="mt-4">
                 {token && (
                   <>
-                    <h2 className="text-xl font-bold mb-3">{t("main_menu")}</h2>
+                    <h2 className="text-xl font-bold mb-3  dark:text-gray-100">
+                      {t("main_menu")}
+                    </h2>
                     <ul className=" *:space-y-3 *:hover:bg-gray-100 transition-colors ">
                       <li onClick={toggleMenu}>
                         <NavLink
                           to="/wishlist"
-                          className="flex gap-2 px-3 py-2"
+                          className={({ isActive }) => {
+                            return `${
+                              isActive
+                                ? " text-primary-600 dark:text-primary-600 bg-primary-100"
+                                : "text-black dark:text-gray-200"
+                            } flex gap-2 px-3 py-2 
+                    `;
+                          }}
                         >
                           <FontAwesomeIcon className="text-xl" icon={faHeart} />
                           <span className="text-sm">{t("wishlist")}</span>
@@ -98,9 +131,9 @@ export default function NavSidebar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex gap-2 px-3 py-2 bg-primary-100"
-                                : "text-black flex gap-2 px-3 py-2"
-                            } 
+                                ? " text-primary-600 dark:text-primary-600 bg-primary-100"
+                                : "text-black dark:text-gray-200"
+                            } flex gap-2 px-3 py-2 
                     `;
                           }}
                         >
@@ -131,9 +164,9 @@ export default function NavSidebar() {
                           className={({ isActive }) => {
                             return `${
                               isActive
-                                ? " text-primary-600 flex gap-2 px-3 py-2 bg-primary-100"
-                                : "text-black flex gap-2 px-3 py-2"
-                            } 
+                                ? " text-primary-600 dark:text-primary-600 bg-primary-100"
+                                : "text-black dark:text-gray-200"
+                            } flex gap-2 px-3 py-2 
                     `;
                           }}
                         >
@@ -146,7 +179,9 @@ export default function NavSidebar() {
                 )}
 
                 <div className="mt-4">
-                  <h2 className="text-xl font-bold mb-3">{t("account")}</h2>
+                  <h2 className="text-xl font-bold mb-3  dark:text-gray-100">
+                    {t("account")}
+                  </h2>
 
                   <ul className="*:space-y-4 *:hover:bg-gray-100 transition-colors ">
                     {!token && (
@@ -156,10 +191,10 @@ export default function NavSidebar() {
                             className={({ isActive }) => {
                               return `${
                                 isActive
-                                  ? " text-primary-600 px-3 py-2 flex gap-2 bg-primary-100"
-                                  : "text-black flex  gap-2 px-3 py-2"
-                              } 
-                                      `;
+                                  ? " text-primary-600 dark:text-primary-600 bg-primary-100"
+                                  : "text-black dark:text-gray-200"
+                              } flex gap-2 px-3 py-2 
+                    `;
                             }}
                             to="/signup"
                           >
@@ -175,10 +210,10 @@ export default function NavSidebar() {
                             className={({ isActive }) => {
                               return `${
                                 isActive
-                                  ? " text-primary-600 flex  gap-2 px-3 py-2"
-                                  : "text-black flex gap-2 px-3 py-2"
-                              } 
-                                      `;
+                                  ? " text-primary-600 dark:text-primary-600 bg-primary-100"
+                                  : "text-black dark:text-gray-200"
+                              } flex gap-2 px-3 py-2 
+                    `;
                             }}
                             to="/login"
                           >
@@ -195,7 +230,7 @@ export default function NavSidebar() {
                       <>
                         <li onClick={toggleMenu}>
                           <button
-                            className="flex gap-2 px-3 py-2"
+                            className="flex gap-2 px-3 py-2 dark:text-gray-200"
                             onClick={logout}
                           >
                             <FontAwesomeIcon

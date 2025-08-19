@@ -11,22 +11,36 @@ import { useContext } from "react";
 import minlogo from "../../assets/mini-logo.png";
 import { useCategories } from "../../hooks/useCategories";
 import { useTranslation } from "react-i18next";
+import colored_logo from "../../assets/logo_white.svg";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Footer() {
   const { categories } = useCategories();
   const { i18n, t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
-      <footer className="py-10 border-t border-gray-300/30 ">
+      <footer className="py-10 border-t border-gray-300/30">
         <div className="container">
           <div className="grid lg:grid-cols-2 xl:grid-cols-5 gap-6 pb-5">
             <div className="col-span-2 space-y-3">
               <Link to={"/"}>
-                <img src={logo} alt="" className="mb-3" />
+                {theme === "light" ? (
+                  <img src={logo} className="mb-3" />
+                ) : (
+                  <div className="flex items-center gap-x-3 mb-3">
+                    <img src={colored_logo} width={40} />
+                    <span className="text-gray-200 text-3xl font-extrabold">
+                      FreshCart
+                    </span>
+                  </div>
+                )}{" "}
               </Link>
-              <p className=" text-gray-500">{t("footer_description")}</p>
-              <ul className="flex items-center text-xl gap-4 *:text-gray-500 *:hover:text-primary-400 *:transition-colors *:duration-300">
+              <p className=" text-gray-500 dark:text-gray-400">
+                {t("footer_description")}
+              </p>
+              <ul className="flex items-center text-xl gap-4 *:text-gray-500 *:dark:text-gray-400 *:hover:text-primary-400  *:dark:hover:text-primary-300 *:transition-colors *:duration-300">
                 <li>
                   <a href="">
                     <FontAwesomeIcon icon={faFacebookF} />
@@ -50,8 +64,10 @@ export default function Footer() {
               </ul>
             </div>
             <div className="col-span-1">
-              <h2 className="text-xl font-bold">{t("categories")}</h2>
-              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:hover:text-primary-500 *:transition-colors *:duration-300">
+              <h2 className="text-xl font-bold dark:text-gray-100">
+                {t("categories")}
+              </h2>
+              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:dark:text-gray-400   *:dark:hover:text-primary-300  *:hover:text-primary-500 *:transition-colors *:duration-300">
                 {categories &&
                   categories.map((category) => (
                     <li key={category._id}>
@@ -63,8 +79,10 @@ export default function Footer() {
               </ul>
             </div>
             <div className="col-span-1">
-              <h2 className="text-xl font-bold">{t("quick_links")}</h2>
-              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:hover:text-primary-500 *:transition-colors *:duration-300">
+              <h2 className="text-xl font-bold dark:text-gray-100">
+                {t("quick_links")}
+              </h2>
+              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:dark:text-gray-400 *:hover:text-primary-400  *:dark:hover:text-primary-300  *:transition-colors *:duration-300">
                 <li>
                   <Link to="/about">{t("about_us")}</Link>
                 </li>
@@ -83,8 +101,10 @@ export default function Footer() {
               </ul>
             </div>
             <div className="col-span-1">
-              <h2 className="text-xl font-bold">{t("customer_service")}</h2>
-              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:hover:text-primary-500 *:transition-colors *:duration-300">
+              <h2 className="text-xl font-bold dark:text-gray-100">
+                {t("customer_service")}
+              </h2>
+              <ul className="mt-4 flex flex-col text-md gap-2 *:text-gray-500 *:dark:text-gray-400 *:hover:text-primary-400  *:dark:hover:text-primary-300 *:transition-colors *:duration-300">
                 <li>
                   <Link to="/account">{t("my_account")}</Link>
                 </li>
@@ -104,12 +124,16 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="copyright flex justify-between mt-3 border-t border-gray-300/30 py-4">
+          <div className="copyright flex justify-between mt-3 border-t border-gray-300/30 py-4 dark:text-gray-100">
             <p>
               &copy; {new Date().getFullYear()} FreeCart,{" "}
               {t("all_rights_reserved")}
             </p>
-            <img src={minlogo} className="w-8" alt="" />
+            {theme === "light" ? (
+              <img src={minlogo} className="w-8" alt="" />
+            ) : (
+              <img src={colored_logo} width={40} />
+            )}
           </div>
         </div>
       </footer>
