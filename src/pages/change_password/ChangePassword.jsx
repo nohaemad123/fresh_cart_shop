@@ -77,19 +77,22 @@ export default function ChangePassword() {
         title={t("change_password_title_page")}
         description={t("change_password_title_page")}
       />
-      <h3 className="text-2xl font-bold">{t("change_password")}</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+        {t("change_password")}
+      </h3>
       <form
         className="flex flex-col space-y-2 mt-4"
         onSubmit={formik.handleSubmit}
       >
+        {/* Current Password */}
         <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">{t("current_password")} </label>
-
+          <label className="text-gray-800 dark:text-gray-200">
+            {t("current_password")}
+          </label>
           <div className="relative flex justify-center">
             <input
               type={isCurrentPasswordShow ? "text" : "password"}
-              id="email_input"
-              className="form-control block w-full pe-10"
+              className="form-control block w-full pe-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 rounded-md"
               placeholder={t("current_password_placeholder")}
               name="currentPassword"
               value={formik.values.currentPassword}
@@ -97,28 +100,30 @@ export default function ChangePassword() {
               onBlur={formik.handleBlur}
             />
             <button
-              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5 "
+              type="button"
+              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5"
               onClick={() => setIsCurrentPasswordShow(!isCurrentPasswordShow)}
             >
-              {isCurrentPasswordShow ? (
-                <FontAwesomeIcon icon={faEyeSlash} className="text-gray-400" />
-              ) : (
-                <FontAwesomeIcon icon={faEye} className="text-gray-400" />
-              )}
+              <FontAwesomeIcon
+                icon={isCurrentPasswordShow ? faEyeSlash : faEye}
+                className="text-gray-400 dark:text-gray-300"
+              />
             </button>
           </div>
         </div>
         {formik.touched.currentPassword && formik.errors.currentPassword && (
           <p className="text-red-600">{formik.errors.currentPassword}</p>
         )}
-        <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">{t("new_password")} </label>
 
+        {/* New Password */}
+        <div className="password flex flex-col space-y-2">
+          <label className="text-gray-800 dark:text-gray-200">
+            {t("new_password")}
+          </label>
           <div className="relative flex justify-center">
             <input
               type={isNewPasswordShow ? "text" : "password"}
-              id="email_input"
-              className="form-control block w-full pe-10"
+              className="form-control block w-full pe-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 rounded-md"
               placeholder={t("new_password_placeholder")}
               name="password"
               value={formik.values.password}
@@ -126,26 +131,25 @@ export default function ChangePassword() {
               onBlur={formik.handleBlur}
             />
             <button
-              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5 "
+              type="button"
+              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5"
               onClick={() => setIsNewPasswordShow(!isNewPasswordShow)}
             >
-              {isNewPasswordShow ? (
-                <FontAwesomeIcon icon={faEyeSlash} className="text-gray-400" />
-              ) : (
-                <FontAwesomeIcon icon={faEye} className="text-gray-400" />
-              )}
+              <FontAwesomeIcon
+                icon={isNewPasswordShow ? faEyeSlash : faEye}
+                className="text-gray-400 dark:text-gray-300"
+              />
             </button>
           </div>
         </div>
-
         {formik.touched.password && (
           <div className="password_strength mt-2 flex flex-nowrap gap-2 items-center">
-            <div className="bar w-full h-2 bg-gray-200  rounded-xl">
+            <div className="bar w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-xl">
               <div
                 className={`progress ${new_password_strength.width} rounded-xl ${new_password_strength.background} h-full overflow-hidden`}
               ></div>
             </div>
-            <span className="text-nowrap text-center">
+            <span className="text-nowrap text-center text-gray-800 dark:text-gray-200">
               {new_password_strength.text}
             </span>
           </div>
@@ -154,14 +158,15 @@ export default function ChangePassword() {
           <p className="text-red-600">{formik.errors.password}</p>
         )}
 
+        {/* Confirm New Password */}
         <div className="password flex flex-col space-y-2">
-          <label htmlFor="password_input">{t("confirm_new_password")} </label>
-
+          <label className="text-gray-800 dark:text-gray-200">
+            {t("confirm_new_password")}
+          </label>
           <div className="relative flex justify-center">
             <input
               type={isReNewPasswordShow ? "text" : "password"}
-              id="email_input"
-              className="form-control block w-full pe-10"
+              className="form-control block w-full pe-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 rounded-md"
               placeholder={t("confirm_new_password_placeholder")}
               name="rePassword"
               value={formik.values.rePassword}
@@ -169,30 +174,32 @@ export default function ChangePassword() {
               onBlur={formik.handleBlur}
             />
             <button
-              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5 "
+              type="button"
+              className="absolute z-30 inset-y-0 end-0 flex cursor-pointer items-center pe-3.5"
               onClick={() => setIsReNewPasswordShow(!isReNewPasswordShow)}
             >
-              {isReNewPasswordShow ? (
-                <FontAwesomeIcon icon={faEyeSlash} className="text-gray-400" />
-              ) : (
-                <FontAwesomeIcon icon={faEye} className="text-gray-400" />
-              )}
+              <FontAwesomeIcon
+                icon={isReNewPasswordShow ? faEyeSlash : faEye}
+                className="text-gray-400 dark:text-gray-300"
+              />
             </button>
           </div>
         </div>
         {formik.touched.rePassword && formik.errors.rePassword && (
           <p className="text-red-600">{formik.errors.rePassword}</p>
         )}
+
+        {/* Buttons */}
         <div className="flex items-center gap-x-3 mt-3">
           <button
             type="submit"
-            className=" py-2 px-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
+            className="py-2 px-3 bg-primary-600 border-transparent cursor-pointer text-lg font-semibold text-white text-center rounded-md"
           >
             {t("change_my_password")}
           </button>
           <Link
             to="/"
-            className="py-2 px-3 border cursor-pointer border-primary-600  text-sm text-primary-600 font-semibold text-center rounded-md"
+            className="py-2 px-3 border cursor-pointer border-primary-600 text-sm text-primary-600 font-semibold text-center rounded-md"
           >
             {t("cancel")}
           </Link>

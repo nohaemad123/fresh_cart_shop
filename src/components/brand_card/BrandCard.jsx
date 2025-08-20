@@ -9,7 +9,7 @@ export default function BrandCard({ brandInfo }) {
   return (
     <>
       <Link to={`/search-products?brand=${_id}`}>
-        <div className="bg-white rounded-lg shadow-md">
+        <div className="bg-white rounded-lg shadow-md dark:bg-gray-900">
           <div className=" p-10">
             <img
               src={image}
@@ -18,10 +18,10 @@ export default function BrandCard({ brandInfo }) {
             />
           </div>
           <div className=" border-t border-gray-300 p-5 pt-2 flex flex-col space-y-2 ">
-            <h3 className="text-lg font-bold">{name}</h3>
+            <h3 className="text-lg font-bold dark:text-gray-200">{name}</h3>
             <span
               to={`/search-products?brand=${_id}`}
-              className="text-primary-600 font-medium text-end"
+              className="text-primary-600 font-medium text-end dark:text-primary-400"
             >
               {t("view")}
             </span>

@@ -12,22 +12,22 @@ export default function Subcategories() {
 
   return (
     <>
-      <div className="py-10">
+      <div className="py-10 bg-white dark:bg-gray-900">
         <div className="container">
-          <h3 className="text-3xl font-bold mb-5">
+          <h3 className="text-3xl font-bold mb-5 text-gray-900 dark:text-gray-100">
             {t("popular_subcategories")}
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 ">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
             {subCategories &&
               subCategories.map((subCategory) => (
                 <div
                   key={subCategory._id}
-                  className="bg-mainColor p-5 rounded-md flex flex-col justify-center items-center space-y-4 h-40 w-full text-center"
+                  className="bg-mainColor dark:bg-gray-800 p-5 rounded-md flex flex-col justify-center items-center space-y-4 h-40 w-full text-center"
                 >
-                  <div className="rounded_icon">
+                  <div className="rounded_icon text-gray-900 dark:text-gray-100">
                     <FontAwesomeIcon icon={faShirt} />
                   </div>
-                  <h3 className="font-bold text-[18px] hover:text-primary-600 text-center leading-tight">
+                  <h3 className="font-bold text-[18px] hover:text-primary-600 text-center leading-tight text-gray-900 dark:text-gray-100">
                     {subCategory.name}
                   </h3>
                 </div>

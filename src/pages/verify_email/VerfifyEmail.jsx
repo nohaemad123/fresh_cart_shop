@@ -15,12 +15,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { verifyEmail } from "../../services/auth-service";
+import { verifyEmail, forgotPassword } from "../../services/auth-service";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import PageMetaData from "../../components/page_meta_data/PageMetaData";
 import { useTranslation } from "react-i18next";
+
 export default function VerifyEmail() {
   const navigate = useNavigate();
   const [isExistError, setIsExistError] = useState(null);
@@ -71,6 +72,7 @@ export default function VerifyEmail() {
     validationSchema,
     onSubmit: SendDataVerifyEmail,
   });
+
   const initialMinutes = 3;
   const initialSeconds = 3;
   const initialTimeInSeconds = initialMinutes * 60 + initialSeconds;
@@ -91,11 +93,9 @@ export default function VerifyEmail() {
 
   useEffect(() => {
     if (time <= 0) return;
-
     const interval = setInterval(() => {
       setTime((prev) => prev - 1);
     }, 1000);
-
     return () => clearInterval(interval);
   }, [time]);
 
@@ -124,137 +124,89 @@ export default function VerifyEmail() {
         title={t("verify_email_page_title")}
         description={t("verify_email_page_title")}
       />
-      <div className="bg-mainColor py-10">
+      <div className="bg-gray-50 dark:bg-gray-900 py-10 min-h-screen">
         <div className="container">
-          <div className="w-full lg:w-[40%] bg-white p-5 lg:p-10 mx-auto border border-gray-300 rounded-lg">
+          <div className="w-full lg:w-[40%] bg-white dark:bg-gray-800 p-5 lg:p-10 mx-auto border border-gray-200 dark:border-gray-700 rounded-lg">
             <div className="flex flex-col space-y-2 items-center justify-center text-center">
-              <div className="rounded_icon">
+              <div className="rounded_icon bg-primary-100 dark:bg-primary-400 text-primary-600 dark:text-primary-800 p-3">
                 <FontAwesomeIcon icon={faEnvelopeOpenText} />
               </div>
-              <h3 className="text-2xl font-bold">{t("verify_your_email")}</h3>
-              <p className="text-[16px] text-gray-500">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                {t("verify_your_email")}
+              </h3>
+              <p className="text-[16px] text-gray-500 dark:text-gray-400">
                 {t("verify_email_desc")}
               </p>
-
-              <p className="text-lg text-primary-600 font-semibold">{email}</p>
+              <p className="text-lg font-semibold text-primary-600 dark:text-primary-400">
+                {email}
+              </p>
             </div>
             <form
               className="mt-5 space-y-2 flex flex-col"
               onSubmit={formik.handleSubmit}
             >
-              <label className="text-lg text-center">
+              <label className="text-lg text-center text-gray-700 dark:text-gray-200">
                 {t("enter_6_digits")}
               </label>
               <div className="grid grid-cols-6 gap-x-5 justify-center items-center text-center">
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit1"
-                  ref={input1}
-                  maxLength={1}
-                  value={formik.values.digit1}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input2);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit2"
-                  ref={input2}
-                  maxLength={1}
-                  value={formik.values.digit2}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input3);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit3"
-                  ref={input3}
-                  maxLength={1}
-                  value={formik.values.digit3}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input4);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit4"
-                  ref={input4}
-                  maxLength={1}
-                  value={formik.values.digit4}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input5);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit5"
-                  ref={input5}
-                  maxLength={1}
-                  value={formik.values.digit5}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input6);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  name="digit6"
-                  ref={input6}
-                  maxLength={1}
-                  value={formik.values.digit6}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleChange(e, input6);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
+                {[input1, input2, input3, input4, input5, input6].map(
+                  (ref, index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      className="form-control text-center border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md"
+                      name={`digit${index + 1}`}
+                      ref={ref}
+                      maxLength={1}
+                      value={formik.values[`digit${index + 1}`]}
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        handleChange(
+                          e,
+                          index < 5
+                            ? [input1, input2, input3, input4, input5, input6][
+                                index + 1
+                              ]
+                            : null
+                        );
+                      }}
+                      onBlur={formik.handleBlur}
+                    />
+                  )
+                )}
               </div>
-              <p className="text-center my-3">
+              <p className="text-center my-3 text-gray-700 dark:text-gray-200">
                 {t("code_expire")}
-                <span className="text-lg text-primary-600 font-semibold ms-2">
+                <span className="text-lg font-semibold text-primary-600 dark:text-primary-400 ms-2">
                   {formatTime(time)}
                 </span>
               </p>
               <button
                 type="submit"
-                className="py-3 mt-3 bg-primary-600 border-transparent cursor-pointer  text-lg font-semibold text-white text-center rounded-md"
+                className="py-3 mt-3 bg-primary-600 dark:bg-primary-500 hover:bg-primary-700 dark:hover:bg-primary-600 text-lg font-semibold text-white rounded-md"
               >
                 {t("verify_email")}
               </button>
-              <div className="flex flex-col space-y-3 justify-center items-center mt-3">
+              <div className="flex flex-col space-y-3 justify-center items-center mt-3 text-gray-700 dark:text-gray-200">
                 <p>{t("ditnt_receive_code")}</p>
                 <button
                   onClick={() => sendCodeToEmail()}
-                  className="text-primary-600 font-medium text-lg"
+                  className="text-primary-600 dark:text-primary-400 font-medium text-lg"
                 >
                   {t("resend_code")}
                 </button>
-                <Link to="/login" className="text-primary-600 font-medium">
+                <Link
+                  to="/login"
+                  className="text-primary-600 dark:text-primary-400 font-medium"
+                >
                   {t("back_signin")}
                 </Link>
               </div>
             </form>
           </div>
-          <p className="text-center text-gray-500 mt-5 text-lg">
+          <p className="text-center mt-5 text-lg text-gray-500 dark:text-gray-400">
             {t("need_help")}{" "}
-            <span className="text-primary-600 font-medium">
+            <span className="text-primary-600 dark:text-primary-400 font-medium">
               {t("contact_support")}
             </span>
           </p>

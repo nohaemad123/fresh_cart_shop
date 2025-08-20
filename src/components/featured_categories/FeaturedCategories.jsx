@@ -7,22 +7,22 @@ export default function FeaturedCategories() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-mainColor py-10">
+    <div className="bg-mainColor dark:bg-gray-900 py-10">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-12">
           <div className="md:col-span-7">
-            <div className="bg-primary-100/50 rounded-tl-md rounded-bl-md p-10 h-full flex items-center">
+            <div className="bg-primary-100/50 dark:bg-gray-800 rounded-tl-md rounded-bl-md p-10 h-full flex items-center">
               <div className="flex flex-col justify-center items-stretch space-y-3">
                 <h5 className="text-primary-600 font-bold">
                   {t("featuredCategories.title")}
                 </h5>
-                <h2 className="text-3xl font-bold">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   {t("featuredCategories.subtitle")}
                 </h2>
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-300">
                   {t("featuredCategories.description")}
                 </p>
-                <ul className="*:text-lg *:font-medium flex flex-col space-y-2">
+                <ul className="*:text-lg *:font-medium flex flex-col space-y-2 text-gray-900 dark:text-gray-100">
                   <li>
                     <FontAwesomeIcon
                       icon={faCheck}

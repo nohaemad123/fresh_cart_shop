@@ -26,51 +26,48 @@ export default function ProductTabs({ productDetails }) {
         return <DescriptionTab />;
     }
   }
+
   return (
     <>
-      <div className="bg-white rounded-lg my-10">
-        <div className="border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-900 rounded-lg my-10">
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <div className="flex">
             <button
-              onClick={() => {
-                setActiveTab("details");
-              }}
-              className={`${
-                activeTab == "details"
-                  ? "text-primary-600 border-b-2 border-primary-600"
-                  : "text-gray-600 border-b-transparent"
-              } px-6 py-4 font-medium  cursor-pointer`}
+              onClick={() => setActiveTab("details")}
+              className={`px-6 py-4 font-medium cursor-pointer transition-colors ${
+                activeTab === "details"
+                  ? "text-primary-600 border-b-2 border-primary-600 bg-primary-50 dark:bg-gray-800"
+                  : "text-gray-600 dark:text-gray-300 border-b-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
+              }`}
             >
               {t("product_info")}
             </button>
             <button
-              onClick={() => {
-                setActiveTab("reviews");
-              }}
-              className={`${
-                activeTab == "reviews"
-                  ? "text-primary-600 border-b-2 border-primary-600"
-                  : "text-gray-600 border-b-transparent"
-              } px-6 py-4 font-medium  cursor-pointer`}
+              onClick={() => setActiveTab("reviews")}
+              className={`px-6 py-4 font-medium cursor-pointer transition-colors ${
+                activeTab === "reviews"
+                  ? "text-primary-600 border-b-2 border-primary-600 bg-primary-50 dark:bg-gray-800"
+                  : "text-gray-600 dark:text-gray-300 border-b-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
+              }`}
             >
               {t("reviews_tabs")} ({ratingsQuantity})
             </button>
             <button
-              onClick={() => {
-                setActiveTab("shipping");
-              }}
-              className={`${
-                activeTab == "shipping"
-                  ? "text-primary-600 border-b-2 border-primary-600"
-                  : "text-gray-600 border-b-transparent"
-              } px-6 py-4 font-medium  cursor-pointer`}
+              onClick={() => setActiveTab("shipping")}
+              className={`px-6 py-4 font-medium cursor-pointer transition-colors ${
+                activeTab === "shipping"
+                  ? "text-primary-600 border-b-2 border-primary-600 bg-primary-50 dark:bg-gray-800"
+                  : "text-gray-600 dark:text-gray-300 border-b-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
+              }`}
             >
               {t("shipping_returns")}
             </button>
           </div>
         </div>
 
-        <div className="p-6">{getActiveTab()}</div>
+        <div className="p-6 text-gray-800 dark:text-gray-200">
+          {getActiveTab()}
+        </div>
       </div>
     </>
   );

@@ -9,7 +9,7 @@ export default function DescriptionTab({ description }) {
   return (
     <>
       <h3 className="text-lg font-semibold mb-3">{t("product_description")}</h3>
-      <p className="text-gray-600 mb-4">{description}</p>
+      <p className="text-gray-600 mb-4 dark:text-gray-400">{description}</p>
       <div className="grid  lg:grid-cols-2">
         <div className="md:mb-2">
           <h3 className="text-lg font-semibold mb-3">{t("benefits")}</h3>
@@ -59,7 +59,7 @@ export default function DescriptionTab({ description }) {
       </div>
 
       <h3 className="text-lg font-semibold mt-5 mb-3">{t("how_store")}</h3>
-      <p className="text-gray-600 mb-4">
+      <p className="text-gray-600 mb-4 dark:text-gray-400">
         For optimal freshness, Refregirate strawberries unwashed in their
         original container or in a paper towel-lined container. wash just before
         eating. To extend shelf life, remove any damaged berries as soon as

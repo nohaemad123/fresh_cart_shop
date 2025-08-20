@@ -461,5 +461,6 @@
   "user_responsibilities_title": "User Responsibilities",
   "user_responsibilities_desc": "You agree not to misuse our website, commit fraud, or violate any laws.",
   "limitation_liability_title": "Limitation of Liability",
-  "limitation_liability_desc": "We are not liable for indirect, incidental, or consequential damages from using our services."
+  "limitation_liability_desc": "We are not liable for indirect, incidental, or consequential damages from using our services.",
+  "delete_address": "Delete address"
 }

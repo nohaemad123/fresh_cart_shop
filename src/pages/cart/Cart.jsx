@@ -1,6 +1,5 @@
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import CartItem from "../../components/cart_item/CartItem";
-
 import EmptyCart from "../../components/empty_cart/EmptCart";
 import { useCart } from "../../hooks/useCart";
 import { useUpdateProductCount } from "../../hooks/useUpdateProductCount";
@@ -20,13 +19,16 @@ export default function Cart() {
     <>
       <PageMetaData title={t("cart_title")} description={t("cart_title")} />
       <BreadCrumb thirdLink={t("cart")} />
-      <div className="bg-mainColor py-15">
+      <div className="bg-mainColor dark:bg-gray-900 py-15">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-5">
-            <div className="md:col-span-8 bg-white py-5 rounded-md border border-gray-300/70">
-              <div className="border-b border-gray-300 pb-5 px-10">
-                <h3 className="text-xl font-bold">{t("shopping_cart")} </h3>
-                <p className="text-gray-500 mt-1">
+            {/* Cart Items */}
+            <div className="md:col-span-8 bg-white dark:bg-gray-800 py-5 rounded-md border border-gray-300/70 dark:border-gray-700">
+              <div className="border-b border-gray-300 dark:border-gray-700 pb-5 px-10">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {t("shopping_cart")}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mt-1">
                   {numOfCartItems} {t("cart_desc")}
                 </p>
               </div>
@@ -48,35 +50,41 @@ export default function Cart() {
 
             {/* Order Summary */}
             <div className="md:col-span-4">
-              <div className="bg-white p-5 w-full rounded-md border border-gray-300/70">
+              <div className="bg-white dark:bg-gray-800 p-5 w-full rounded-md border border-gray-300/70 dark:border-gray-700">
                 {cartProducts?.products?.length > 0 && (
                   <>
-                    <h3 className="text-xl font-bold mb-5">
-                      {t("order_summary")}{" "}
+                    <h3 className="text-xl font-bold mb-5 text-gray-900 dark:text-white">
+                      {t("order_summary")}
                     </h3>
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-lg text-gray-600">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-300">
                         {t("subtotal")} ( {numOfCartItems} {t("items")})
                       </h4>
-                      <span className="text-sm text-[16px] font-semibold">
+                      <span className="text-sm text-[16px] font-semibold text-gray-900 dark:text-white">
                         {totalCartPrice} {t("egp")}
                       </span>
                     </div>
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-lg text-gray-600">{t("shipping")}</h4>
-                      <span className="text-sm text-[16px] font-semibold text-primary-600">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-300">
+                        {t("shipping")}
+                      </h4>
+                      <span className="text-sm text-[16px] font-semibold text-primary-600 dark:text-primary-400">
                         70 {t("egp")}
                       </span>
                     </div>
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-lg text-gray-600">{t("tax")}</h4>
-                      <span className="text-sm text-[16px] font-semibold">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-300">
+                        {t("tax")}
+                      </h4>
+                      <span className="text-sm text-[16px] font-semibold text-gray-900 dark:text-white">
                         {Math.trunc(totalCartPrice * 0.14)} {t("egp")}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300">
-                      <h4 className="text-lg font-bold">{t("total")}</h4>
-                      <span className=" text-[16px] font-bold">
+                    <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300 dark:border-gray-700">
+                      <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                        {t("total")}
+                      </h4>
+                      <span className=" text-[16px] font-bold text-gray-900 dark:text-white">
                         {Math.trunc(
                           totalCartPrice + 70 + totalCartPrice * 0.14
                         )}{" "}
@@ -87,7 +95,7 @@ export default function Cart() {
                 )}
 
                 {!cartProducts?.products?.length && (
-                  <p className="mb-3 bg-red-50 py-2 px-3 text-red-700 font-semibold">
+                  <p className="mb-3 bg-red-50 dark:bg-red-900/40 py-2 px-3 text-red-700 dark:text-red-400 font-semibold">
                     {t("empty_cart_title")}
                   </p>
                 )}
@@ -96,14 +104,14 @@ export default function Cart() {
                   {cartProducts?.products?.length > 0 && (
                     <Link
                       to="/checkout"
-                      className="py-3 bg-primary-600 border-transparent text-lg font-semibold text-white text-center rounded-md"
+                      className="py-3 bg-primary-600 border-transparent text-lg font-semibold text-white text-center rounded-md hover:bg-primary-700 transition"
                     >
                       {t("proceed_checkout")}
                     </Link>
                   )}
                   <Link
                     to="/"
-                    className="py-3 border mb-5 border-primary-600 text-lg text-primary-600 font-semibold text-center rounded-md"
+                    className="py-3 border mb-5 border-primary-600 text-lg text-primary-600 dark:text-primary-400 font-semibold text-center rounded-md hover:bg-primary-50 dark:hover:bg-gray-700 transition"
                   >
                     {t("continue_shopping")}
                   </Link>

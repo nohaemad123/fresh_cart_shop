@@ -26,10 +26,12 @@ export default function About() {
             <div className="md:col-span-7">
               <div className="rounded-tl-md rounded-bl-md h-full flex items-center">
                 <div className="flex flex-col justify-center items-stretch space-y-3">
-                  <h2 className="text-3xl font-bold">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                     {t("future_of_grocery")}
                   </h2>
-                  <p className="text-gray-500">{t("future_of_grocery_desc")}</p>
+                  <p className="text-gray-500 dark:text-gray-300">
+                    {t("future_of_grocery_desc")}
+                  </p>
                 </div>
               </div>
             </div>
@@ -47,41 +49,49 @@ export default function About() {
       {/* Ready to Get Started Section */}
       <section className="py-10 w-[80%] mx-auto">
         <div className="container">
-          <h2 className="text-2xl font-bold">{t("ready_to_get_started")}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            {t("ready_to_get_started")}
+          </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-5 mt-5">
             {/* Card 1 */}
-            <div className="bg-gray-200 rounded-lg p-10 flex flex-col space-y-2">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-10 flex flex-col space-y-2">
               <img src={about_image1} className="size-30" alt="" />
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {t("ready_to_get_started")}
               </h2>
-              <p className="text-gray-600">{t("ready_to_get_started_desc")}</p>
-              <button className="w-fit bg-black py-2 px-3 rounded-md text-white">
+              <p className="text-gray-600 dark:text-gray-300">
+                {t("ready_to_get_started_desc")}
+              </p>
+              <button className="w-fit bg-black dark:bg-gray-700 py-2 px-3 rounded-md text-white">
                 {t("freshcart_platform")}
               </button>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-gray-200 rounded-lg p-10 flex flex-col space-y-2">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-10 flex flex-col space-y-2">
               <img src={about_image2} className="size-30" alt="" />
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {t("advertise_my_brand")}
               </h2>
-              <p className="text-gray-600">{t("ready_to_get_started_desc")}</p>
-              <button className="w-fit bg-black py-2 px-3 rounded-md text-white">
+              <p className="text-gray-600 dark:text-gray-300">
+                {t("ready_to_get_started_desc")}
+              </p>
+              <button className="w-fit bg-black dark:bg-gray-700 py-2 px-3 rounded-md text-white">
                 {t("freshcart_ads")}
               </button>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-gray-200 rounded-lg p-10 flex flex-col space-y-2">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-10 flex flex-col space-y-2">
               <img src={about_image3} className="size-30" alt="" />
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {t("learn_more_about_freshcart")}
               </h2>
-              <p className="text-gray-600">{t("ready_to_get_started_desc")}</p>
-              <button className="w-fit bg-black py-2 px-3 rounded-md text-white">
+              <p className="text-gray-600 dark:text-gray-300">
+                {t("ready_to_get_started_desc")}
+              </p>
+              <button className="w-fit bg-black dark:bg-gray-700 py-2 px-3 rounded-md text-white">
                 {t("freshcart_platform")}
               </button>
             </div>
@@ -90,7 +100,7 @@ export default function About() {
       </section>
 
       {/* Trusted by Retailers Section */}
-      <section className="py-20 bg-primary-700 text-white">
+      <section className="py-20 bg-primary-700 text-white dark:bg-primary-900 dark:text-gray-100">
         <div className="container">
           <div className="flex flex-col space-y-3">
             <h3 className="text-2xl font-bold whitespace-pre-line">

@@ -46,7 +46,7 @@ export default function ProductCard({ productInfo }) {
 
   return (
     <>
-      <div className="product_card bg-white dark:bg-gray-800 relative shadow-lg rounded-xl overflow-hidden">
+      <div className="product_card bg-white dark:bg-gray-900 relative shadow-lg rounded-xl overflow-hidden">
         <div className="">
           <Link to={`/product-details/${_id}`} className="block">
             <img
@@ -90,7 +90,7 @@ export default function ProductCard({ productInfo }) {
             </div>
             <button
               onClick={() => addProductToCartApi.mutate(_id)}
-              className="size-9 rounded-full cursor-pointer bg-primary-600 dark:bg-primary-400 text-gray-900  text-lg"
+              className="size-9 rounded-full cursor-pointer bg-primary-600 dark:bg-primary-400 text-white dark:text-gray-900  text-lg"
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>

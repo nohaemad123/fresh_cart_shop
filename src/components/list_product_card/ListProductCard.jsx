@@ -59,14 +59,14 @@ export default function ListProductCard({ productInfo }) {
 
   return (
     <>
-      <div className="bg-white  shadow-lg rounded-xl overflow-hidden p-5 mb-5">
+      <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl overflow-hidden p-5 mb-5 transition-colors duration-300">
         <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-10 ">
           <div className="md:col-span-3 relative">
             <Link to={`/product-details/${_id}`} className="block">
-              <img src={imageCover} className="h-60 mx-auto  object-cover" />
+              <img src={imageCover} className="h-60 mx-auto object-cover" />
             </Link>
             {priceAfterDiscount ? (
-              <span className="bg-red-600 absolute top-3 ltr:left-3 rtl:right-3  text-white text-xs rounded-md px-2 py-1">
+              <span className="bg-red-600 absolute top-3 ltr:left-3 rtl:right-3 text-white text-xs rounded-md px-2 py-1">
                 -{calcDiscount({ price, priceAfterDiscount })}%
               </span>
             ) : (
@@ -75,11 +75,15 @@ export default function ListProductCard({ productInfo }) {
           </div>
           <div className="md:col-span-9 ">
             <div className="flex flex-col space-y-3">
-              <span className="text-sm text-gray-500">{category.name}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                {category.name}
+              </span>
               <Link to={`/product-details/${_id}`} className="">
-                <h2 className=" font-semibold text-xl">{title}</h2>
+                <h2 className="font-semibold text-xl text-gray-900 dark:text-gray-100">
+                  {title}
+                </h2>
               </Link>
-              <div className="flex gap-x-2 text-sm text-gray-600">
+              <div className="flex gap-x-2 text-sm text-gray-600 dark:text-gray-300">
                 <ProductRating rating={ratingsAverage} /> {ratingsAverage} (
                 {ratingsQuantity})
               </div>
@@ -89,20 +93,18 @@ export default function ListProductCard({ productInfo }) {
                     <span className="text-lg font-bold text-primary-600">
                       {priceAfterDiscount} {t("egp")}
                     </span>
-                    <del className="text-gray-500">
+                    <del className="text-gray-500 dark:text-gray-400">
                       {price} {t("egp")}
                     </del>
                   </>
                 ) : (
-                  <>
-                    <span className="text-lg font-bold text-primary-600">
-                      {price} {t("egp")}
-                    </span>
-                  </>
+                  <span className="text-lg font-bold text-primary-600">
+                    {price} {t("egp")}
+                  </span>
                 )}
               </div>
 
-              <div className=" bg-white  flex  items-center space-x-5 *:hover:bg-primary-600 *:hover:text-white *:transition-colors *:duration-500 *:cursor-pointer *:p-2 *:shadow-md ">
+              <div className="bg-white w-fit dark:text-gray-200 dark:bg-gray-700 flex items-center space-x-5 *:hover:bg-primary-600 *:hover:text-white *:transition-colors *:duration-500 *:cursor-pointer *:p-2 *:shadow-md rounded-md">
                 {!isExist ? (
                   <button onClick={() => addProductToWishlist.mutate(_id)}>
                     <FontAwesomeIcon icon={regularHeart} />
@@ -120,6 +122,7 @@ export default function ListProductCard({ productInfo }) {
                   <FontAwesomeIcon icon={faEye} />
                 </Link>
               </div>
+
               {!isProductCartExist ? (
                 <button
                   onClick={() => addProductToCartApi.mutate(_id)}
@@ -131,7 +134,7 @@ export default function ListProductCard({ productInfo }) {
               ) : (
                 <button
                   onClick={() => removeProductToCartApi.mutate(_id)}
-                  className="bg-red-500 flex items-center w-fit px-5 py-2  text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
+                  className="bg-red-500 flex items-center w-fit px-5 py-2 text-white rounded-md text-[16px] font-bold cursor-pointer border-transparent"
                 >
                   <FontAwesomeIcon icon={faTrashCan} className="me-2" />{" "}
                   {t("remove_from_cart")}

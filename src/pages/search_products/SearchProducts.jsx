@@ -71,28 +71,32 @@ export default function SearchProducts() {
         secondLink={t("search_products")}
         thirdLink={searchParams.get("category") ? categoryName : brandName}
       />
-      <div className="bg-mainColor py-10">
+      <div className="bg-mainColor dark:bg-gray-800 py-10">
         <div className="container">
-          <h3 className="text-xl font-semibold flex flex-col space-y-3 lg:flex-row">
+          <h3 className="text-xl font-semibold flex flex-col space-y-3 lg:flex-row dark:text-gray-100">
             {t("search_results")}
             {searchParams.get("category") && (
               <>
-                <p className="ms-2 me-2 mb-3 lg:mb-0">
+                <p className="ms-2 me-2 mb-3 lg:mb-0 dark:text-gray-300">
                   {t("search_category")}:
                 </p>
-                <span className="text-primary-600">{categoryName}</span>
+                <span className="text-primary-600 dark:text-primary-400">
+                  {categoryName}
+                </span>
               </>
             )}
             {searchParams.get("brand") && (
               <>
-                <p className="ms-2 me-2">
+                <p className="ms-2 me-2 dark:text-gray-300">
                   {t("and")} {t("search_brand")}:
-                </p>{" "}
-                <span className="text-primary-600">{brandName}</span>
+                </p>
+                <span className="text-primary-600 dark:text-primary-400">
+                  {brandName}
+                </span>
               </>
             )}
           </h3>
-          <p className="text-gray-500 mt-2 ">
+          <p className="text-gray-500 dark:text-gray-400 mt-2">
             {t("we_found")} {filteredProducts?.length || 0}{" "}
             {t("products_for_you")}
           </p>
@@ -110,16 +114,18 @@ export default function SearchProducts() {
               )}
               {filteredProducts.length > 0 && (
                 <>
-                  <div className="bg-white p-5 rounded-md">
+                  <div className="bg-white dark:bg-gray-900 p-5 rounded-md">
                     <div className="flex flex-col space-y-4 lg:flex-row justify-between items-center">
                       <div className="flex items-center gap-x-3">
-                        <h3 className="text-lg font-medium">{t("view")}:</h3>
+                        <h3 className="text-lg font-medium dark:text-gray-100">
+                          {t("view")}:
+                        </h3>
                         <button
                           onClick={() => setView("grid")}
                           className={`${
                             view === "grid"
                               ? "bg-primary-600 text-white"
-                              : "bg-gray-200"
+                              : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200"
                           } w-[35px] h-[40px] text-lg rounded-md cursor-pointer`}
                         >
                           <FontAwesomeIcon icon={faGrip} />
@@ -129,17 +135,17 @@ export default function SearchProducts() {
                           className={`${
                             view === "list"
                               ? "bg-primary-600 text-white"
-                              : "bg-gray-200"
+                              : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200"
                           } w-[35px] h-[40px] text-lg rounded-md cursor-pointer`}
                         >
                           <FontAwesomeIcon icon={faList} />
                         </button>
                       </div>
                       <div className="flex items-center gap-x-3">
-                        <h3 className="text-lg font-medium">
+                        <h3 className="text-lg font-medium dark:text-gray-100">
                           {t("sorted_by")}:
                         </h3>
-                        <select className="form-control min-w-50">
+                        <select className="form-control min-w-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
                           <option>{t("relevance")}</option>
                           <option>{t("price")}</option>
                         </select>
@@ -176,7 +182,7 @@ export default function SearchProducts() {
                             });
                           }
                         }}
-                        className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600"
+                        className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300"
                       >
                         {lang === "en" ? (
                           <FontAwesomeIcon icon={faChevronLeft} />
@@ -198,10 +204,10 @@ export default function SearchProducts() {
                                   page,
                                 })
                               }
-                              className={`cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center ${
+                              className={`cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center ${
                                 +searchParams.get("page") === page
-                                  ? "bg-primary-600 text-white"
-                                  : "text-gray-600"
+                                  ? "bg-primary-600 text-white  dark:bg-primary-400 dark:text-gray-900"
+                                  : "text-gray-600 dark:text-gray-300"
                               }`}
                             >
                               {page}
@@ -219,7 +225,7 @@ export default function SearchProducts() {
                             });
                           }
                         }}
-                        className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600"
+                        className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300"
                       >
                         {lang === "en" ? (
                           <FontAwesomeIcon

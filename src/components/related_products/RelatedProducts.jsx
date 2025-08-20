@@ -3,9 +3,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { getAllProductsApi } from "../../services/products-service";
-
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from "../product_card/ProductCard";
 import { Navigation } from "swiper/modules";
@@ -18,7 +16,7 @@ import { useTranslation } from "react-i18next";
 export default function RelatedProducts({ productDetails }) {
   const { category } = productDetails;
   const { t } = useTranslation();
-  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+  const [lang] = useState(localStorage.getItem("lang") || "en");
 
   const { filteredProducts, isLoading } = useFilteredProducts({
     category: category._id,
@@ -30,22 +28,36 @@ export default function RelatedProducts({ productDetails }) {
 
   return (
     <>
-      <div className="my-10">
-        <div className="flex justify-between">
-          <h3 className="text-2xl font-bold">{t("related_products")}</h3>
+      <div className="my-10 ">
+        <div className="flex justify-between items-center">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            {t("related_products")}
+          </h3>
           <div className="buttons flex gap-x-2">
-            <button className="related_prev_btn bg-gray-200/40 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center">
+            <button className="related_prev_btn bg-gray-200/60 dark:bg-gray-700 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
               {lang === "en" ? (
-                <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  className="ms-2 text-gray-700 dark:text-gray-200"
+                />
               ) : (
-                <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className="ms-2 text-gray-700 dark:text-gray-200"
+                />
               )}
             </button>
-            <button className="related_next_btn bg-gray-200/40 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center">
+            <button className="related_next_btn bg-gray-200/60 dark:bg-gray-700 cursor-pointer size-10 rounded-full flex flex-col text-center justify-center items-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
               {lang === "en" ? (
-                <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className="ms-2 text-gray-700 dark:text-gray-200"
+                />
               ) : (
-                <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  className="ms-2 text-gray-700 dark:text-gray-200"
+                />
               )}
             </button>
           </div>

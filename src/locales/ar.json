@@ -455,5 +455,6 @@
   "user_responsibilities_title": "مسؤوليات المستخدم",
   "user_responsibilities_desc": "أنت توافق على عدم إساءة استخدام موقعنا أو ارتكاب الاحتيال أو انتهاك أي قوانين.",
   "limitation_liability_title": "تحديد المسؤولية",
-  "limitation_liability_desc": "نحن غير مسؤولين عن أي أضرار غير مباشرة أو عرضية أو تبعية ناتجة عن استخدام خدماتنا."
+  "limitation_liability_desc": "نحن غير مسؤولين عن أي أضرار غير مباشرة أو عرضية أو تبعية ناتجة عن استخدام خدماتنا.",
+  "delete_address": "حذف العنوان"
 }

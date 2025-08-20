@@ -26,75 +26,87 @@ export default function Brands() {
         description={t("brands_title_page")}
       />
       <BreadCrumb thirdLink={t("brands")} />
-      <div className="py-5">
+
+      {/* Header Section */}
+      <div className="py-5 bg-white dark:bg-gray-800">
         <div className="container">
           <div className="text-center flex flex-col space-y-3">
-            <h3 className="text-3xl font-bold">{t("brands_title")}</h3>
-            <p className="w-[100%] lg:w-[50%] m-auto text-gray-500">
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              {t("brands_title")}
+            </h3>
+            <p className="w-[100%] lg:w-[50%] m-auto text-gray-500 dark:text-gray-400">
               {t("brands_desc")}
             </p>
           </div>
         </div>
       </div>
-      <div className="py-10 bg-mainColor">
+
+      <div className="py-10 bg-mainColor dark:bg-gray-900">
         <div className="container">
           <FeaturedBrands />
         </div>
       </div>
 
-      <div className="py-10 bg-mainColor">
+      {/* Brands List */}
+      <div className="py-10 bg-mainColor dark:bg-gray-800">
         <div className="container">
+          {/* Search + Sort */}
           <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 justify-between items-center mb-10">
             <div className="flex">
               <input
                 type="text"
                 placeholder={t("search_brands")}
-                className="form-control min-w-70 bg-white"
+                className="form-control min-w-70 bg-white dark:bg-gray-700 dark:text-gray-100"
               />
             </div>
-            <div className="flex items-center gap-x-4">
+            <div className="flex items-center gap-x-4 text-gray-700 dark:text-gray-200">
               <h4>{t("sorted_by")}:</h4>
-              <select className="form-control min-w-50 bg-white">
+              <select className="form-control min-w-50 bg-white dark:bg-gray-700 dark:text-gray-100">
                 <option>{t("aphabitical")}</option>
               </select>
             </div>
           </div>
+
+          {/* Brand Cards */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-5 md:gap-10">
             {brands &&
               brands.map((brand) => (
                 <BrandCard key={brand._id} brandInfo={brand} />
               ))}
           </div>
+
+          {/* Pagination */}
           <div className="flex justify-center items-center mt-10">
             <ul className="flex gap-x-3">
-              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
+              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300 rounded-md">
                 {lang === "en" ? (
                   <FontAwesomeIcon icon={faChevronLeft} />
                 ) : (
                   <FontAwesomeIcon icon={faChevronRight} />
-                )}{" "}
+                )}
               </li>
               <li className="cursor-pointer font-semibold text-sm size-7 bg-primary-600 flex justify-center items-center text-white rounded-md">
                 1
               </li>
-              <li className="cursor-pointer font-semibold text-sm size-7  border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
+              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300 rounded-md">
                 2
               </li>
-              <li className="cursor-pointer font-semibold text-sm size-7  border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
+              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300 rounded-md">
                 3
               </li>
-              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 flex justify-center items-center text-gray-600 rounded-md">
+              <li className="cursor-pointer font-semibold text-sm size-7 border border-gray-300 dark:border-gray-600 flex justify-center items-center text-gray-600 dark:text-gray-300 rounded-md">
                 {lang === "en" ? (
                   <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
                 ) : (
                   <FontAwesomeIcon icon={faChevronLeft} className="ms-2" />
-                )}{" "}
+                )}
               </li>
             </ul>
           </div>
         </div>
       </div>
 
+      {/* Brand Partners */}
       <BrandPartner />
     </>
   );

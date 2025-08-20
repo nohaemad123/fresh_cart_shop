@@ -27,7 +27,7 @@ export default function ProductDetails() {
         thirdLink={productDetails?.title}
       />
 
-      <div className="bg-mainColor py-5">
+      <div className="bg-mainColor py-5 dark:bg-gray-800">
         <div className="container">
           <ProductInfo productDetails={productDetails} />
 

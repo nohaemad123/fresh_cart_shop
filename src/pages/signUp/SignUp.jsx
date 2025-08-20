@@ -88,86 +88,106 @@ export default function SignUp() {
         title={t("signup_page_title")}
         description={t("signup_page_title")}
       />
-      <div className="py-10 bg-mainColor">
+      <div className="py-10 bg-mainColor dark:bg-gray-900">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="">
-              <h2 className="text-4xl font-bold">
+            {/* Left Section */}
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
                 {t("welcome_to")}{" "}
                 <span className="text-primary-600">FreshCart</span>
               </h2>
-              <p className="text-lg mt-3">{t("signup_desc")}</p>
-              <div className="mt-5">
-                <div className="flex gap-3">
-                  <div className="rounded_icon ">
-                    <FontAwesomeIcon icon={faStar} />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">{t("premium_quality")}</h3>
-                    <p className="text-gray-600">{t("premium_quality_desc")}</p>
-                  </div>
+              <p className="text-lg mt-3 text-gray-700 dark:text-gray-300">
+                {t("signup_desc")}
+              </p>
+
+              {/* Features */}
+              <div className="mt-5 flex gap-3">
+                <div className="rounded_icon ">
+                  <FontAwesomeIcon icon={faStar} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    {t("premium_quality")}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {t("premium_quality_desc")}
+                  </p>
                 </div>
               </div>
-              <div className="mt-5">
-                <div className="flex gap-3">
-                  <div className="rounded_icon ">
-                    <FontAwesomeIcon icon={faTruckFast} />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">{t("free_delivery")}</h3>
-                    <p className="text-gray-600">{t("free_delivery_desc")}</p>
-                  </div>
+
+              <div className="mt-5 flex gap-3">
+                <div className="rounded_icon ">
+                  <FontAwesomeIcon icon={faTruckFast} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    {t("free_delivery")}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {t("free_delivery_desc")}
+                  </p>
                 </div>
               </div>
-              <div className="mt-5">
-                <div className="flex gap-3">
-                  <div className="rounded_icon ">
-                    <FontAwesomeIcon icon={faShieldHalved} />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">{t("secure_shopping")}</h3>
-                    <p className="text-gray-600">{t("secure_shopping_desc")}</p>
-                  </div>
+
+              <div className="mt-5 flex gap-3">
+                <div className="rounded_icon ">
+                  <FontAwesomeIcon icon={faShieldHalved} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    {t("secure_shopping")}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {t("secure_shopping_desc")}
+                  </p>
                 </div>
               </div>
-              <div className="mt-5 p-6 rounded-xl bg-white shadow-md">
+
+              {/* Review */}
+              <div className="mt-5 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md">
                 <div className="flex gap-3">
                   <img src={author_image} alt="" className="size-12" />
-                  <div className="flex flex-col justify-center">
-                    <h3 className="font-semibold">{t("sara_johnson")}</h3>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                      {t("sara_johnson")}
+                    </h3>
                     <div className="flex *:text-yellow-400 gap-1 mt-1">
-                      <FontAwesomeIcon icon={faStar} />
-                      <FontAwesomeIcon icon={faStar} />
-                      <FontAwesomeIcon icon={faStar} />
-                      <FontAwesomeIcon icon={faStar} />
-                      <FontAwesomeIcon icon={faStar} />
-                      <FontAwesomeIcon icon={faStar} />
+                      {[...Array(5)].map((_, i) => (
+                        <FontAwesomeIcon key={i} icon={faStar} />
+                      ))}
                     </div>
                   </div>
                 </div>
                 <blockquote>
-                  <p className="text-gray-600 mt-3 italic">
+                  <p className="text-gray-600 dark:text-gray-400 mt-3 italic">
                     "{t("sara_johnson_desc")}"
                   </p>
                 </blockquote>
               </div>
             </div>
-            <div className="form bg-white p-5 lg:p-10 space-y-8 shadow-xl rounded-xl">
-              <div className="flex flex-col justify-center items-center space-y-2">
-                <h2 className="text-3xl font-semibold">
+
+            {/* Right Section (Form) */}
+            <div className="form bg-white dark:bg-gray-800 p-5 lg:p-10 space-y-8 shadow-xl rounded-xl">
+              <div className="text-center space-y-2">
+                <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
                   {t("create_account")}
                 </h2>
-                <p className="text-md text-gray-500">{t("signup_subtitle")}</p>
+                <p className="text-md text-gray-500 dark:text-gray-400">
+                  {t("signup_subtitle")}
+                </p>
               </div>
+
+              {/* Social Buttons */}
               <div className="grid grid-cols-2 gap-3 mt-5 mb-10">
-                <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
+                <button className="cursor-pointer border hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-500 border-gray-400 rounded-lg py-2 text-gray-900 dark:text-white">
                   <FontAwesomeIcon
                     icon={faGoogle}
                     className="me-3 text-red-500"
                   />{" "}
                   {t("google")}
                 </button>
-                <button className="cursor-pointer border hover:bg-gray-100 transition-all duration-500 border-gray-400 rounded-lg py-2">
+                <button className="cursor-pointer border hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-500 border-gray-400 rounded-lg py-2 text-gray-900 dark:text-white">
                   <FontAwesomeIcon
                     icon={faFacebook}
                     className="me-3 text-blue-500"
@@ -175,20 +195,29 @@ export default function SignUp() {
                   {t("facebook")}
                 </button>
               </div>
+
               <div className="h-0.5 w-full bg-gray-300/30 relative">
-                <span className="absolute px-4 bg-white left-1/2 top-1/2 -translate-1/2">
+                <span className="absolute px-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 left-1/2 top-1/2 -translate-1/2">
                   {t("or")}
                 </span>
               </div>
+
+              {/* Form */}
               <form
                 className="mt-3 flex flex-col space-y-5"
                 onSubmit={formik.handleSubmit}
               >
-                <div className="name flex flex-col space-y-1">
-                  <label htmlFor="name">{t("name_input")} *</label>
+                {/* Name */}
+                <div className="flex flex-col space-y-1">
+                  <label
+                    htmlFor="name"
+                    className="text-gray-900 dark:text-gray-200"
+                  >
+                    {t("name_input")} *
+                  </label>
                   <input
                     type="text"
-                    className="form-control block w-full "
+                    className="form-control block w-full dark:bg-gray-700 dark:text-white"
                     placeholder="Ali"
                     name="name"
                     value={formik.values.name}
@@ -199,12 +228,19 @@ export default function SignUp() {
                     <p className="text-red-600">{formik.errors.name}</p>
                   )}
                 </div>
-                <div className="name flex flex-col space-y-1">
-                  <label htmlFor="">{t("email_address")} *</label>
+
+                {/* Email */}
+                <div className="flex flex-col space-y-1">
+                  <label
+                    htmlFor="email_input"
+                    className="text-gray-900 dark:text-gray-200"
+                  >
+                    {t("email_address")} *
+                  </label>
                   <input
                     type="email"
                     id="email_input"
-                    className="form-control block w-full "
+                    className="form-control block w-full dark:bg-gray-700 dark:text-white"
                     placeholder="john.doe@example.com"
                     name="email"
                     value={formik.values.email}
@@ -214,17 +250,23 @@ export default function SignUp() {
                   {formik.touched.email && formik.errors.email && (
                     <p className="text-red-600">{formik.errors.email}</p>
                   )}
-
                   {isExistError && (
                     <p className="text-red-600">{isExistError}</p>
                   )}
                 </div>
-                <div className="phone flex flex-col space-y-1">
-                  <label htmlFor="phone_input">{t("phone")} *</label>
+
+                {/* Phone */}
+                <div className="flex flex-col space-y-1">
+                  <label
+                    htmlFor="phone_input"
+                    className="text-gray-900 dark:text-gray-200"
+                  >
+                    {t("phone")} *
+                  </label>
                   <input
                     type="tel"
                     id="phone_input"
-                    className="form-control block w-full "
+                    className="form-control block w-full dark:bg-gray-700 dark:text-white"
                     placeholder="+1 (800) 123-4567"
                     name="phone"
                     value={formik.values.phone}
@@ -235,9 +277,15 @@ export default function SignUp() {
                     <p className="text-red-600">{formik.errors.phone}</p>
                   )}
                 </div>
-                <div className="password flex flex-col space-y-1">
-                  <label htmlFor="password_input">{t("password")} *</label>
 
+                {/* Password */}
+                <div className="flex flex-col space-y-1">
+                  <label
+                    htmlFor="password_input"
+                    className="text-gray-900 dark:text-gray-200"
+                  >
+                    {t("password")} *
+                  </label>
                   <input
                     type="password"
                     value={formik.values.password}
@@ -245,16 +293,16 @@ export default function SignUp() {
                     onBlur={formik.handleBlur}
                     name="password"
                     id="password_input"
-                    className="form-control block w-full "
+                    className="form-control block w-full dark:bg-gray-700 dark:text-white"
                   />
                   {formik.touched.password && (
-                    <div className="password_strength mt-2 flex flex-nowrap gap-2 items-center">
-                      <div className="bar w-full h-2 bg-gray-200  rounded-xl">
+                    <div className="password_strength mt-2 flex gap-2 items-center">
+                      <div className="bar w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-xl">
                         <div
-                          className={`progress ${password_strength.width} rounded-xl ${password_strength.background} h-full overflow-hidden`}
+                          className={`progress ${password_strength.width} rounded-xl ${password_strength.background} h-full`}
                         ></div>
                       </div>
-                      <span className="text-nowrap text-center">
+                      <span className="text-nowrap text-gray-800 dark:text-gray-200">
                         {password_strength.text}
                       </span>
                     </div>
@@ -264,15 +312,19 @@ export default function SignUp() {
                   )}
                 </div>
 
-                <div className="repassword flex flex-col space-y-1">
-                  <label htmlFor="repassword_input">
+                {/* Confirm Password */}
+                <div className="flex flex-col space-y-1">
+                  <label
+                    htmlFor="repassword_input"
+                    className="text-gray-900 dark:text-gray-200"
+                  >
                     {t("confirm_password")} *
                   </label>
                   <input
                     type="password"
                     name="rePassword"
                     id="repassword_input"
-                    className="form-control block w-full "
+                    className="form-control block w-full dark:bg-gray-700 dark:text-white"
                     value={formik.values.rePassword}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -281,6 +333,8 @@ export default function SignUp() {
                     <p className="text-red-600">{formik.errors.rePassword}</p>
                   )}
                 </div>
+
+                {/* Terms */}
                 <div className="terms flex gap-2 items-center flex-wrap">
                   <input
                     value={formik.values.terms}
@@ -290,13 +344,19 @@ export default function SignUp() {
                     name="terms"
                     className="accent-primary-600 size-4"
                   />
-                  <label>
+                  <label className="text-gray-900 dark:text-gray-300">
                     {t("i_agree")}{" "}
-                    <Link to="/terms" className="text-primary-600 underline">
+                    <Link
+                      to="/terms"
+                      className="text-primary-600 underline dark:text-primary-400"
+                    >
                       {t("terms_of_service")}
                     </Link>{" "}
                     {t("and")}{" "}
-                    <Link to="/privacy" className="text-primary-600 underline">
+                    <Link
+                      to="/privacy"
+                      className="text-primary-600 underline dark:text-primary-400"
+                    >
                       {t("privacy_policy")}
                     </Link>
                   </label>
@@ -305,16 +365,20 @@ export default function SignUp() {
                   )}
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  className="btn flex gap-2 items-center text-center rounded-md py-2 justify-center bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-500"
+                  className="btn flex gap-2 items-center justify-center rounded-md py-2 bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-500"
                 >
                   <FontAwesomeIcon icon={faUserPlus} />
                   <span>{t("create_account")}</span>
                 </button>
-                <p className="border-t-2 border-gray-300/30 mt-2 pt-4">
+                <p className="border-t-2 border-gray-300/30 mt-2 pt-4 text-gray-800 dark:text-gray-300">
                   {t("have_account")}{" "}
-                  <Link to="/login" className="text-primary-600 underline">
+                  <Link
+                    to="/login"
+                    className="text-primary-600 underline dark:text-primary-400"
+                  >
                     {t("login")}
                   </Link>
                 </p>
@@ -324,16 +388,21 @@ export default function SignUp() {
         </div>
       </div>
 
-      <div className="py-10 text-center">
+      {/* Why Account */}
+      <div className="py-10 text-center dark:bg-gray-800">
         <div className="container">
-          <h2 className="text-3xl font-bold">{t("why_account")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            {t("why_account")}
+          </h2>
           <div className="grid lg:grid-cols-3 mt-8 lg:w-[85%] mx-auto gap-10 lg:gap-20">
             <div className="flex flex-col justify-center items-center space-y-3">
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faTruckFast} />
               </div>
-              <h3 className="font-semibold text-2xl">{t("faster_checkout")}</h3>
-              <p className="text-gray-600 text-lg">
+              <h3 className="font-semibold text-2xl text-gray-900 dark:text-white">
+                {t("faster_checkout")}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
                 {t("faster_checkout_desc")}
               </p>
             </div>
@@ -341,17 +410,23 @@ export default function SignUp() {
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faTag} />
               </div>
-              <h3 className="font-semibold text-2xl">{t("exclusive_deals")}</h3>
-              <p className="text-gray-600 text-lg">
-                {t("exclusive_deals_desc")}{" "}
+              <h3 className="font-semibold text-2xl text-gray-900 dark:text-white">
+                {t("exclusive_deals")}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                {t("exclusive_deals_desc")}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center space-y-3">
               <div className="rounded_icon">
                 <FontAwesomeIcon icon={faClockRotateLeft} />
               </div>
-              <h3 className="font-semibold text-2xl">{t("order_history")}</h3>
-              <p className="text-gray-600 text-lg">{t("order_history_desc")}</p>
+              <h3 className="font-semibold text-2xl text-gray-900 dark:text-white">
+                {t("order_history")}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                {t("order_history_desc")}
+              </p>
             </div>
           </div>
         </div>

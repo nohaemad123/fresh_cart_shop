@@ -16,86 +16,92 @@ export default function Contact() {
 
       <section className="py-10 w-[60%] mx-auto">
         <div className="container">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
             {t("retailer_inquiries")}
           </h2>
-          <p>{t("retailer_inquiries_desc")}</p>
+          <p className="text-gray-700 dark:text-gray-300">
+            {t("retailer_inquiries_desc")}
+          </p>
 
           <form className="mt-5">
             <div className="grid lg:grid-cols-2 space-y-5 lg:space-x-10">
               <div className="flex flex-col space-y-2">
-                <label>
+                <label className="text-gray-900 dark:text-gray-100">
                   {t("first_name")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder={t("first_name_placeholder")}
-                  className="form-control w-full border border-gray-300"
+                  className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
               </div>
 
               <div className="flex flex-col space-y-2">
-                <label>
+                <label className="text-gray-900 dark:text-gray-100">
                   {t("last_name")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder={t("last_name_placeholder")}
-                  className="form-control w-full border border-gray-300"
+                  className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
 
             <div className="flex flex-col space-y-2 mb-5">
-              <label>
+              <label className="text-gray-900 dark:text-gray-100">
                 {t("company")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 placeholder={t("company_placeholder")}
-                className="form-control w-full border border-gray-300"
+                className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
 
             <div className="flex flex-col space-y-2 mb-5">
-              <label>{t("title")}</label>
+              <label className="text-gray-900 dark:text-gray-100">
+                {t("title")}
+              </label>
               <input
                 type="text"
                 placeholder={t("title_placeholder")}
-                className="form-control w-full border border-gray-300"
+                className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
 
             <div className="grid lg:grid-cols-2 space-y-5 lg:space-x-10">
               <div className="flex flex-col space-y-2">
-                <label>
+                <label className="text-gray-900 dark:text-gray-100">
                   {t("email")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   placeholder={t("email_placeholder")}
-                  className="form-control w-full border border-gray-300"
+                  className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
               </div>
 
               <div className="flex flex-col space-y-2">
-                <label>
+                <label className="text-gray-900 dark:text-gray-100">
                   {t("phone")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
                   placeholder={t("phone_placeholder")}
-                  className="form-control w-full border border-gray-300"
+                  className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
 
             <div className="flex flex-col space-y-2 mb-5">
-              <label>{t("write_message")}</label>
+              <label className="text-gray-900 dark:text-gray-100">
+                {t("write_message")}
+              </label>
               <textarea
                 placeholder={t("additional_comments")}
                 rows="5"
-                className="form-control w-full border border-gray-300"
+                className="form-control w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               ></textarea>
             </div>
 
