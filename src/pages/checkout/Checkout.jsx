@@ -18,7 +18,6 @@ import { useCart } from "../../hooks/useCart";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-
 import { paymentCheckout } from "../../services/payment-service";
 import { useQueryClient } from "@tanstack/react-query";
 import CheckoutSkeleton from "../../skeleton/CheckoutSkeleton";
@@ -58,9 +57,9 @@ export default function Checkout() {
       }
     } catch (error) {
       toast.error(error.message);
-      setIsExistError(error.message);
     }
   }
+
   const validationSchema = yup.object({
     paymentMethod: yup.string().required(t("payment_method_msg")),
     shippingAddress: yup.object({
@@ -72,6 +71,7 @@ export default function Checkout() {
         .required(t("phone_required")),
     }),
   });
+
   const formik = useFormik({
     initialValues: {
       paymentMethod: "online",
@@ -90,6 +90,7 @@ export default function Checkout() {
   }
 
   if (isLoading) return <CheckoutSkeleton />;
+
   return (
     <>
       <PageMetaData
@@ -97,25 +98,30 @@ export default function Checkout() {
         description={t("checkout_title")}
       />
       <BreadCrumb thirdLink={t("checkout")} />
-      <div className="bg-mainColor py-10">
-        <div className="container m-auto">
+
+      {/* Main Container */}
+      <div className="bg-mainColor dark:bg-gray-900 py-10 transition-colors duration-300">
+        <div className="container m-auto text-gray-800 dark:text-gray-100">
           <h3 className="text-xl font-bold">{t("checkout")} </h3>
+
           <form onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-5 mt-5">
-              <div className="md:col-span-8 ">
-                <div className="bg-white p-5 rounded-lg mb-10 shadow-sm">
+
+              {/* Left Section */}
+              <div className="md:col-span-8">
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-lg mb-10 shadow-sm transition-all duration-300">
                   <h3 className="text-xl font-bold mb-5">
-                    {t("payment_methods")}{" "}
+                    {t("payment_methods")}
                   </h3>
 
+                  {/* Cash */}
                   <div className="flex flex-col mb-5">
                     <label
                       htmlFor="cash"
-                      className={`${
-                        formik.values.paymentMethod == "cod"
-                          ? " bg-green-50/80"
+                      className={`${formik.values.paymentMethod == "cod"
+                          ? "bg-green-50/80 dark:bg-green-900/40"
                           : ""
-                      } border flex gap-4 border-green-300  hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
+                        } border flex gap-4 border-green-300 hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
                     >
                       <input
                         type="radio"
@@ -137,7 +143,7 @@ export default function Checkout() {
                               <h3 className="text-md font-semibold">
                                 {t("cash_delivery")}
                               </h3>
-                              <p className="text-gray-500 text-sm mt-1">
+                              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                                 {t("cash_delivery_desc")}
                               </p>
                             </div>
@@ -147,7 +153,7 @@ export default function Checkout() {
                           </span>
                         </div>
                         {formik.values.paymentMethod == "cod" && (
-                          <div className="border bg-primary-100 border-primary-600/50 items-center text-green-800 p-2 rounded-md mt-3 text-[15px] flex gap-2">
+                          <div className="border bg-primary-100 dark:bg-green-900/30 border-primary-600/50 items-center text-green-800 dark:text-green-300 p-2 rounded-md mt-3 text-[15px] flex gap-2">
                             <FontAwesomeIcon
                               icon={faInfoCircle}
                               className="text-primary-600"
@@ -159,14 +165,14 @@ export default function Checkout() {
                     </label>
                   </div>
 
+                  {/* Online */}
                   <div className="flex flex-col">
                     <label
                       htmlFor="online"
-                      className={`${
-                        formik.values.paymentMethod == "online"
-                          ? " bg-green-50/80"
+                      className={`${formik.values.paymentMethod == "online"
+                          ? "bg-green-50/80 dark:bg-green-900/40"
                           : ""
-                      } border flex gap-4 border-green-300  hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
+                        } border flex gap-4 border-green-300 hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
                     >
                       <input
                         type="radio"
@@ -188,7 +194,7 @@ export default function Checkout() {
                               <h3 className="text-md font-semibold">
                                 {t("online_payment")}
                               </h3>
-                              <p className="text-gray-500 text-sm mt-1">
+                              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                                 {t("online_payment_desc")}
                               </p>
                             </div>
@@ -198,7 +204,7 @@ export default function Checkout() {
                           </span>
                         </div>
                         {formik.values.paymentMethod == "online" && (
-                          <div className="bg-blue-100/50 items-center text-blue-800  p-2 rounded-md mt-3 text-[15px] flex gap-2">
+                          <div className="bg-blue-100/50 dark:bg-blue-900/30 items-center text-blue-800 dark:text-blue-300 p-2 rounded-md mt-3 text-[15px] flex gap-2">
                             <FontAwesomeIcon
                               icon={faInfoCircle}
                               className="text-blue-600"
@@ -210,183 +216,103 @@ export default function Checkout() {
                     </label>
                   </div>
                 </div>
-                <div className="bg-white p-5 rounded-lg shadow-sm ">
+
+                {/* Shipping Address */}
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-lg shadow-sm transition-all duration-300">
                   <h3 className="text-xl font-bold mb-5">
-                    {t("shipping_address")}{" "}
+                    {t("shipping_address")}
                   </h3>
                   <div className="flex flex-col space-y-2 mb-5">
                     <label>{t("address_details")}:</label>
                     <textarea
-                      className="form-control w-full border border-gray-400"
+                      className="form-control w-full border border-gray-400 dark:border-gray-600 dark:bg-gray-700"
                       name="shippingAddress.details"
                       value={formik.values.shippingAddress.details}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     ></textarea>
-                    {formik.touched.shippingAddress?.details &&
-                      formik.errors.shippingAddress?.details && (
-                        <p className="text-red-600">
-                          {formik.errors.shippingAddress.details}
-                        </p>
-                      )}
-                  </div>
-
-                  <div className="grid lg:grid-cols-2 space-y-5 lg:space-x-5">
-                    <div className="flex flex-col space-y-2">
-                      <label>{t("city")}:</label>
-                      <input
-                        type="text"
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        name="shippingAddress.city"
-                        value={formik.values.shippingAddress.city}
-                        className="form-control w-full border border-gray-400"
-                      />
-                      {formik.touched.shippingAddress?.city &&
-                        formik.errors.shippingAddress?.city && (
-                          <p className="text-red-600">
-                            {formik.errors.shippingAddress.city}
-                          </p>
-                        )}
-                    </div>
-
-                    <div className="flex flex-col space-y-2">
-                      <label>{t("phone")}:</label>
-                      <input
-                        type="tel"
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        name="shippingAddress.phone"
-                        value={formik.values.shippingAddress.phone}
-                        className="form-control w-full border border-gray-400"
-                      />
-                      {formik.touched.shippingAddress?.phone &&
-                        formik.errors.shippingAddress?.phone && (
-                          <p className="text-red-600">
-                            {formik.errors.shippingAddress.phone}
-                          </p>
-                        )}
-                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Right Summary */}
               <div className="md:col-span-4">
-                <div className="bg-white p-5 rounded-md sticky top-10">
-                  <h3 className="text-xl font-bold mb-5">
-                    {t("order_summary")}{" "}
-                  </h3>
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-md sticky top-10 transition-all duration-300">
+                  <h3 className="text-xl font-bold mb-5">{t("order_summary")}</h3>
+
                   <div className="flex flex-col space-y-2 max-h-50 overflow-auto">
                     {cartProducts?.products.map((product) => (
-                      <>
-                        <div className="flex justify-between items-center gap-x-3 mb-3 px-2 ">
-                          <div className="flex items-center gap-x-3 ">
+                      <div
+                        key={product.product._id}
+                        className="flex justify-between items-center gap-x-3 mb-3 px-2"
+                      >
+                        <div className="flex items-center gap-x-3">
+                          <Link to={`/product-details/${product.product._id}`}>
+                            <img
+                              src={product.product.imageCover}
+                              className="w-12 h-12 min-w-[50px] min-h-[50px] object-cover rounded-lg border border-gray-200 dark:border-gray-600 p-1"
+                            />
+                          </Link>
+                          <div className="flex flex-col">
                             <Link
                               to={`/product-details/${product.product._id}`}
                             >
-                              <img
-                                src={product.product.imageCover}
-                                className="w-12 h-12 min-w-[50px] min-h-[50px] object-cover rounded-lg border border-gray-200 p-1"
-                              />
+                              <h3 className="text-[14px] font-semibold">
+                                {product.product.title}
+                              </h3>
                             </Link>
-                            <div className="flex flex-col">
-                              <Link
-                                to={`/product-details/${product.product._id}`}
-                              >
-                                <h3 className="text-[14px] font-semibold">
-                                  {product.product.title}
-                                </h3>
-                              </Link>
-                              <span className="text-sm text-gray-500">
-                                {t("quantity2")}: {product.count}
-                              </span>
-                            </div>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                              {t("quantity2")}: {product.count}
+                            </span>
                           </div>
-
-                          <h3 className="text-sm font-bold whitespace-nowrap">
-                            {product.price} {t("egp")}
-                          </h3>
                         </div>
-                      </>
+
+                        <h3 className="text-sm font-bold whitespace-nowrap">
+                          {product.price} {t("egp")}
+                        </h3>
+                      </div>
                     ))}
                   </div>
 
-                  <div className="flex justify-between items-center mb-3 mt-5 border-t pt-3 border-gray-300">
-                    <h4 className="text-lg text-gray-600">{t("subtotal")}</h4>
-                    <span className="text-sm text-[16px] font-semibold">
-                      {totalCartPrice} {t("egp")}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center mb-3">
-                    <h4 className="text-lg text-gray-600">{t("shipping")}</h4>
-                    <span className="text-sm text-[16px] font-semibold text-primary-600">
-                      70 {t("egp")}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center mb-3">
-                    <h4 className="text-lg text-gray-600">{t("tax")}</h4>
-                    <span className="text-sm text-[16px] font-semibold">
-                      {Math.trunc(totalCartPrice * 0.14)} {t("egp")}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300">
-                    <h4 className="text-lg font-bold">{t("total")}</h4>
-                    <span className="text-lg text-[18px] font-bold">
-                      {Math.trunc(totalCartPrice + 70 + totalCartPrice * 0.14)}{" "}
-                      {t("egp")}
-                    </span>
-                  </div>
-                  <div className="flex flex-col space-y-3">
-                    <button
-                      type="submit"
-                      disabled={!(formik.isValid && formik.dirty)}
-                      className={`py-3 text-lg font-semibold text-white text-center rounded-md transition-all duration-300 ${
-                        formik.isValid && formik.dirty
-                          ? "bg-primary-600 cursor-pointer"
-                          : "bg-primary-700 cursor-not-allowed"
-                      }`}
-                    >
-                      {t("proceed_payment")}
-                      {lang === "en" ? (
-                        <FontAwesomeIcon icon={faArrowRight} className="ms-3" />
-                      ) : (
-                        <FontAwesomeIcon icon={faArrowLeft} className="ms-3" />
-                      )}
-                    </button>
-                    <Link
-                      to="/cart"
-                      className="py-3 border mb-5 border-primary-600  text-lg text-primary-600 font-semibold text-center rounded-md"
-                    >
-                      {lang === "en" ? (
-                        <FontAwesomeIcon
-                          icon={faChevronLeft}
-                          className="me-3"
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          icon={faChevronRight}
-                          className="me-3"
-                        />
-                      )}
-                      {t("return_cart")}
-                    </Link>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    {t("secure_checkout")}
-                  </h3>
-                  <p className="text-[17px] text-gray-500">
-                    <FontAwesomeIcon
-                      icon={faLock}
-                      className="text-primary-600 me-3"
-                    />
-                    {t("secure_checkout_desc")}
-                  </p>
-                  <div className="flex mt-2 gap-x-4">
-                    <img src={americanimg} className="w-12" />
-                    <img src={mastercardimg} className="w-12" />
-                    <img src={paypalimg} className="w-12" />
+                  <div className="border-t border-gray-300 dark:border-gray-600 mt-3 pt-3">
+                    <div className="flex justify-between mb-3">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
+                        {t("subtotal")}
+                      </h4>
+                      <span className="text-[16px] font-semibold">
+                        {totalCartPrice} {t("egp")}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between mb-3">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
+                        {t("shipping")}
+                      </h4>
+                      <span className="text-sm text-[16px] font-semibold text-primary-600">
+                        70 {t("egp")}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between mb-3">
+                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
+                        {t("tax")}
+                      </h4>
+                      <span className="text-sm text-[16px] font-semibold">
+                        {Math.trunc(totalCartPrice * 0.14)} {t("egp")}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300 dark:border-gray-600">
+                      <h4 className="text-lg font-bold">{t("total")}</h4>
+                      <span className="text-lg text-[18px] font-bold">
+                        {Math.trunc(totalCartPrice + 70 + totalCartPrice * 0.14)}{" "}
+                        {t("egp")}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
           </form>
         </div>
