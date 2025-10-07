@@ -93,35 +93,30 @@ export default function Checkout() {
 
   return (
     <>
-      <PageMetaData
-        title={t("checkout_title")}
-        description={t("checkout_title")}
-      />
+      <PageMetaData title={t("checkout_title")} description={t("checkout_title")} />
       <BreadCrumb thirdLink={t("checkout")} />
 
-      {/* Main Container */}
-      <div className="bg-mainColor dark:bg-gray-900 py-10 transition-colors duration-300">
-        <div className="container m-auto text-gray-800 dark:text-gray-100">
-          <h3 className="text-xl font-bold">{t("checkout")} </h3>
+      <div className="bg-mainColor dark:bg-gray-900 py-10 min-h-screen transition-colors duration-300">
+        <div className="container m-auto">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            {t("checkout")}
+          </h3>
 
           <form onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-12 mb-2 gap-x-5 mt-5">
-
-              {/* Left Section */}
+              {/* left side */}
               <div className="md:col-span-8">
-                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-lg mb-10 shadow-sm transition-all duration-300">
-                  <h3 className="text-xl font-bold mb-5">
-                    {t("payment_methods")}
-                  </h3>
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-200 p-5 rounded-lg mb-10 shadow-sm transition-all">
+                  <h3 className="text-xl font-bold mb-5">{t("payment_methods")}</h3>
 
                   {/* Cash */}
                   <div className="flex flex-col mb-5">
                     <label
                       htmlFor="cash"
-                      className={`${formik.values.paymentMethod == "cod"
-                          ? "bg-green-50/80 dark:bg-green-900/40"
-                          : ""
-                        } border flex gap-4 border-green-300 hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
+                      className={`border flex gap-4 border-green-300 hover:border-[#86efac] w-full rounded-md p-4 cursor-pointer transition-all duration-200 ${formik.values.paymentMethod === "cod"
+                        ? "bg-green-50/80 dark:bg-[#86efac]/10"
+                        : "dark:border-gray-600"
+                        }`}
                     >
                       <input
                         type="radio"
@@ -129,7 +124,7 @@ export default function Checkout() {
                         name="paymentMethod"
                         value={"cod"}
                         checked={formik.values.paymentMethod === "cod"}
-                        className="accent-blue-500 size-4"
+                        className="accent-[#86efac] size-4"
                         onChange={(e) => handlePaymentChange(e.target.value)}
                       />
                       <div className="w-full">
@@ -137,7 +132,7 @@ export default function Checkout() {
                           <div className="flex gap-6">
                             <FontAwesomeIcon
                               icon={faMoneyBill1Wave}
-                              className="text-green-600 text-2xl"
+                              className="text-green-600 dark:text-[#86efac] text-2xl"
                             />
                             <div>
                               <h3 className="text-md font-semibold">
@@ -148,15 +143,15 @@ export default function Checkout() {
                               </p>
                             </div>
                           </div>
-                          <span className="text-green-600 font-medium text-sm">
+                          <span className="text-green-600 dark:text-[#86efac] font-medium text-sm">
                             {t("extra_changes")}
                           </span>
                         </div>
                         {formik.values.paymentMethod == "cod" && (
-                          <div className="border bg-primary-100 dark:bg-green-900/30 border-primary-600/50 items-center text-green-800 dark:text-green-300 p-2 rounded-md mt-3 text-[15px] flex gap-2">
+                          <div className="border bg-primary-100 border-primary-600/50 dark:bg-[#86efac]/10 items-center text-green-800 dark:text-[#86efac] p-2 rounded-md mt-3 text-[15px] flex gap-2">
                             <FontAwesomeIcon
                               icon={faInfoCircle}
-                              className="text-primary-600"
+                              className="text-primary-600 dark:text-[#86efac]"
                             />
                             <p>{t("cash_delivery_note")}</p>
                           </div>
@@ -169,10 +164,10 @@ export default function Checkout() {
                   <div className="flex flex-col">
                     <label
                       htmlFor="online"
-                      className={`${formik.values.paymentMethod == "online"
-                          ? "bg-green-50/80 dark:bg-green-900/40"
-                          : ""
-                        } border flex gap-4 border-green-300 hover:border-primary-500 w-full rounded-md p-4 cursor-pointer transition-all duration-200`}
+                      className={`border flex gap-4 border-green-300 hover:border-[#86efac] w-full rounded-md p-4 cursor-pointer transition-all duration-200 ${formik.values.paymentMethod === "online"
+                        ? "bg-green-50/80 dark:bg-[#86efac]/10"
+                        : "dark:border-gray-600"
+                        }`}
                     >
                       <input
                         type="radio"
@@ -181,14 +176,14 @@ export default function Checkout() {
                         onChange={(e) => handlePaymentChange(e.target.value)}
                         value={"online"}
                         checked={formik.values.paymentMethod === "online"}
-                        className="accent-blue-500 size-4"
+                        className="accent-[#86efac] size-4"
                       />
                       <div className="w-full">
                         <div className="flex flex-row justify-between items-center w-full">
                           <div className="flex gap-6">
                             <FontAwesomeIcon
                               icon={faCreditCard}
-                              className="text-green-600 text-2xl"
+                              className="text-green-600 dark:text-[#86efac] text-2xl"
                             />
                             <div>
                               <h3 className="text-md font-semibold">
@@ -199,15 +194,15 @@ export default function Checkout() {
                               </p>
                             </div>
                           </div>
-                          <span className="text-green-600 font-medium text-sm">
+                          <span className="text-green-600 dark:text-[#86efac] font-medium text-sm">
                             {t("recommended")}
                           </span>
                         </div>
                         {formik.values.paymentMethod == "online" && (
-                          <div className="bg-blue-100/50 dark:bg-blue-900/30 items-center text-blue-800 dark:text-blue-300 p-2 rounded-md mt-3 text-[15px] flex gap-2">
+                          <div className="bg-blue-100/50 dark:bg-[#86efac]/10 items-center text-blue-800 dark:text-[#86efac] p-2 rounded-md mt-3 text-[15px] flex gap-2">
                             <FontAwesomeIcon
                               icon={faInfoCircle}
-                              className="text-blue-600"
+                              className="text-blue-600 dark:text-[#86efac]"
                             />
                             <p>{t("online_payment_note")}</p>
                           </div>
@@ -217,27 +212,70 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {/* Shipping Address */}
-                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-lg shadow-sm transition-all duration-300">
-                  <h3 className="text-xl font-bold mb-5">
-                    {t("shipping_address")}
-                  </h3>
+                {/* Shipping */}
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-200 p-5 rounded-lg shadow-sm">
+                  <h3 className="text-xl font-bold mb-5">{t("shipping_address")}</h3>
+
                   <div className="flex flex-col space-y-2 mb-5">
                     <label>{t("address_details")}:</label>
                     <textarea
-                      className="form-control w-full border border-gray-400 dark:border-gray-600 dark:bg-gray-700"
+                      className="form-control w-full border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200"
                       name="shippingAddress.details"
                       value={formik.values.shippingAddress.details}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     ></textarea>
+                    {formik.touched.shippingAddress?.details &&
+                      formik.errors.shippingAddress?.details && (
+                        <p className="text-red-600">
+                          {formik.errors.shippingAddress.details}
+                        </p>
+                      )}
+                  </div>
+
+                  <div className="grid lg:grid-cols-2 space-y-5 lg:space-x-5">
+                    <div className="flex flex-col space-y-2">
+                      <label>{t("city")}:</label>
+                      <input
+                        type="text"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        name="shippingAddress.city"
+                        value={formik.values.shippingAddress.city}
+                        className="form-control w-full border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200"
+                      />
+                      {formik.touched.shippingAddress?.city &&
+                        formik.errors.shippingAddress?.city && (
+                          <p className="text-red-600">
+                            {formik.errors.shippingAddress.city}
+                          </p>
+                        )}
+                    </div>
+
+                    <div className="flex flex-col space-y-2">
+                      <label>{t("phone")}:</label>
+                      <input
+                        type="tel"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        name="shippingAddress.phone"
+                        value={formik.values.shippingAddress.phone}
+                        className="form-control w-full border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200"
+                      />
+                      {formik.touched.shippingAddress?.phone &&
+                        formik.errors.shippingAddress?.phone && (
+                          <p className="text-red-600">
+                            {formik.errors.shippingAddress.phone}
+                          </p>
+                        )}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right Summary */}
+              {/* Right Side - Summary */}
               <div className="md:col-span-4">
-                <div className="bg-white dark:bg-gray-800 dark:text-gray-100 p-5 rounded-md sticky top-10 transition-all duration-300">
+                <div className="bg-white dark:bg-gray-800 dark:text-gray-200 p-5 rounded-md sticky top-10 shadow-sm transition-all">
                   <h3 className="text-xl font-bold mb-5">{t("order_summary")}</h3>
 
                   <div className="flex flex-col space-y-2 max-h-50 overflow-auto">
@@ -250,13 +288,11 @@ export default function Checkout() {
                           <Link to={`/product-details/${product.product._id}`}>
                             <img
                               src={product.product.imageCover}
-                              className="w-12 h-12 min-w-[50px] min-h-[50px] object-cover rounded-lg border border-gray-200 dark:border-gray-600 p-1"
+                              className="w-12 h-12 min-w-[50px] min-h-[50px] object-cover rounded-lg border border-gray-200 dark:border-gray-600 p-1 dark:border-gray-600 p-1"
                             />
                           </Link>
                           <div className="flex flex-col">
-                            <Link
-                              to={`/product-details/${product.product._id}`}
-                            >
+                            <Link to={`/product-details/${product.product._id}`}>
                               <h3 className="text-[14px] font-semibold">
                                 {product.product.title}
                               </h3>
@@ -266,7 +302,6 @@ export default function Checkout() {
                             </span>
                           </div>
                         </div>
-
                         <h3 className="text-sm font-bold whitespace-nowrap">
                           {product.price} {t("egp")}
                         </h3>
@@ -274,45 +309,89 @@ export default function Checkout() {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-300 dark:border-gray-600 mt-3 pt-3">
-                    <div className="flex justify-between mb-3">
-                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
-                        {t("subtotal")}
-                      </h4>
-                      <span className="text-[16px] font-semibold">
-                        {totalCartPrice} {t("egp")}
-                      </span>
-                    </div>
+                  <div className="flex justify-between items-center mb-3 mt-5 border-t pt-3 border-gray-300 dark:border-gray-600">
+                    <h4 className="text-lg text-gray-600 dark:text-gray-300">
+                      {t("subtotal")}
+                    </h4>
+                    <span className="text-sm text-[16px] font-semibold">
+                      {totalCartPrice} {t("egp")}
+                    </span>
+                  </div>
 
-                    <div className="flex justify-between mb-3">
-                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
-                        {t("shipping")}
-                      </h4>
-                      <span className="text-sm text-[16px] font-semibold text-primary-600">
-                        70 {t("egp")}
-                      </span>
-                    </div>
+                  <div className="flex justify-between items-center mb-3">
+                    <h4 className="text-lg text-gray-600 dark:text-gray-300">
+                      {t("shipping")}
+                    </h4>
+                    <span className="text-sm text-[16px] font-semibold text-[#86efac]">
+                      70 {t("egp")}
+                    </span>
+                  </div>
 
-                    <div className="flex justify-between mb-3">
-                      <h4 className="text-lg text-gray-600 dark:text-gray-400">
-                        {t("tax")}
-                      </h4>
-                      <span className="text-sm text-[16px] font-semibold">
-                        {Math.trunc(totalCartPrice * 0.14)} {t("egp")}
-                      </span>
-                    </div>
+                  <div className="flex justify-between items-center mb-3">
+                    <h4 className="text-lg text-gray-600 dark:text-gray-300">
+                      {t("tax")}
+                    </h4>
+                    <span className="text-sm text-[16px] font-semibold">
+                      {Math.trunc(totalCartPrice * 0.14)} {t("egp")}
+                    </span>
+                  </div>
 
-                    <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300 dark:border-gray-600">
-                      <h4 className="text-lg font-bold">{t("total")}</h4>
-                      <span className="text-lg text-[18px] font-bold">
-                        {Math.trunc(totalCartPrice + 70 + totalCartPrice * 0.14)}{" "}
-                        {t("egp")}
-                      </span>
-                    </div>
+                  <div className="flex justify-between items-center mb-3 border-t py-3 border-gray-300 dark:border-gray-600">
+                    <h4 className="text-lg font-bold">{t("total")}</h4>
+                    <span className="text-lg text-[18px] font-bold">
+                      {Math.trunc(totalCartPrice + 70 + totalCartPrice * 0.14)}{" "}
+                      {t("egp")}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col space-y-3">
+                    <button
+                      type="submit"
+                      disabled={!(formik.isValid && formik.dirty)}
+                      className={`py-3 text-lg font-semibold text-white text-center rounded-md transition-all duration-300 ${formik.isValid && formik.dirty
+                        ? "bg-[#86efac] cursor-pointer"
+                        : "bg-[#86efac]/50 cursor-not-allowed"
+                        }`}
+                    >
+                      {t("proceed_payment")}{" "}
+                      {lang === "en" ? (
+                        <FontAwesomeIcon icon={faArrowRight} className="ms-3" />
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowLeft} className="ms-3" />
+                      )}
+                    </button>
+
+                    <Link
+                      to="/cart"
+                      className="py-3 border mb-5 border-[#86efac] text-lg text-[#86efac] font-semibold text-center rounded-md"
+                    >
+                      {lang === "en" ? (
+                        <FontAwesomeIcon icon={faChevronLeft} className="me-3" />
+                      ) : (
+                        <FontAwesomeIcon icon={faChevronRight} className="me-3" />
+                      )}
+                      {t("return_cart")}
+                    </Link>
+                  </div>
+
+                  <h3 className="text-lg font-semibold mb-2">
+                    {t("secure_checkout")}
+                  </h3>
+                  <p className="text-[17px] text-gray-500 dark:text-gray-400">
+                    <FontAwesomeIcon
+                      icon={faLock}
+                      className="text-[#86efac] me-3"
+                    />
+                    {t("secure_checkout_desc")}
+                  </p>
+
+                  <div className="flex mt-2 gap-x-4">
+                    <img src={americanimg} className="w-12" />
+                    <img src={mastercardimg} className="w-12" />
+                    <img src={paypalimg} className="w-12" />
                   </div>
                 </div>
               </div>
-
             </div>
           </form>
         </div>
